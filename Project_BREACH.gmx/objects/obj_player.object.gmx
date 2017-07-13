@@ -58,6 +58,8 @@ sprite_damage   = spr_hero_jump;
             <string>///Setup
 //create hud
 if !instance_exists(CAMERA){instance_create(x,y,CAMERA);}
+//create light
+if !instance_exists(obj_lighting){instance_create(x,y,obj_lighting);}
 hud_border = 0;
 //Facing 1-right -1-left
 facing=1;
@@ -493,6 +495,11 @@ if !acting and !LOADING{
 if PRESS_B and rotii_bag&gt;0 and canshoot=true{
 
     }
+//Toggle Flashlight
+if PRESS_C{
+        if light_player=true{light_player=false;exit;}
+        if light_player=false{light_player=true;exit;}
+    }    
 }
 </string>
           </argument>
@@ -567,6 +574,54 @@ scr_player_damage();
             <string>///Draw sprite on screen
 if sight{
     draw_sprite_ext(sprite_index,image_index,x,y,facing,image_yscale,image_angle,image_blend,image_alpha);
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="32">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>room_goto_previous();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="13">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if !keyboard_check(vk_alt){
+    room_goto_next();
     }
 </string>
           </argument>

@@ -27,18 +27,18 @@
       <sprite>sprites\spr_move</sprite>
       <sprite>sprites\spr_water</sprite>
     </sprites>
-    <sprites name="tiletsets">
-      <sprites name="demo">
-        <sprite>sprites\spr_tile_demo_back</sprite>
-      </sprites>
-    </sprites>
     <sprites name="system">
       <sprites name="lighting">
-        <sprite>sprites\spr_lightcookie_purple_r</sprite>
-        <sprite>sprites\spr_lightcookie_purple_l</sprite>
-        <sprite>sprites\spr_light</sprite>
         <sprite>sprites\spr_light_full</sprite>
+        <sprite>sprites\spr_light</sprite>
+        <sprite>sprites\spr_light_bulb</sprite>
+        <sprite>sprites\spr_light_spot</sprite>
+      </sprites>
+    </sprites>
+    <sprites name="levels">
+      <sprites name="demo">
         <sprite>sprites\spr_box</sprite>
+        <sprite>sprites\spr_tile_demo_lamp</sprite>
       </sprites>
     </sprites>
   </sprites>
@@ -55,28 +55,25 @@
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
+    <script>scripts\scr_global_data.gml</script>
     <script>scripts\scr_global_controls.gml</script>
     <script>scripts\scr_control_gamepad.gml</script>
     <script>scripts\scr_control_keyboard.gml</script>
-    <script>scripts\scr_global_data.gml</script>
     <scripts name="player functions">
       <script>scripts\scr_player_damage.gml</script>
     </scripts>
-    <scripts name="lighting">
-      <script>scripts\light_change_scale.gml</script>
-      <script>scripts\light_update.gml</script>
-    </scripts>
   </scripts>
-  <fonts name="fonts"/>
+  <shaders name="shaders">
+    <shader type="GLSLES">shaders\shd_multiply.shader</shader>
+  </shaders>
   <objects name="objects">
     <objects name="System">
       <objects name="Lighting">
+        <object>objects\obj_lighting</object>
         <object>objects\obj_box</object>
-        <object>objects\obj_control</object>
         <object>objects\obj_light</object>
         <object>objects\obj_light_lamp</object>
-        <object>objects\obj_light_player</object>
-        <object>objects\obj_wall</object>
+        <object>objects\obj_light_view</object>
       </objects>
       <objects name="Controls">
         <object>objects\GLOBAL_KEYS</object>
@@ -110,11 +107,17 @@
     <objects name="player">
       <object>objects\obj_player</object>
     </objects>
+    <objects name="levels">
+      <objects name="demo">
+        <object>objects\obj_demo_lamp</object>
+      </objects>
+    </objects>
   </objects>
   <rooms name="rooms">
     <rooms name="alpha">
-      <room>rooms\room4</room>
-      <room>rooms\room5</room>
+      <room>rooms\STARTUP</room>
+      <room>rooms\rm_demo_lights_1</room>
+      <room>rooms\rm_demo_lights_2</room>
     </rooms>
   </rooms>
   <help>

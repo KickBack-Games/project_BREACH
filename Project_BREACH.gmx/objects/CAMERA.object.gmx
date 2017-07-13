@@ -38,8 +38,8 @@ targety=0;
 view_object[0] = CAMERA;
 adjust_y=0;
 
-view_hborder[0]=1024*1.25;
-view_vborder[0]=1024*1.25;
+view_hborder[0]=832;
+view_vborder[0]=512;
 
 view_hport[0]=1080;
 view_wport[0]=1920;
@@ -127,6 +127,29 @@ y = focus.y + adjust_y;
        }
     }
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>event_perform(ev_create,0);
 </string>
           </argument>
         </arguments>

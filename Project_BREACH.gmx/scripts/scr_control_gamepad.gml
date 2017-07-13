@@ -16,5 +16,9 @@ if gamepad_button_check_released(argument0,jkeya){RELEASE_A=true;}else{RELEASE_A
 if gamepad_button_check_pressed(argument0,jkeyb){PRESS_B=true;}else{PRESS_B=false;}
 if gamepad_button_check(argument0,jkeyb){HOLD_B=true;}else{HOLD_B=false;}
 if gamepad_button_check_released(argument0,jkeyb){RELEASE_B=true;}else{RELEASE_B=false;}
+//press, hold, release - C
+if gamepad_button_check_pressed(argument0,jkeyc){PRESS_C=true;}else{PRESS_C=false;}
+if gamepad_button_check(argument0,jkeyc){HOLD_C=true;}else{HOLD_C=false;}
+if gamepad_button_check_released(argument0,jkeyc){RELEASE_C=true;}else{RELEASE_C=false;}
 //set device deadzone
 gamepad_set_axis_deadzone(argument0,JOYSTICK_DEADZONE);

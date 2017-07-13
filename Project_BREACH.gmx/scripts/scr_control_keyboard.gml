@@ -11,3 +11,7 @@ if keyboard_check_released(keya){RELEASE_A=true;}else{RELEASE_A=false;}
 if keyboard_check_pressed(keyb){PRESS_B=true;}else{PRESS_B=false;}
 if keyboard_check(keyb){HOLD_B=true;}else{HOLD_B=false;}
 if keyboard_check_released(keyb){RELEASE_B=true;}else{RELEASE_B=false;}
+//press, hold, release - C
+if keyboard_check_pressed(keyc){PRESS_C=true;}else{PRESS_C=false;}
+if keyboard_check(keyc){HOLD_C=true;}else{HOLD_C=false;}
+if keyboard_check_released(keyc){RELEASE_C=true;}else{RELEASE_C=false;}

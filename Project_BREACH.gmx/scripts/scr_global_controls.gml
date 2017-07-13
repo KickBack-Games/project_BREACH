@@ -1,7 +1,8 @@
 ///This script contains the button mapping for game controls
 globalvar P1_INDEX, PRESS_LEFT, PRESS_RIGHT, PRESS_DOWN, PRESS_UP, PRESS_A, HOLD_A, RELEASE_A, PRESS_B, HOLD_B, RELEASE_B, 
-JOYSTICK_DEADZONE, jkeyx, jkeyy, jkeya, jkeyb, jkeystart, jkeyselect, jkeyup, jkeydown, jkeyleft, jkeyright, keyleft,
-keyright, keyup, keydown, keya, keyb, keystart, keyselect;
+PRESS_C, HOLD_C, RELEASE_CJOYSTICK_DEADZONE, jkeyx, jkeyy, jkeya, jkeyb, jkeyc, jkeystart, jkeyselect, jkeyup, jkeydown, 
+jkeyleft, jkeyright, keyleft,
+keyright, keyup, keydown, keya, keyb, keyc, keystart, keyselect;
 //input (5 = keyboard, 0-3 = gamepad)
 P1_INDEX = 5;
 //Directions
@@ -17,6 +18,10 @@ RELEASE_A = false;
 PRESS_B = false;
 HOLD_B = false;
 RELEASE_B = false;
+//C button (flash)
+PRESS_C = false;
+HOLD_C = false;
+RELEASE_C = false;
 ///Gamepad///////////////////////////////////////////////
 //gamepad deadzone 
 JOYSTICK_DEADZONE = 0.11;
@@ -28,6 +33,8 @@ jkeyy=gamepad_axis_value(0, gp_axislv );
 jkeya=gp_face1;
 //shoot button map
 jkeyb=gp_face3;
+//flash button map
+jkeyc=gp_face2;
 //start button map
 jkeystart=gp_start;
 //select button map
@@ -50,6 +57,8 @@ keydown=vk_down;
 keya=(ord('Z'));
 //shoot map
 keyb=(ord('X'));
+//flash map
+keyc=(ord('F'));
 //start map
 keystart=vk_enter;
 //select map
