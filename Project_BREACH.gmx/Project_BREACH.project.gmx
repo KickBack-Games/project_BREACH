@@ -3,7 +3,9 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <NewExtensions/>
+  <NewExtensions>
+    <extension index="0">extensions\Fake light II</extension>
+  </NewExtensions>
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprites name="actors">
@@ -30,15 +32,17 @@
     <sprites name="system">
       <sprites name="lighting">
         <sprite>sprites\spr_light_full</sprite>
-        <sprite>sprites\spr_light</sprite>
-        <sprite>sprites\spr_light_bulb</sprite>
-        <sprite>sprites\spr_light_spot</sprite>
+        <sprite>sprites\spr_gradient</sprite>
+        <sprite>sprites\spr_gradient_half</sprite>
+        <sprite>sprites\spr_cone</sprite>
+        <sprite>sprites\spr_fire</sprite>
       </sprites>
     </sprites>
     <sprites name="levels">
       <sprites name="demo">
         <sprite>sprites\spr_box</sprite>
         <sprite>sprites\spr_tile_demo_lamp</sprite>
+        <sprite>sprites\spr_tile_demo_light</sprite>
       </sprites>
     </sprites>
   </sprites>
@@ -52,6 +56,7 @@
       <background>background\tile_demo_pass</background>
       <background>background\bg_demo_back</background>
     </backgrounds>
+    <background>background\bck_01</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -62,18 +67,17 @@
     <scripts name="player functions">
       <script>scripts\scr_player_damage.gml</script>
     </scripts>
+    <scripts name="lighting">
+      <script>scripts\scr_max_range.gml</script>
+      <script>scripts\scr_is_on_view.gml</script>
+      <script>scripts\scr_day_night_alpha.gml</script>
+    </scripts>
   </scripts>
-  <shaders name="shaders">
-    <shader type="GLSLES">shaders\shd_multiply.shader</shader>
-  </shaders>
   <objects name="objects">
     <objects name="System">
       <objects name="Lighting">
-        <object>objects\obj_lighting</object>
-        <object>objects\obj_box</object>
         <object>objects\obj_light</object>
-        <object>objects\obj_light_lamp</object>
-        <object>objects\obj_light_view</object>
+        <object>objects\obj_light_par</object>
       </objects>
       <objects name="Controls">
         <object>objects\GLOBAL_KEYS</object>
@@ -96,6 +100,7 @@
         <object>objects\CAMERA</object>
       </objects>
       <objects name="Parents">
+        <object>objects\BLANK</object>
         <object>objects\PLAYER</object>
         <object>objects\ENEMY</object>
         <object>objects\EFFECT</object>
@@ -106,10 +111,17 @@
     </objects>
     <objects name="player">
       <object>objects\obj_player</object>
+      <object>objects\obj_light_player</object>
     </objects>
     <objects name="levels">
       <objects name="demo">
         <object>objects\obj_demo_lamp</object>
+        <object>objects\obj_light_view</object>
+        <object>objects\obj_demo_light</object>
+        <object>objects\obj_box</object>
+        <object>objects\obj_demo_fire</object>
+        <object>objects\obj_light_fire_outer</object>
+        <object>objects\obj_light_fire_inner</object>
       </objects>
     </objects>
   </objects>
@@ -118,6 +130,7 @@
       <room>rooms\STARTUP</room>
       <room>rooms\rm_demo_lights_1</room>
       <room>rooms\rm_demo_lights_2</room>
+      <room>rooms\rm_demo_lights_3</room>
     </rooms>
   </rooms>
   <help>

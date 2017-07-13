@@ -64,14 +64,13 @@
     <instance objName="obj_box" x="544" y="448" name="inst_F8A7EBDE" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_box" x="672" y="320" name="inst_CCE922E0" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_demo_lamp" x="32" y="96" name="inst_4E82955B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_lighting" x="320" y="-64" name="inst_2C1F8FF8" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="&lt;undefined&gt;" x="320" y="-64" name="inst_2C1F8FF8" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_block_pass" x="128" y="352" name="inst_67659AA0" locked="0" code="" scaleX="7" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_block_pass" x="320" y="224" name="inst_38B29DBF" locked="0" code="" scaleX="7" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_block_pass" x="512" y="352" name="inst_A7ACF2B7" locked="0" code="" scaleX="7" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_demo_lamp" x="834" y="50" name="inst_4E3CE264" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="270"/>
     <instance objName="obj_demo_lamp" x="1618" y="60" name="inst_56B47F0C" locked="0" code="" scaleX="-1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_light_lamp" x="960" y="192" name="inst_D4CD0050" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_light_lamp" x="1504" y="416" name="inst_6BB36570" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_demo_light" x="785" y="491" name="inst_05D501A8" locked="0" code="" scaleX="13" scaleY="1.5" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="tile_demo_floor" x="0" y="480" w="832" h="32" xo="0" yo="0" id="10000013" name="inst_1F09C547" depth="1" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

@@ -30,18 +30,58 @@ Surf_Light = surface_create(view_wview[0],view_hview[0])
 
 //Array of objects that generates light.
 
-Item[0,0] = obj_demo_light;
-Item[1,0] = obj_light_view;
-Item[2,0] = obj_light_player;
-Item[3,0] = obj_light_fire_outer;
-Item[4,0] = obj_light_fire_inner;
+Item[0,0] = obj_player; //Source of light.
+Item[0,1] = spr_cone; //sprite to use (Always use white sprite with gradient for best result.)
+Item[0,2] = 1; // Xscale factor of the sprite.
+Item[0,3] = 1; // Yscale factor of the sprite.
+Item[0,4] = c_black; // The light color. (Black is no color.)
+Item[0,5] = 1; //Flickering. That affects the size of BOTH Xscale and Yscale.
+
+Item[1,0] = obj_blue_fire;
+Item[1,1] = spr_gradient;
+Item[1,2] = 2;
+Item[1,3] = 2;
+Item[1,4] = c_teal;
+Item[1,5] = 1.1; //Flicker to the outside
+
+Item[2,0] = obj_red_fire;
+Item[2,1] = spr_gradient;
+Item[2,2] = 1;
+Item[2,3] = 1;
+Item[2,4] = c_red;
+Item[2,5] = 1;
+
+Item[3,0] = obj_lantern;
+Item[3,1] = spr_gradient;
+Item[3,2] = 1;
+Item[3,3] = 1.5;
+Item[3,4] = c_yellow ;
+Item[3,5] = 1;
+
+Item[4,0] = obj_green_fire;
+Item[4,1] = spr_gradient;
+Item[4,2] = 1.5;
+Item[4,3] = 1.5;
+Item[4,4] = c_lime;
+Item[4,5] = 0.8; //Flicker on the inside
+
+/*
+If you want another object, increment the first dimension of the array like this:
+Item[5,0] = 
+Item[5,1] = 
+Item[5,2] = 
+Item[5,3] = 
+Item[5,4] = 
+Item[5,5] = 
+*/
+
 
 //That part set the max range of all lights.
 var count = 0;
 
 repeat(array_height_2d(Item))
 {
-//Item[count,6] = scr_max_range(Item[count,1], Item[count,2], Item[count,3], Item[count,5]); //See inside scipt for description
+Item[count,6] = scr_max_range(Item[count,1], Item[count,2], Item[count,3], Item[count,5]); //See inside scipt for description
 count++;
 }
 
@@ -54,7 +94,7 @@ Rising sun is between 300 and 480 (5am to 8 am)
 Sunset if from 1140 1320 (7pm to 22pm)
 */
 
-Blackness_Value = light_room; //The alpha value of the 'darkness'
+Blackness_Value = 0.9; //The alpha value of the 'darkness'
 
 Cycle[0] = 0//start time
 Cycle[1] = 300//Rising sun
@@ -151,20 +191,19 @@ var xx, yy;
 repeat(array_height_2d(Item))
 {
 l_source = Item[count,0];
+l_sprite = Item[count,1];
+l_xscale = Item[count,2];
+l_yscale = Item[count,3];
+l_color = Item[count,4];
+l_flick_id = Item[count,5];
+l_max_range = Item[count, 6];
 
     with(l_source)
     {
-        l_max_range = scr_max_range();
         if scr_is_on_view(0, l_max_range) //See inside script for description
         {
-        c_rotation = image_angle;
-        l_sprite = sprite_index;
-        l_xscale = image_xscale;
-        l_yscale = image_yscale;
-        l_color = image_blend;
         xx = x-view_xview[0];
         yy = y-view_yview[0];
-        l_flick_id = image_speed;
         l_flick = choose(1, 1, 1, 1, 1, 1, l_flick_id); //You can add or remove some '1'.
         draw_set_blend_mode(bm_subtract); //Punch a gradient hole
         draw_sprite_ext(l_sprite, 0, xx, yy, l_xscale*l_flick, l_yscale*l_flick, c_rotation, c_black, 1);
@@ -179,38 +218,6 @@ count++;
 draw_set_blend_mode(bm_normal);
 surface_reset_target();
 
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>Blackness_Value = light_room; //The alpha value of the 'darkness'
-if mouse_wheel_up()
-{
-light_room += 0.025;
-}
-if mouse_wheel_down()
-{
-light_room -= 0.025;
-}
-show_debug_message(light_room);
-if light_room &gt; 0.5{instance_activate_object(obj_light_par);}
-if light_room &lt; 0.5{instance_deactivate_object(obj_light_par);}
 </string>
           </argument>
         </arguments>
@@ -289,17 +296,17 @@ draw_text(view_xview[0]+12, view_yview[0]+12, string(hour div 10)+ string(hour m
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/*var surf_alpha = scr_day_night_alpha(); //That line adjusts the alpha value of the whole surface.
+            <string>var surf_alpha = scr_day_night_alpha(); //That line adjusts the alpha value of the whole surface.
 
 if(surf_alpha == 0)
 {
 exit; //The surface is invisible, no need to draw it.
-}*/
+}
 
 
 if(surface_exists(Surf_Light)) //A safe way to draw a surface: Make sure it exists.
 {
-draw_surface_ext(Surf_Light, view_xview[0], view_yview[0], 1, 1, 0, c_white, 1); //We use our alpha value right here: surf_alpha.
+draw_surface_ext(Surf_Light, view_xview[0], view_yview[0], 1, 1, 0, c_white, surf_alpha); //We use our alpha value right here: surf_alpha.
 }
 else
 {

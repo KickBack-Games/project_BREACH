@@ -25,41 +25,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///sprite setup - Default
-if P1_COSTUME=0{
-sprite_idle     = spr_hero_idle;
-sprite_run      = spr_hero_run;
-sprite_jump     = spr_hero_jump;
-sprite_Sidle    = spr_hero_idle_s;
-sprite_Srun     = spr_hero_run;
-sprite_Sair     = spr_hero_jump;
-sprite_damage   = spr_hero_jump;
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///Setup
 //create hud
 if !instance_exists(CAMERA){instance_create(x,y,CAMERA);}
 //create light
-if !instance_exists(obj_lighting){instance_create(x,y,obj_lighting);}
+if !instance_exists(obj_light){instance_create(x,y,obj_light);}
 hud_border = 0;
 //Facing 1-right -1-left
 facing=1;
@@ -115,6 +85,37 @@ sight=true;
 hor=0;
 ver=0;
 up=0;
+c_rotation = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///sprite setup - Default
+if P1_COSTUME=0{
+sprite_idle     = spr_hero_idle;
+sprite_run      = spr_hero_run;
+sprite_jump     = spr_hero_jump;
+sprite_Sidle    = spr_hero_idle_s;
+sprite_Srun     = spr_hero_run;
+sprite_Sair     = spr_hero_jump;
+sprite_damage   = spr_hero_jump;
+}
 </string>
           </argument>
         </arguments>
@@ -497,8 +498,8 @@ if PRESS_B and rotii_bag&gt;0 and canshoot=true{
     }
 //Toggle Flashlight
 if PRESS_C{
-        if light_player=true{light_player=false;exit;}
-        if light_player=false{light_player=true;exit;}
+        if light_player=true{light_player=false;instance_destroy(light);exit;}
+        if light_player=false{light_player=true;light=instance_create(x,y,obj_light_player);exit;}
     }    
 }
 </string>
