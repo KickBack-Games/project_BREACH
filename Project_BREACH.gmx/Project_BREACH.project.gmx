@@ -14,6 +14,7 @@
         <sprite>sprites\spr_hero_idle</sprite>
         <sprite>sprites\spr_hero_idle_s</sprite>
         <sprite>sprites\spr_hero_jump</sprite>
+        <sprite>sprites\spr_hero_shot_0</sprite>
       </sprites>
     </sprites>
     <sprites name="debug">
@@ -33,8 +34,10 @@
       <sprites name="lighting">
         <sprite>sprites\spr_light_full</sprite>
         <sprite>sprites\spr_gradient</sprite>
+        <sprite>sprites\spr_light_shot_0</sprite>
         <sprite>sprites\spr_gradient_half</sprite>
         <sprite>sprites\spr_cone</sprite>
+        <sprite>sprites\sprite23</sprite>
         <sprite>sprites\spr_fire</sprite>
       </sprites>
     </sprites>
@@ -78,6 +81,13 @@
       <objects name="Lighting">
         <object>objects\obj_light</object>
         <object>objects\obj_light_par</object>
+        <object>objects\obj_light_player_flash</object>
+        <object>objects\obj_demo_light</object>
+        <object>objects\obj_light_view</object>
+        <object>objects\obj_light_spot</object>
+        <object>objects\obj_light_fire_outer</object>
+        <object>objects\obj_light_fire_inner</object>
+        <object>objects\obj_light_shot_0</object>
       </objects>
       <objects name="Controls">
         <object>objects\GLOBAL_KEYS</object>
@@ -112,16 +122,13 @@
     <objects name="player">
       <object>objects\obj_player</object>
       <object>objects\obj_light_player</object>
+      <object>objects\obj_player_shot_0</object>
     </objects>
     <objects name="levels">
       <objects name="demo">
         <object>objects\obj_demo_lamp</object>
-        <object>objects\obj_light_view</object>
-        <object>objects\obj_demo_light</object>
         <object>objects\obj_box</object>
         <object>objects\obj_demo_fire</object>
-        <object>objects\obj_light_fire_outer</object>
-        <object>objects\obj_light_fire_inner</object>
       </objects>
     </objects>
   </objects>
@@ -131,6 +138,7 @@
       <room>rooms\rm_demo_lights_1</room>
       <room>rooms\rm_demo_lights_2</room>
       <room>rooms\rm_demo_lights_3</room>
+      <room>rooms\rm_demo_lights_4</room>
     </rooms>
   </rooms>
   <help>

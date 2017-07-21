@@ -38,11 +38,11 @@ speedx=0;
 //vertical speed
 speedy=.1;
 //walk speed
-speed_walk = 6;
+speed_walk = 4;
 //jump speed
-speed_jump = -16;
+speed_jump = -13;
 //max fall speed
-speed_fall = 10;
+speed_fall = 8;
 //acceleration
 speed_fric = speed_walk;
 //acceleration
@@ -50,7 +50,7 @@ speed_shoot = speed_walk;
 //deceleration
 speed_accel = speed_walk;
 //falling rate
-speed_grav = 1;
+speed_grav = 0.55;
 //no input state
 acting=false;
 //walking state
@@ -231,8 +231,8 @@ if !acting{
 if place_meeting(x,y+2,obj_block_pass_dummy) and speedy&gt;0{
 grounded=true;}  
 //room borders
-if x &gt; room_width { x -= speedx;}
-if x &lt; 0 { x += -(speedx);}
+x = clamp(x,0,room_width);
+y = clamp(y,0,room_height);
 }
 
 </string>
@@ -264,7 +264,7 @@ if acting=false{
         //if not on slope, increase speed
            speedx += speed_accel;
             //if using vac, lock direction
-            if (!shooting) {facing = 1;}
+            facing = 1;
             walking = true;
         }
 //if press left and not front of block
@@ -272,7 +272,7 @@ if acting=false{
         //if not on slope, increase speed
             speedx -= speed_accel;
             //if using vac, lock direction
-            if (!shooting) {facing = -1;}
+            facing = -1;
             walking = true;
         }
 //if walking in front of block        
@@ -336,45 +336,53 @@ if !acting and !walking and !rising and !falling and !shooting
 and grounded{
     sprite_index = sprite_idle;
     image_speed = .18;
-    gun_x=58;gun_y=35;
+    //gun_x=x+(4*facing);gun_y=y+27;
+    gun_x=x+(15 * facing);gun_y=y+7;
     }
 if !acting and !walking and !rising and !falling and shooting
 and grounded{
     sprite_index = sprite_Sidle;
     image_speed = .18;
-    gun_x=58;gun_y=60;
+    //gun_x=x+(24 * facing);gun_y=y+7;
+    gun_x=x+(15 * facing);gun_y=y+7;
     }
 if !acting and walking  and !rising and !falling and !shooting
 and grounded{
     sprite_index = sprite_run;
     image_speed = .33;
-    gun_x=71;gun_y=28;
+    //gun_x=x +(23 * facing);gun_y=y+12;
+    gun_x=x +(14 * facing);gun_y=y+12;
     }
 if !acting and walking  and !rising and !falling and shooting
 and grounded{
     sprite_index = sprite_Srun;
     image_speed = .33;
-    gun_x=71;gun_y=40;
+    //gun_x=x +(23 * facing);gun_y=y+12;
+    gun_x=x +(14 * facing);gun_y=y+12;
     }
 if !acting and rising and !shooting and !falling
 {
     sprite_index = sprite_jump;
     image_index = 0;
     image_speed = 0;
-    gun_x=79;gun_y=36;
+    //gun_x=x +(24 * facing);gun_y=y+7;
+    gun_x=x +(14 * facing);gun_y=y+7;
     }
 if !acting and falling and !shooting and !rising
 {
     sprite_index = sprite_jump;
     image_index = 1;
     image_speed = 0;
-    rjet_x=-44;rjet_y=52;
+    //gun_x=x +(24 * facing);gun_y=y+7;
+    gun_x=x +(14 * facing);gun_y=y+7;
     }
 if !acting and !(speedy=0) and shooting
 {    
     sprite_index = sprite_Sair;
     image_index = 0;
     image_speed = 0;
+    //gun_x=x +(24 * facing);gun_y=y+7;
+    gun_x=x +(14 * facing);gun_y=y+7;
     }
 </string>
           </argument>
@@ -492,9 +500,14 @@ if ((!place_meeting(x,y+6,obj_block)) and (!place_meeting(x,y+6,obj_block_pass_d
             <kind>1</kind>
             <string>///Gunplay 
 if !acting and !LOADING{
-//Shoot Bag contents
-if PRESS_B and rotii_bag&gt;0 and canshoot=true{
-
+//Shoot
+if PRESS_B and canshoot=true{
+    shooting = true;
+    instance_create(gun_x,gun_y,obj_light_player_flash);
+    shot = instance_create(gun_x,gun_y,obj_player_shot_0);
+    shot.image_xscale = facing;
+    shot.hspeed = 10 * shot.image_xscale;
+    alarm[0]=120;
     }
 //Toggle Flashlight
 if PRESS_C{
@@ -621,7 +634,8 @@ if sight{
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if !keyboard_check(vk_alt){
+            <string>///Next Room DEBUG
+if !keyboard_check(vk_alt){
     room_goto_next();
     }
 </string>

@@ -64,7 +64,6 @@
     <instance objName="obj_box" x="544" y="448" name="inst_F8A7EBDE" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_box" x="672" y="320" name="inst_CCE922E0" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_demo_lamp" x="32" y="96" name="inst_4E82955B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="&lt;undefined&gt;" x="320" y="-64" name="inst_2C1F8FF8" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_block_pass" x="128" y="352" name="inst_67659AA0" locked="0" code="" scaleX="7" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_block_pass" x="320" y="224" name="inst_38B29DBF" locked="0" code="" scaleX="7" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_block_pass" x="512" y="352" name="inst_A7ACF2B7" locked="0" code="" scaleX="7" scaleY="1" colour="4294967295" rotation="0"/>

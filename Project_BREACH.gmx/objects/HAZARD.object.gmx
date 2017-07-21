@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>dmg = 3;
+            <string>///Hurts player by this much
+dmg = 3;
 </string>
           </argument>
         </arguments>

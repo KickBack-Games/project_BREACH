@@ -25,14 +25,25 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>owner = id;
+            <string>///Parent to all light objects 
+
+//If the object needs to interact with the object that made it.
+owner = id;
+//Turn on/off object despite light_room
 on = true;
+//Angle of light
 c_rotation = image_angle;
+//Sprite of Light
 l_sprite = sprite_index;
+//Multiplier of xscale
 l_xscale = image_xscale;
+//Multiplier of yscale
 l_yscale = image_yscale;
+//c_color of light
 l_color = image_blend;
+//Flicker speed of light, 1 = 0
 l_flick_id = image_speed;
+//maximum range of the light to ensure it's drawn on the screen if it has to be.
 l_max_range = scr_max_range();
 </string>
           </argument>

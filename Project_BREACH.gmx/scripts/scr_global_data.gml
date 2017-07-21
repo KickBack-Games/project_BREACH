@@ -10,5 +10,5 @@ globalvar LOADING; LOADING = false;
 
 
 //lighting system
-globalvar light_room; light_room = 1;
+globalvar light_room; light_room = 0;
 globalvar light_player; light_player = false;

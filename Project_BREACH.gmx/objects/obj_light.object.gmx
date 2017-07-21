@@ -25,91 +25,22 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Surface is created here. It only covers the view, not the whole room.
+            <string>///Controls for dynamic light.
+//Surface is created here. It only covers the view, not the whole room.
 Surf_Light = surface_create(view_wview[0],view_hview[0])
 
-//Array of objects that generates light.
+//Array of objects that generates light. Add to the item, and place the object giving off light here.
 
 Item[0,0] = obj_demo_light;
 Item[1,0] = obj_light_view;
 Item[2,0] = obj_light_player;
 Item[3,0] = obj_light_fire_outer;
 Item[4,0] = obj_light_fire_inner;
-
-//That part set the max range of all lights.
-var count = 0;
-
-repeat(array_height_2d(Item))
-{
-//Item[count,6] = scr_max_range(Item[count,1], Item[count,2], Item[count,3], Item[count,5]); //See inside scipt for description
-count++;
-}
-
-
-//DAY/NIGHT CYCLE//
-
-/*1440 minutes/days. 0 is 12am, 1439 is 11h59pm.
-Alpha value of darkness is 0.9 by night and 0 by day.
-Rising sun is between 300 and 480 (5am to 8 am)
-Sunset if from 1140 1320 (7pm to 22pm)
-*/
+Item[5,0] = obj_light_spot;
+Item[6,0] = obj_light_shot_0;
+Item[7,0] = obj_light_player_flash;
 
 Blackness_Value = light_room; //The alpha value of the 'darkness'
-
-Cycle[0] = 0//start time
-Cycle[1] = 300//Rising sun
-Cycle[2] = 480//Day
-Cycle[3] = 1140//Sunset
-Cycle[4] = 1320//Night
-Cycle[5] = 0//Day alpha
-Cycle[6] = 1//Night alpha
-//The day and night alpha value is the alpha value of the drawn surface, not the 'darkness'.
-
-C_Time = Cycle[0] //Set C_Time at start time.
-
-/*
-Blackness_Value and Cycle[6] have 2 differents purpose.
-Blackness_Value set the maximum darkness.
-Cylcle[6] is the alpha of the surface with all the lights and darkness.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </string>
           </argument>
         </arguments>
@@ -132,13 +63,7 @@ Cylcle[6] is the alpha of the surface with all the lights and darkness.
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/*
-We increment C_Time by 1 each step. (1 minute each step)
-If you want a slower timer, you could use an alarm that loop each X steps.
-*/
-
-C_Time = (C_Time + 1) mod 1440;
-
+            <string>///Objects create light
 surface_set_target(Surf_Light);
 
 draw_clear_alpha(c_black, Blackness_Value); //The opacity of the darkness is set here.
@@ -155,7 +80,7 @@ l_source = Item[count,0];
     with(l_source)
     {
         l_max_range = scr_max_range();
-        if scr_is_on_view(0, l_max_range) //See inside script for description
+        if scr_is_on_view(0, l_max_range) and light_room &gt; 0.5//See inside script for description
         {
         c_rotation = image_angle;
         l_sprite = sprite_index;
@@ -164,7 +89,7 @@ l_source = Item[count,0];
         l_color = image_blend;
         xx = x-view_xview[0];
         yy = y-view_yview[0];
-        l_flick_id = image_speed;
+        l_flick_id = image_speed;//flicker speed of the light
         l_flick = choose(1, 1, 1, 1, 1, 1, l_flick_id); //You can add or remove some '1'.
         draw_set_blend_mode(bm_subtract); //Punch a gradient hole
         draw_sprite_ext(l_sprite, 0, xx, yy, l_xscale*l_flick, l_yscale*l_flick, c_rotation, c_black, 1);
@@ -199,18 +124,22 @@ surface_reset_target();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>Blackness_Value = light_room; //The alpha value of the 'darkness'
+            <string>///Room Light Controls
+
+//Limit range of light
+light_room = clamp(light_room,0,1);
+//The alpha value of the 'darkness'
+Blackness_Value = light_room; 
+
+//DEBUG LIGHT CONTROLS
 if mouse_wheel_up()
-{
-light_room += 0.025;
-}
-if mouse_wheel_down()
 {
 light_room -= 0.025;
 }
-show_debug_message(light_room);
-if light_room &gt; 0.5{instance_activate_object(obj_light_par);}
-if light_room &lt; 0.5{instance_deactivate_object(obj_light_par);}
+if mouse_wheel_down()
+{
+light_room += 0.025;
+}
 </string>
           </argument>
         </arguments>
@@ -233,40 +162,8 @@ if light_room &lt; 0.5{instance_deactivate_object(obj_light_par);}
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>surface_free(Surf_Light); //Good habits!
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="73">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//Draw the timer
-draw_set_color(c_white);
-draw_set_valign(fa_center);
-draw_set_halign(fa_left);
-
-var hour, minute;
-hour = C_Time div 60;
-minute = C_Time mod 60;
-
-
-draw_text(view_xview[0]+12, view_yview[0]+12, string(hour div 10)+ string(hour mod 10)+':'+string(minute div 10)+string(minute mod 10));
+            <string>///Free Surface
+surface_free(Surf_Light); //Good habits!
 </string>
           </argument>
         </arguments>
@@ -289,14 +186,7 @@ draw_text(view_xview[0]+12, view_yview[0]+12, string(hour div 10)+ string(hour m
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/*var surf_alpha = scr_day_night_alpha(); //That line adjusts the alpha value of the whole surface.
-
-if(surf_alpha == 0)
-{
-exit; //The surface is invisible, no need to draw it.
-}*/
-
-
+            <string>///Surface Draw
 if(surface_exists(Surf_Light)) //A safe way to draw a surface: Make sure it exists.
 {
 draw_surface_ext(Surf_Light, view_xview[0], view_yview[0], 1, 1, 0, c_white, 1); //We use our alpha value right here: surf_alpha.
@@ -305,30 +195,6 @@ else
 {
 Surf_Light = surface_create(view_wview[0],view_hview[0]);
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="32">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//A very interesting function to restart the game ;)
-game_restart();
 </string>
           </argument>
         </arguments>
