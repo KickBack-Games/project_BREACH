@@ -65,12 +65,14 @@ shooting=false;
 jumping=false;
 //on solid ground
 grounded=false;
-//damage frames
-hit_frame=150;
+//damage frames *5 per frame
+hit_frame=24;
 //can be hurt
 canhurt=true;
 //Can vac
 canshoot=true;
+//Aiming | 1 = up, -1 = down
+aiming = 0;
 //affected by windup
 upwind=false;
 //where projectile shoots from
@@ -108,13 +110,21 @@ c_rotation = 0;
             <kind>1</kind>
             <string>///sprite setup - Default
 if P1_COSTUME=0{
-sprite_idle     = spr_hero_idle;
-sprite_run      = spr_hero_run;
-sprite_jump     = spr_hero_jump;
-sprite_Sidle    = spr_hero_idle_s;
-sprite_Srun     = spr_hero_run;
-sprite_Sair     = spr_hero_jump;
-sprite_damage   = spr_hero_jump;
+mask_index      = spr_morgan_coat_mask;
+sprite_idle     = spr_morgan_coat_idle;
+sprite_run      = spr_morgan_coat_run;
+sprite_jump     = spr_morgan_coat_jump;
+sprite_shoot    = spr_morgan_coat_shoot;
+
+sprite_Didle    = spr_morgan_coat_idle_down;
+sprite_Uidle    = spr_morgan_coat_idle_up;
+sprite_Drun     = spr_morgan_coat_run_down;
+sprite_Urun     = spr_morgan_coat_run_up;
+sprite_Ujump    = spr_morgan_coat_jump_up;
+sprite_Djump    = spr_morgan_coat_jump_down;
+
+sprite_front    = spr_morgan_coat_front;
+sprite_back     = spr_morgan_coat_back
 }
 </string>
           </argument>
@@ -163,17 +173,17 @@ loucas=0;
           <argument>
             <kind>1</kind>
             <string>///Blnking invincible sprite
-if canhurt=false{
-    sight=false;
-    if sight{sight=false;}
-    if !sight{sight=true;}
     alarm[2]=5;
-    exit;
-    }
-if canhurt=true{
+    hit_frame -= 1;
+    if hit_frame=0{
     sight=true;
+    hit_frame = 24;
+    canhurt=true;
+    alarm[2]=-1;
     exit;
     }
+    if sight{sight=false;exit;}
+    if !sight{sight=true;exit;}
 </string>
           </argument>
         </arguments>
@@ -198,7 +208,6 @@ if canhurt=true{
             <kind>1</kind>
             <string>///Shooting off
 shooting=false;
-canhurt=true;
 </string>
           </argument>
         </arguments>
@@ -307,7 +316,16 @@ if acting=false{
         if place_meeting(x,y+speedy,obj_block) and speedy&lt;0{
            speedy=4;
             }
-
+//Aiming
+        if (PRESS_UP) and !(PRESS_DOWN){
+            aiming = 1;
+            }
+        if !(PRESS_UP) and (PRESS_DOWN){
+            aiming = -1;
+            }
+        if !(PRESS_UP) and !(PRESS_DOWN){
+            aiming = 0;
+            }
   if speedy&gt;0{falling=true;rising=false;}  if speedy&lt;0{falling=false;rising=true;} if speedy=0{falling=false;rising=false;}      
 }
 </string>
@@ -332,57 +350,79 @@ if acting=false{
             <kind>1</kind>
             <string>///Sprite Changer
 
+gun_x = x +((sprite_get_bbox_left(sprite_index) - sprite_get_xoffset(sprite_index)) * facing );
+gun_y = y + sprite_get_bbox_top (sprite_index) - sprite_get_yoffset(sprite_index);
+
+//idle
 if !acting and !walking and !rising and !falling and !shooting
 and grounded{
-    sprite_index = sprite_idle;
     image_speed = .18;
-    //gun_x=x+(4*facing);gun_y=y+27;
-    gun_x=x+(15 * facing);gun_y=y+7;
+    if aiming = 0{
+        sprite_index = sprite_idle;
+        }
+    if aiming = 1{
+        sprite_index = sprite_Uidle;
+        }
+    if aiming = -1{
+        sprite_index = sprite_Didle;
+        }
     }
+//shooting
 if !acting and !walking and !rising and !falling and shooting
 and grounded{
-    sprite_index = sprite_Sidle;
     image_speed = .18;
-    //gun_x=x+(24 * facing);gun_y=y+7;
-    gun_x=x+(15 * facing);gun_y=y+7;
+    if aiming = 0{
+        sprite_index = sprite_shoot; 
+        }
+    if aiming = 1{
+        sprite_index = sprite_Uidle;
+        }
+    if aiming = -1{
+        sprite_index = sprite_Didle;
+        }
     }
-if !acting and walking  and !rising and !falling and !shooting
-and grounded{
-    sprite_index = sprite_run;
+//running
+if !acting and walking  and !rising and !falling and grounded{
     image_speed = .33;
-    //gun_x=x +(23 * facing);gun_y=y+12;
-    gun_x=x +(14 * facing);gun_y=y+12;
+    if aiming = 0{
+        sprite_index = sprite_run;
+        }
+    if aiming = 1{
+        sprite_index = sprite_Urun;
+        }
+    if aiming = -1{
+        sprite_index = sprite_Drun;
+        }
     }
-if !acting and walking  and !rising and !falling and shooting
-and grounded{
-    sprite_index = sprite_Srun;
-    image_speed = .33;
-    //gun_x=x +(23 * facing);gun_y=y+12;
-    gun_x=x +(14 * facing);gun_y=y+12;
-    }
-if !acting and rising and !shooting and !falling
+//jumping up
+if !acting and rising and !falling
 {
-    sprite_index = sprite_jump;
     image_index = 0;
     image_speed = 0;
-    //gun_x=x +(24 * facing);gun_y=y+7;
-    gun_x=x +(14 * facing);gun_y=y+7;
+    if aiming = 0{
+        sprite_index = sprite_jump;
+        }
+    if aiming = 1{
+        sprite_index = sprite_Ujump;
+        }
+    if aiming = -1{
+        sprite_index = sprite_Djump;
+        }
     }
-if !acting and falling and !shooting and !rising
+//jumping down
+if !acting and falling and !rising
 {
-    sprite_index = sprite_jump;
     image_index = 1;
     image_speed = 0;
-    //gun_x=x +(24 * facing);gun_y=y+7;
-    gun_x=x +(14 * facing);gun_y=y+7;
-    }
-if !acting and !(speedy=0) and shooting
-{    
-    sprite_index = sprite_Sair;
-    image_index = 0;
-    image_speed = 0;
-    //gun_x=x +(24 * facing);gun_y=y+7;
-    gun_x=x +(14 * facing);gun_y=y+7;
+    if aiming = 0{
+        sprite_index = sprite_jump;
+        }
+    if aiming = 1{
+        sprite_index = sprite_Ujump;
+        }
+    if aiming = -1{
+        sprite_index = sprite_Djump;
+        }
     }
 </string>
           </argument>
@@ -423,7 +463,7 @@ if loucas&gt;0 {
     x += (speedx/2)/loucas;
     y += speedy/2;
     }
-if(place_meeting(x,y+16,obj_block) or place_meeting(x,y+16,obj_block_pass) ){
+if(place_meeting(x,y+16,obj_block) or place_meeting(x,y+16,obj_block_pass_dummy) ){
     speed_fric = speed_walk;
     speed_accel = speed_walk;
 }
@@ -465,12 +505,12 @@ if speedx=0{
 floor_snap = collision_rectangle( bbox_left, bbox_bottom, bbox_right, bbox_bottom+1, obj_block, false, true );
 if floor_snap &gt; -1 and speedy&gt;=0{
 speedy=0;rising=false;falling=false;jumping=false;fall_time=0;grounded=true;
-y = floor_snap.bbox_top - 57;
+y = floor_snap.bbox_top - sprite_get_height(mask_index * image_yscale) + sprite_get_yoffset(mask_index);
 } 
 pass_snap = collision_rectangle( bbox_left, bbox_bottom, bbox_right, bbox_bottom+1, obj_block_pass_dummy, false, true );
 if pass_snap &gt; -1 and speedy&gt;=0{
 speedy=0;rising=false;falling=false;jumping=false;fall_time=0;grounded=true;
-y = (pass_snap.bbox_top) - 57;
+y = pass_snap.bbox_top - sprite_get_height(mask_index * image_yscale) + sprite_get_yoffset(mask_index);
 }
 
 if ((!place_meeting(x,y+6,obj_block)) and (!place_meeting(x,y+6,obj_block_pass_dummy))) {
@@ -502,11 +542,13 @@ if ((!place_meeting(x,y+6,obj_block)) and (!place_meeting(x,y+6,obj_block_pass_d
 if !acting and !LOADING{
 //Shoot
 if PRESS_B and canshoot=true{
+    audio_play_sound_on(s_sfx,sound0,false,10);
     shooting = true;
     instance_create(gun_x,gun_y,obj_light_player_flash);
     shot = instance_create(gun_x,gun_y,obj_player_shot_0);
     shot.image_xscale = facing;
-    shot.hspeed = 10 * shot.image_xscale;
+    if aiming = 0{shot.hspeed = 10 * shot.image_xscale;}
+    if aiming != 0{shot.image_angle = 90;shot.vspeed = 10 * -aiming;shot.image_yscale = -aiming;}
     alarm[0]=120;
     }
 //Toggle Flashlight
@@ -589,6 +631,8 @@ scr_player_damage();
 if sight{
     draw_sprite_ext(sprite_index,image_index,x,y,facing,image_yscale,image_angle,image_blend,image_alpha);
     }
+//draw_set_colour(c_red);
+//draw_circle(gun_x,gun_y,5,true);
 </string>
           </argument>
         </arguments>

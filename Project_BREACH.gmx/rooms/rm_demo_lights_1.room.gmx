@@ -10,7 +10,7 @@
   <persistent>0</persistent>
   <colour>12632256</colour>
   <showcolour>-1</showcolour>
-  <code></code>
+  <code>audio_play_sound_on(s_sfx,sound2,true,10);</code>
   <enableViews>0</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>
@@ -66,6 +66,11 @@
     <instance objName="obj_demo_light" x="160" y="480" name="inst_99302E6D" locked="0" code="" scaleX="2" scaleY="2" colour="4294967295" rotation="0"/>
     <instance objName="obj_demo_light" x="672" y="480" name="inst_7358C4DC" locked="0" code="" scaleX="2" scaleY="2" colour="4294967295" rotation="0"/>
     <instance objName="obj_demo_light" x="416" y="32" name="inst_2E0654CC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="180"/>
+    <instance objName="obj_enem_guard1" x="512" y="64" name="inst_61BCEEDC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_enem_guard1" x="416" y="384" name="inst_64C2335E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_enem_guard1" x="256" y="288" name="inst_9CEFCD27" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_enem_guard1" x="704" y="224" name="inst_183EBE3C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_enem_guard1" x="416" y="96" name="inst_7B1C7091" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="tile_demo_floor" x="0" y="480" w="832" h="32" xo="0" yo="0" id="10000013" name="inst_1F09C547" depth="1" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

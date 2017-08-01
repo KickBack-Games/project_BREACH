@@ -5,8 +5,17 @@
   </Configs>
   <NewExtensions>
     <extension index="0">extensions\Fake light II</extension>
+    <extension index="1">extensions\Infinite Parallax</extension>
   </NewExtensions>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sounds name="sfx">
+      <sounds name="demo">
+        <sound>sound\sound0</sound>
+        <sound>sound\sound1</sound>
+        <sound>sound\sound2</sound>
+      </sounds>
+    </sounds>
+  </sounds>
   <sprites name="sprites">
     <sprites name="actors">
       <sprites name="hero">
@@ -14,7 +23,38 @@
         <sprite>sprites\spr_hero_idle</sprite>
         <sprite>sprites\spr_hero_idle_s</sprite>
         <sprite>sprites\spr_hero_jump</sprite>
+      </sprites>
+      <sprites name="morgan">
         <sprite>sprites\spr_hero_shot_0</sprite>
+        <sprites name="coat">
+          <sprite>sprites\spr_morgan_coat_idle</sprite>
+          <sprite>sprites\spr_morgan_coat_mask</sprite>
+          <sprite>sprites\spr_morgan_coat_idle_up</sprite>
+          <sprite>sprites\spr_morgan_coat_idle_down</sprite>
+          <sprite>sprites\spr_morgan_coat_shoot</sprite>
+          <sprite>sprites\spr_morgan_coat_run</sprite>
+          <sprite>sprites\spr_morgan_coat_run_up</sprite>
+          <sprite>sprites\spr_morgan_coat_run_down</sprite>
+          <sprite>sprites\spr_morgan_coat_jump</sprite>
+          <sprite>sprites\spr_morgan_coat_jump_up</sprite>
+          <sprite>sprites\spr_morgan_coat_jump_down</sprite>
+          <sprite>sprites\spr_morgan_coat_front</sprite>
+          <sprite>sprites\spr_morgan_coat_back</sprite>
+        </sprites>
+      </sprites>
+      <sprites name="guard1">
+        <sprite>sprites\spr_guard1_shot_0</sprite>
+        <sprite>sprites\spr_guard1_idle</sprite>
+        <sprite>sprites\spr_guard1_mask</sprite>
+        <sprite>sprites\spr_guard1_idle_up</sprite>
+        <sprite>sprites\spr_guard1_idle_down</sprite>
+        <sprite>sprites\spr_guard1_shoot</sprite>
+        <sprite>sprites\spr_guard1_run</sprite>
+        <sprite>sprites\spr_guard1_run_up</sprite>
+        <sprite>sprites\spr_guard1_run_down</sprite>
+        <sprite>sprites\spr_guard1_jump</sprite>
+        <sprite>sprites\spr_guard1_jump_up</sprite>
+        <sprite>sprites\spr_guard1_jump_down</sprite>
       </sprites>
     </sprites>
     <sprites name="debug">
@@ -48,18 +88,31 @@
         <sprite>sprites\spr_tile_demo_light</sprite>
       </sprites>
     </sprites>
+    <sprite>sprites\spr_navigator</sprite>
+    <sprite>sprites\spr_mountain1</sprite>
+    <sprite>sprites\spr_mountain2</sprite>
   </sprites>
   <backgrounds name="background">
-    <backgrounds name="demo">
-      <background>background\tile_demo_floor</background>
-      <background>background\tile_demo_top</background>
-      <background>background\tile_demo_right</background>
-      <background>background\tile_demo_left</background>
-      <background>background\tile_demo_light</background>
-      <background>background\tile_demo_pass</background>
-      <background>background\bg_demo_back</background>
-    </backgrounds>
     <background>background\bck_01</background>
+    <background>background\bck_sky</background>
+    <backgrounds name="tile">
+      <backgrounds name="demo">
+        <background>background\tile_demo_floor</background>
+        <background>background\tile_demo_top</background>
+        <background>background\tile_demo_right</background>
+        <background>background\tile_demo_left</background>
+        <background>background\tile_demo_light</background>
+        <background>background\tile_demo_pass</background>
+        <background>background\tile_demo_door</background>
+        <background>background\tile_demo_pillar_1</background>
+        <background>background\tile_demo_pillar_2</background>
+      </backgrounds>
+    </backgrounds>
+    <backgrounds name="back">
+      <background>background\bg_demo_back</background>
+      <background>background\bg_demo_test</background>
+      <background>background\bg_demo_test_1</background>
+    </backgrounds>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -75,6 +128,7 @@
       <script>scripts\scr_is_on_view.gml</script>
       <script>scripts\scr_day_night_alpha.gml</script>
     </scripts>
+    <script>scripts\scr_triangle_find_side_similar.gml</script>
   </scripts>
   <objects name="objects">
     <objects name="System">
@@ -129,6 +183,22 @@
         <object>objects\obj_demo_lamp</object>
         <object>objects\obj_box</object>
         <object>objects\obj_demo_fire</object>
+      </objects>
+    </objects>
+    <objects name="essential">
+      <object>objects\obj_parallax_handler</object>
+      <object>objects\obj_parallax_element</object>
+    </objects>
+    <objects name="unessential">
+      <object>objects\obj_mountain_2</object>
+      <object>objects\obj_mountain_1</object>
+      <object>objects\obj_parallax_test</object>
+      <object>objects\obj_navigator</object>
+    </objects>
+    <objects name="enemy">
+      <objects name="guard1">
+        <object>objects\obj_enem_guard1</object>
+        <object>objects\obj_light_enemy</object>
       </objects>
     </objects>
   </objects>

@@ -76,6 +76,7 @@ for (i=0;i&lt;ww;i+=chunk) { //we loop 4 pixel at a time all the way across
  particle.depth = depth;
  }
  }
+audio_play_sound_on(s_sfx,sound1,false,10);
 </string>
           </argument>
         </arguments>

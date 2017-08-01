@@ -2,7 +2,7 @@
 <object>
   <spriteName>spr_gradient</spriteName>
   <solid>0</solid>
-  <visible>-1</visible>
+  <visible>0</visible>
   <depth>2</depth>
   <persistent>0</persistent>
   <parentName>obj_light_par</parentName>
@@ -42,6 +42,7 @@
             <string>sprite_scale = 0.01;
 alarm[0]=15;
 image_blend = c_red;
+image_alpha = 0.5;
 </string>
           </argument>
         </arguments>
