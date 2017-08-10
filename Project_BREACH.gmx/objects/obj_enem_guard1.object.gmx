@@ -143,6 +143,9 @@ sprite_Djump    = spr_guard1_jump_down;
 idle = "idle";
 caution = "caution";
 alert = "alert";
+shock = "shock";
+search = "search";
+find  = "find";
 state = idle;
 //AI "controls
 ai_left = false;
@@ -152,10 +155,14 @@ ai_down = false;
 ai_a = false;
 ai_b = false;
 //Sight range
-sight_caution = 20;
-sight_alert = 10;
+sight_caution = 220;
+sight_alert = 110;
+yellow = -1;
+red = -1;
 //target to chase
 target = -1;
+target_x = 0;
+target_y = 0;
 //can cause damage by touch
 attack = true;
 dmg = 3;
@@ -217,6 +224,31 @@ if canhurt=true{
     sight=true;
     exit;
     }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///search mode
+if state = shock{state = search;exit;}
+if state = find{state = idle;exit;}
 </string>
           </argument>
         </arguments>
@@ -649,6 +681,78 @@ if !acting and state = idle and speedy = 0{
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Pattern - Search
+//Movement
+if !acting and state = search and speedy = 0{   
+        if (target_x &gt; x) and !place_meeting(x+speedx,y,obj_block){
+            ai_right=true;
+            ai_left=false;
+        }
+        if (target_x &lt; x) and !place_meeting(x+speedx,y,obj_block){
+            ai_left=true;
+            ai_right=false;
+        }
+        if point_in_rectangle(target_x,target_y,bbox_left-32,bbox_top-64,bbox_right+32,bbox_bottom+64){
+            state = find;
+            alarm[1]=120;
+            ai_right=false;
+            ai_left=false;
+            } 
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Path of sight
+yellow = collision_line(x+ (sight_alert * facing),y,x + (sight_caution * facing),y,PLAYER,true,true);
+red = collision_line(x,y,x + (sight_alert * facing),y,PLAYER,true,true);
+
+if yellow != noone and state = idle{
+    if !collision_line(x,y,PLAYER.x,PLAYER.y,obj_block,true,true){
+        state = shock;
+        alarm[1]=60;
+        ai_left = false;
+        ai_right = false;
+        target_x = yellow.x;
+        target_y = yellow.y;
+        }
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="0">
       <action>
@@ -671,8 +775,18 @@ if !acting and state = idle and speedy = 0{
 if sight{
     draw_sprite_ext(sprite_index,image_index,x,y,facing,image_yscale,image_angle,image_blend,image_alpha);
     }
+/*
+draw_set_color(c_yellow);
+draw_line(x+ (sight_alert * facing),y,x + (sight_caution * facing),y);
 draw_set_colour(c_red);
-//draw_circle(gun_x,gun_y,5,false);
+draw_line(x,y,x + (sight_alert * facing),y);
+draw_circle(gun_x,gun_y,5,false);
+draw_circle(target_x,target_y,5,false);
+*/
+
+if state = shock{
+    draw_sprite(spr_caution,0,x,y-32);
+    }
 </string>
           </argument>
         </arguments>

@@ -37,6 +37,7 @@ speed_fall=10;
 //platform riding offset
 hor=0;
 ver=0;
+pass = true;
 </string>
           </argument>
         </arguments>

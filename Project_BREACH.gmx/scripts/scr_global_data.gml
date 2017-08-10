@@ -16,3 +16,9 @@ globalvar light_player; light_player = false;
 //sound
 globalvar s_bgm; s_bgm = audio_emitter_create();
 globalvar s_sfx; s_sfx = audio_emitter_create();
+
+//game stuff
+globalvar IsPaused; IsPaused = false;
+globalvar warp_rm;  warp_rm = room;
+globalvar warp_x;   warp_x = 0;
+globalvar warp_y;   warp_y = 0;

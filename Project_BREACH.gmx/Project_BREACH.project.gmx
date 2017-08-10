@@ -84,13 +84,19 @@
     <sprites name="levels">
       <sprites name="demo">
         <sprite>sprites\spr_box</sprite>
+        <sprite>sprites\spr_box_metal</sprite>
         <sprite>sprites\spr_tile_demo_lamp</sprite>
         <sprite>sprites\spr_tile_demo_light</sprite>
+        <sprite>sprites\spr_door_unlock</sprite>
+        <sprite>sprites\spr_door_lock</sprite>
       </sprites>
     </sprites>
-    <sprite>sprites\spr_navigator</sprite>
-    <sprite>sprites\spr_mountain1</sprite>
-    <sprite>sprites\spr_mountain2</sprite>
+    <sprites name="menu">
+      <sprites name="hud">
+        <sprite>sprites\spr_alert</sprite>
+        <sprite>sprites\spr_caution</sprite>
+      </sprites>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\bck_01</background>
@@ -116,10 +122,12 @@
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\scr_global_data.gml</script>
-    <script>scripts\scr_global_controls.gml</script>
-    <script>scripts\scr_control_gamepad.gml</script>
-    <script>scripts\scr_control_keyboard.gml</script>
+    <scripts name="variables">
+      <script>scripts\scr_global_data.gml</script>
+      <script>scripts\scr_global_controls.gml</script>
+      <script>scripts\scr_control_gamepad.gml</script>
+      <script>scripts\scr_control_keyboard.gml</script>
+    </scripts>
     <scripts name="player functions">
       <script>scripts\scr_player_damage.gml</script>
     </scripts>
@@ -127,8 +135,11 @@
       <script>scripts\scr_max_range.gml</script>
       <script>scripts\scr_is_on_view.gml</script>
       <script>scripts\scr_day_night_alpha.gml</script>
+      <script>scripts\scr_triangle_find_side_similar.gml</script>
     </scripts>
-    <script>scripts\scr_triangle_find_side_similar.gml</script>
+    <scripts name="transition">
+      <script>scripts\scr_warp.gml</script>
+    </scripts>
   </scripts>
   <objects name="objects">
     <objects name="System">
@@ -159,6 +170,7 @@
         <object>objects\obj_move_change</object>
         <object>objects\obj_move_flip</object>
         <object>objects\obj_water</object>
+        <object>objects\obj_door</object>
       </objects>
       <objects name="Camera">
         <object>objects\CAMERA</object>
@@ -172,6 +184,14 @@
         <object>objects\SHOT</object>
         <object>objects\HAZARD</object>
       </objects>
+      <objects name="Transition">
+        <object>objects\TRANSITION</object>
+        <object>objects\FREEZE</object>
+      </objects>
+      <objects name="Parallax">
+        <object>objects\obj_parallax_handler</object>
+        <object>objects\obj_parallax_element</object>
+      </objects>
     </objects>
     <objects name="player">
       <object>objects\obj_player</object>
@@ -183,17 +203,8 @@
         <object>objects\obj_demo_lamp</object>
         <object>objects\obj_box</object>
         <object>objects\obj_demo_fire</object>
+        <object>objects\obj_box_metal</object>
       </objects>
-    </objects>
-    <objects name="essential">
-      <object>objects\obj_parallax_handler</object>
-      <object>objects\obj_parallax_element</object>
-    </objects>
-    <objects name="unessential">
-      <object>objects\obj_mountain_2</object>
-      <object>objects\obj_mountain_1</object>
-      <object>objects\obj_parallax_test</object>
-      <object>objects\obj_navigator</object>
     </objects>
     <objects name="enemy">
       <objects name="guard1">
@@ -205,6 +216,7 @@
   <rooms name="rooms">
     <rooms name="alpha">
       <room>rooms\STARTUP</room>
+      <room>rooms\rm_demo_combat_1</room>
       <room>rooms\rm_demo_lights_1</room>
       <room>rooms\rm_demo_lights_2</room>
       <room>rooms\rm_demo_lights_3</room>

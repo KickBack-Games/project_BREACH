@@ -58,10 +58,12 @@
     <instance objName="obj_block_pass" x="128" y="352" name="inst_9A0E8B4B" locked="0" code="" scaleX="7" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_block_pass" x="320" y="224" name="inst_364F7DEC" locked="0" code="" scaleX="7" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_block_pass" x="512" y="352" name="inst_53D65977" locked="0" code="" scaleX="7" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_player" x="160" y="224" name="inst_79C06D23" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_player" x="96" y="416" name="inst_79C06D23" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_demo_fire" x="449" y="178" name="inst_7E32714F" locked="0" code="" scaleX="0.5" scaleY="0.5" colour="4294967295" rotation="0"/>
-    <instance objName="obj_demo_fire" x="708" y="433" name="inst_D6B38645" locked="0" code="" scaleX="0.550000011920929" scaleY="0.487437188625336" colour="4294967295" rotation="0"/>
-    <instance objName="obj_demo_fire" x="264" y="442" name="inst_6F6EB3C8" locked="0" code="" scaleX="0.550000011920929" scaleY="0.400000005960464" colour="4294967295" rotation="0"/>
+    <instance objName="obj_demo_fire" x="554" y="433" name="inst_D6B38645" locked="0" code="" scaleX="0.550000011920929" scaleY="0.487437188625336" colour="4294967295" rotation="0"/>
+    <instance objName="obj_demo_fire" x="177" y="312" name="inst_6F6EB3C8" locked="0" code="" scaleX="0.550000011920929" scaleY="0.400000005960464" colour="4294967295" rotation="0"/>
+    <instance objName="obj_box_metal" x="288" y="448" name="inst_C7C91A0E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_door" x="672" y="384" name="inst_5B92AC06" locked="0" code="rm = room_next(room);&#xA;xx = 96;&#xA;yy = 384;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="tile_demo_floor" x="0" y="480" w="832" h="32" xo="0" yo="0" id="10000013" name="inst_1F09C547" depth="1" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

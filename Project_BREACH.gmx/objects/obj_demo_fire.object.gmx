@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>HAZARD</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -34,6 +34,9 @@ out.image_yscale = 5 * image_yscale;
 
 in.image_xscale = 2 * image_xscale;
 in.image_yscale = 2 * image_yscale;
+
+attack = true;
+dmg = 5;
 </string>
           </argument>
         </arguments>
