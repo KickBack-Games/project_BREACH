@@ -35,6 +35,8 @@ speedx=0;
 speedy=.1;
 //walk speed
 speed_walk = 3;
+//run speed
+speed_run = 0;
 //jump speed
 speed_jump = -13;
 //max fall speed
@@ -146,6 +148,7 @@ alert = "alert";
 shock = "shock";
 search = "search";
 find  = "find";
+pursue = "pursue";
 state = idle;
 //AI "controls
 ai_left = false;
@@ -166,6 +169,12 @@ target_y = 0;
 //can cause damage by touch
 attack = true;
 dmg = 3;
+//block id
+block_id = -1;
+jump_y = 0;
+start_y = 0;
+//gunshot delay
+fire_count = 0;
 </string>
           </argument>
         </arguments>
@@ -246,9 +255,10 @@ if canhurt=true{
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///search mode
+            <string>///state switch
 if state = shock{state = search;exit;}
 if state = find{state = idle;exit;}
+if state = alert{state = pursue;exit;}
 </string>
           </argument>
         </arguments>
@@ -552,16 +562,16 @@ if speedx=0{
     walking = false;
 }
     if shooting =false and walking=true and speedx &gt; speed_walk{
-        speedx = speed_walk;
+        speedx = speed_walk + speed_run;
         }
     if shooting =false and walking=true and speedx &lt; -(speed_walk){
-        speedx = -(speed_walk);
+        speedx = -(speed_walk + speed_run);
         }
     if shooting =true and speedx &lt; -(speed_shoot){
-        speedx = -(speed_shoot);
+        speedx = -(speed_shoot + speed_run);
         }
     if shooting =true and speedx &gt; speed_shoot{
-        speedx = speed_shoot;
+        speedx = speed_shoot + speed_run;
         }
     if grounded = false {
         speedy += speed_grav;
@@ -608,16 +618,15 @@ if ((!place_meeting(x,y+6,obj_block)) and (!place_meeting(x,y+6,obj_block_pass))
 if !acting and !LOADING{
 //Shoot
 if ai_b and canshoot=true{
-    audio_play_sound_on(s_sfx,sound0,false,10);
     shooting = true;
-    repeat(5){
-        shot = instance_create(gun_x,gun_y,obj_enem_guard1);
-        shot.image_xscale = facing;
-        if aiming = 0{shot.hspeed = 10 * shot.image_xscale;}
-        if aiming != 0{shot.image_angle = 90;shot.vspeed = 10 * -aiming;shot.image_yscale = -aiming;}
-        }
+    audio_play_sound_on(s_sfx,sound0,false,10);
+    shot = instance_create(gun_x,gun_y,obj_player_shot_0);
+    shot.image_xscale = facing;
+    if aiming = 0{shot.hspeed = 10 * shot.image_xscale;}
+    if aiming != 0{shot.image_angle = 90;shot.vspeed = 10 * -aiming;shot.image_yscale = -aiming;}
     canshoot=false;
     alarm[0]=120;
+    ai_b = false;
     }
 }
 </string>
@@ -735,18 +744,101 @@ if !acting and state = search and speedy = 0{
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Path of sight
-yellow = collision_line(x+ (sight_alert * facing),y,x + (sight_caution * facing),y,PLAYER,true,true);
-red = collision_line(x,y,x + (sight_alert * facing),y,PLAYER,true,true);
+            <string>///Pattern - Pursue
+//Movement
+if !acting and state = pursue{
+target_x = PLAYER.x;
+target_y = PLAYER.y;
+        //fire at will
+            fire_count -=1;
+            if fire_count = 0{ai_b = true;fire_count = irandom_range(60,180);}
 
-if yellow != noone and state = idle{
+        //left/right pursue
+        if !point_in_rectangle(target_x,y,bbox_left-32,bbox_top,bbox_right+32,bbox_bottom){
+            if (target_x &gt; x) and !place_meeting(x+speedx,y,obj_block){
+                ai_right=true;
+                ai_left=false;
+            }
+            if (target_x &lt; x) and !place_meeting(x+speedx,y,obj_block){
+                ai_left=true;
+                ai_right=false;
+            }
+        }
+        //stop walking when close to prevent twitch   
+        if point_in_rectangle(target_x,y,bbox_left-32,bbox_top,bbox_right+32,bbox_bottom){
+            ai_right=false;
+            ai_left=false;
+        }
+        //jumping
+        if (target_x &gt; x) and place_meeting(x+32,y,obj_block){
+            block = collision_point(x+32,y,obj_block,false,true);
+            if block != noone and speedy=0{
+                if block.bbox_top &gt;= y - 64{
+                    ai_a = true;
+                    jump_y = bbox_bottom - (bbox_bottom - block.bbox_top);
+                    }
+                }
+        }
+        if (target_x &lt; x) and place_meeting(x-32,y,obj_block){
+            block = collision_point(x-32,y,obj_block,false,true);
+            if block != noone and speedy=0{
+                if block.bbox_top &gt;= y - 64{
+                    ai_a = true;
+                    jump_y = bbox_bottom - (bbox_bottom - block.bbox_top);
+                    }
+                }
+
+        }
+            pass = collision_line(x,bbox_bottom,x,bbox_bottom - 96,obj_block_pass,false,true)
+            if pass != noone and speedy=0 and PLAYER.y &lt;= pass.bbox_top{
+                    ai_a = true;
+                    jump_y = bbox_bottom - (bbox_bottom - pass.bbox_top);
+                }
+            if ai_a and bbox_bottom &lt; jump_y - 32{
+                ai_a = false;
+            }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Path of sight
+if rectangle_in_triangle(PLAYER.bbox_left,PLAYER.bbox_top,PLAYER.bbox_right,PLAYER.bbox_bottom,x,y,x+ (sight_caution * facing),y-64,x+ (sight_caution * facing),y+64)
+and state = idle{
     if !collision_line(x,y,PLAYER.x,PLAYER.y,obj_block,true,true){
         state = shock;
         alarm[1]=60;
         ai_left = false;
         ai_right = false;
-        target_x = yellow.x;
-        target_y = yellow.y;
+        target_x = PLAYER.x;
+        target_y = PLAYER.y;
+        }
+    }
+if rectangle_in_triangle(PLAYER.bbox_left,PLAYER.bbox_top,PLAYER.bbox_right,PLAYER.bbox_bottom,x,y,x+ (sight_alert * facing),y-32,x+ (sight_alert * facing),y+32)
+and (state != alert and state != pursue){
+    if !collision_line(x,y,PLAYER.x,PLAYER.y,obj_block,true,true){
+        state = alert;
+        alarm[1]=60;
+        ai_left = false;
+        ai_right = false;
+        speed_run = 1;
+        fire_count = irandom_range(60,180);
         }
     }
 </string>
@@ -777,15 +869,19 @@ if sight{
     }
 /*
 draw_set_color(c_yellow);
-draw_line(x+ (sight_alert * facing),y,x + (sight_caution * facing),y);
+draw_triangle(x,y,x+ (sight_caution * facing),y-64,x+ (sight_caution * facing),y+64,false);
 draw_set_colour(c_red);
-draw_line(x,y,x + (sight_alert * facing),y);
+draw_triangle(x,y,x+ (sight_alert * facing),y-32,x+ (sight_alert * facing),y+32,false);
 draw_circle(gun_x,gun_y,5,false);
+draw_set_colour(c_lime);
+draw_line(x,y,PLAYER.x,PLAYER.y);
 draw_circle(target_x,target_y,5,false);
-*/
-
+draw_circle(x,jump_y,5,false);+*/
 if state = shock{
     draw_sprite(spr_caution,0,x,y-32);
+    }
+if state = alert{
+    draw_sprite(spr_alert,0,x,y-32);
     }
 </string>
           </argument>

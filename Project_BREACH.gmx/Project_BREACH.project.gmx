@@ -25,7 +25,6 @@
         <sprite>sprites\spr_hero_jump</sprite>
       </sprites>
       <sprites name="morgan">
-        <sprite>sprites\spr_hero_shot_0</sprite>
         <sprites name="coat">
           <sprite>sprites\spr_morgan_coat_idle</sprite>
           <sprite>sprites\spr_morgan_coat_mask</sprite>
@@ -40,6 +39,11 @@
           <sprite>sprites\spr_morgan_coat_jump_down</sprite>
           <sprite>sprites\spr_morgan_coat_front</sprite>
           <sprite>sprites\spr_morgan_coat_back</sprite>
+        </sprites>
+        <sprites name="fx">
+          <sprite>sprites\spr_hero_shot_0_bullet</sprite>
+          <sprite>sprites\spr_hero_shot_0_spray</sprite>
+          <sprite>sprites\spr_hero_shot_0_hit</sprite>
         </sprites>
       </sprites>
       <sprites name="guard1">

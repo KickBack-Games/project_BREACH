@@ -551,7 +551,11 @@ if !acting and !LOADING{
 if PRESS_B and canshoot=true{
     audio_play_sound_on(s_sfx,sound0,false,10);
     shooting = true;
-    instance_create(gun_x,gun_y,obj_light_player_flash);
+    if light_room &gt; .5{instance_create(gun_x,gun_y,obj_light_player_flash);}
+    fx = instance_create(gun_x,gun_y,EFFECT);
+    fx.sprite_index = spr_hero_shot_0_spray;
+    fx.depth = depth-1;
+    fx.image_speed = .5;
     shot = instance_create(gun_x,gun_y,obj_player_shot_0);
     shot.image_xscale = facing;
     if aiming = 0{shot.hspeed = 10 * shot.image_xscale;}

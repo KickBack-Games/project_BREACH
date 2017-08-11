@@ -56,7 +56,6 @@
     <instance objName="obj_block" x="0" y="32" name="inst_35C4EF47" locked="0" code="" scaleX="1" scaleY="14" colour="4294967295" rotation="0"/>
     <instance objName="obj_block" x="800" y="32" name="inst_F7F545E0" locked="0" code="" scaleX="1" scaleY="14" colour="4294967295" rotation="0"/>
     <instance objName="obj_block" x="0" y="0" name="inst_164C2EF7" locked="0" code="" scaleX="26" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_block_pass" x="128" y="384" name="inst_9A0E8B4B" locked="0" code="" scaleX="7" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_block_pass" x="320" y="288" name="inst_364F7DEC" locked="0" code="" scaleX="7" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_block_pass" x="512" y="384" name="inst_53D65977" locked="0" code="" scaleX="7" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_player" x="224" y="416" name="inst_79C06D23" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
@@ -71,7 +70,6 @@
     <tile bgName="tile_demo_top" x="0" y="0" w="832" h="36" xo="0" yo="0" id="10000014" name="inst_FF1C645D" depth="1" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="tile_demo_right" x="800" y="32" w="31" h="448" xo="0" yo="0" id="10000015" name="inst_C98FB3B5" depth="1" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="tile_demo_left" x="0" y="32" w="32" h="448" xo="0" yo="0" id="10000016" name="inst_0F78A469" depth="1" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="tile_demo_pass" x="128" y="384" w="224" h="12" xo="0" yo="0" id="10000017" name="inst_8997B068" depth="1" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="tile_demo_pass" x="320" y="288" w="224" h="12" xo="0" yo="0" id="10000018" name="inst_BE5EA58A" depth="1" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="tile_demo_pass" x="512" y="384" w="224" h="12" xo="0" yo="0" id="10000019" name="inst_38A02637" depth="1" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="tile_demo_light" x="134" y="482" w="60" h="14" xo="0" yo="0" id="10000029" name="inst_C43BE83A" depth="1" locked="0" colour="4294967295" scaleX="1" scaleY="-1"/>
