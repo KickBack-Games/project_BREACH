@@ -87,6 +87,7 @@
     </sprites>
     <sprites name="levels">
       <sprites name="demo">
+        <sprite>sprites\spr_slope</sprite>
         <sprite>sprites\spr_box</sprite>
         <sprite>sprites\spr_box_metal</sprite>
         <sprite>sprites\spr_tile_demo_lamp</sprite>
@@ -204,6 +205,7 @@
     </objects>
     <objects name="levels">
       <objects name="demo">
+        <object>objects\obj_slope</object>
         <object>objects\obj_demo_lamp</object>
         <object>objects\obj_box</object>
         <object>objects\obj_demo_fire</object>
@@ -219,7 +221,12 @@
   </objects>
   <rooms name="rooms">
     <rooms name="alpha">
-      <room>rooms\STARTUP</room>
+      <rooms name="Act1">
+        <room>rooms\STARTUP</room>
+        <room>rooms\rm_3rd_1</room>
+        <room>rooms\rm_3rd_leapingBoots</room>
+        <room>rooms\rm_3rd_hall1</room>
+      </rooms>
       <room>rooms\rm_demo_combat_1</room>
       <room>rooms\rm_demo_lights_1</room>
       <room>rooms\rm_demo_lights_2</room>
