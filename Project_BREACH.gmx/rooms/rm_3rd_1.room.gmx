@@ -56,7 +56,7 @@
     <instance objName="obj_block" x="0" y="0" name="inst_E800516B" locked="0" code="" scaleX="23.7419357299805" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_block" x="736" y="32" name="inst_AAE00385" locked="0" code="" scaleX="1" scaleY="15" colour="4294967295" rotation="0"/>
     <instance objName="obj_player" x="96" y="416" name="inst_DF573FEC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_door" x="640" y="384" name="inst_D5E5ACDC" locked="0" code="rm = rm_3rd_hall1;&#xA;xx = 106;&#xA;yy = 416;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_door" x="640" y="384" name="inst_D5E5ACDC" locked="0" code="rm = rm_3rd_hall1;&#xA;xx = 750;//106;&#xA;yy = 416;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_light_spot" x="128" y="32" name="inst_3A940A88" locked="0" code="" scaleX="3" scaleY="2.06557369232178" colour="4294967295" rotation="-90"/>
     <instance objName="obj_light_spot" x="352" y="32" name="inst_5BD8F919" locked="0" code="" scaleX="3" scaleY="2.06557369232178" colour="4294967295" rotation="-90"/>
     <instance objName="obj_light_spot" x="576" y="32" name="inst_0DF81CB5" locked="0" code="" scaleX="3" scaleY="2.06557369232178" colour="4294967295" rotation="-90"/>
