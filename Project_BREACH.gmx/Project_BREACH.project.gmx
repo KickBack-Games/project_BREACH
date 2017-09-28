@@ -63,7 +63,8 @@
     </sprites>
     <sprites name="debug">
       <sprite>sprites\spr_block</sprite>
-      <sprite>sprites\spr_block_slope</sprite>
+      <sprite>sprites\spr_block_slope_right</sprite>
+      <sprite>sprites\spr_block_slope_left</sprite>
       <sprite>sprites\spr_block_half</sprite>
       <sprite>sprites\spr_block2</sprite>
       <sprite>sprites\spr_bounce</sprite>
@@ -117,6 +118,37 @@
         <background>background\tile_demo_pillar_1</background>
         <background>background\tile_demo_pillar_2</background>
       </backgrounds>
+      <backgrounds name="general">
+        <background>background\tile_desk</background>
+        <background>background\tile_plant</background>
+        <background>background\tile_ladder</background>
+        <background>background\tile_shelf</background>
+        <backgrounds name="boxes">
+          <background>background\tile_box1</background>
+          <background>background\tile_box2</background>
+          <background>background\tile_box3</background>
+          <background>background\tile_box4</background>
+          <background>background\tile_box5</background>
+        </backgrounds>
+        <background>background\tile_wallpipe</background>
+      </backgrounds>
+      <backgrounds name="level3">
+        <background>background\tile_lvl3_vent</background>
+        <background>background\tile_lvl3_hpipe</background>
+        <background>background\tile_lvl3_vpipe</background>
+        <background>background\tile_lvl3_pipe</background>
+        <background>background\tile_lvl3_sign</background>
+        <background>background\tile_lvl3_floor1</background>
+        <background>background\tile_lvl3_floor2</background>
+        <backgrounds name="wall">
+          <background>background\tile_lvl3_wall1</background>
+          <background>background\tile_lvl3_wall2</background>
+          <background>background\tile_lvl3_wall3</background>
+          <background>background\tile_lvl3_wall4</background>
+          <background>background\tile_lvl3_wall5</background>
+          <background>background\tile_lvl3_wall6</background>
+        </backgrounds>
+      </backgrounds>
     </backgrounds>
     <backgrounds name="back">
       <background>background\bg_demo_back</background>
@@ -163,6 +195,8 @@
       </objects>
       <objects name="Collision">
         <object>objects\obj_block</object>
+        <object>objects\obj_slope_right</object>
+        <object>objects\obj_slope_left</object>
         <object>objects\obj_block_pass</object>
         <object>objects\obj_block_pass_dummy</object>
         <object>objects\obj_bounce</object>
@@ -220,11 +254,15 @@
   <rooms name="rooms">
     <rooms name="alpha">
       <room>rooms\STARTUP</room>
-      <room>rooms\rm_demo_combat_1</room>
+      <room>rooms\rm_3rd</room>
+      <room>rooms\rm_3rd_1</room>
+      <room>rooms\rm_3rd_hall1</room>
+      <room>rooms\rm_3rd_leapingBoots</room>
       <room>rooms\rm_demo_lights_1</room>
       <room>rooms\rm_demo_lights_2</room>
       <room>rooms\rm_demo_lights_3</room>
       <room>rooms\rm_demo_lights_4</room>
+      <room>rooms\rm_demo_combat_1</room>
     </rooms>
   </rooms>
   <help>

@@ -519,7 +519,6 @@ if pass_snap &gt; -1 and speedy&gt;=0{
 speedy=0;rising=false;falling=false;jumping=false;fall_time=0;grounded=true;
 y = pass_snap.bbox_top - sprite_get_height(mask_index * image_yscale) + sprite_get_yoffset(mask_index);
 }
-
 if ((!place_meeting(x,y+6,obj_block)) and (!place_meeting(x,y+6,obj_block_pass_dummy))) {
     grounded = false;
     }
