@@ -240,8 +240,8 @@ shooting=false;
             <string>///Collision Correction
 
 //prevent block clipping
-if !acting{  
- if  (place_meeting(x,y,obj_block) or place_meeting(x,y,obj_block_pass_dummy) and speedy=0)
+if !acting{ 
+ if  (place_meeting(x,y,obj_block) or place_meeting(x,y,obj_block_pass_dummy)and speedy=0)
   {y-=1;}
 //when on solid ground
 if place_meeting(x,y+2,obj_block_pass_dummy) and speedy&gt;0{
@@ -275,6 +275,7 @@ y = clamp(y,0,room_height);
             <kind>1</kind>
             <string>///Movement
 if acting=false{
+///////////////Normal/////////////////////////////////
 //if press right and not front of block
         if (PRESS_RIGHT) and !place_meeting(x+speedx,y,obj_block){
         //if not on slope, increase speed
@@ -291,13 +292,57 @@ if acting=false{
             facing = -1;
             walking = true;
         }
+///////////////Slope Up/////////////////////////////////
+//if press right and not front of block
+        if (PRESS_RIGHT) and place_meeting(x+speedx,y,obj_slope_right){
+        //if not on slope, increase speed
+           speedx += speed_accel/4;
+           y -= speedx/2;
+            //if using vac, lock direction
+            facing = 1;
+            walking = true;
+        }
+//if press left and not front of block
+        if (PRESS_LEFT) and place_meeting(x+speedx,y,obj_slope_left){
+        //if not on slope, increase speed
+          speedx -= (speed_accel/4);
+           y -= speedx/2;
+            //if using vac, lock direction
+            facing = -1;
+            walking = true;
+        }
+///////////////Slope Down////////////////////////////////
+//if press right and not front of block
+/*
+        if (PRESS_RIGHT) and place_meeting(x+speedx,y+16,obj_slope_left){
+        //if not on slope, increase speed
+           speedx += speed_accel/4;
+           y += speedx/2;
+            //if using vac, lock direction
+            facing = 1;
+            walking = true;
+        }
+//if press left and not front of block
+        if (PRESS_LEFT) and place_meeting(x+speedx,y+16,obj_slope_right){
+        //if not on slope, increase speed
+           speedx -= speed_accel/4;
+           y += speedx/2;
+            //if using vac, lock direction
+            facing = -1;
+            walking = true;
+        }
+*/
 //if walking in front of block        
-        if (speedx&gt;0) and place_meeting(x+speedx,y,obj_block){
+        if (speedx&gt;0) and place_meeting(x+speedx,y,obj_block)
+        and !place_meeting(x+speedx,bbox_bottom,obj_slope_right)
+        and !place_meeting(x+speedx,bbox_bottom,obj_slope_left){
             speedx = 0;
             if (!shooting) {facing = 1;}
             walking = true;
         }
-        if (speedx&lt;0) and place_meeting(x+speedx,y,obj_block){
+        if (speedx&lt;0) and place_meeting(x+speedx,y,obj_block)
+        and !place_meeting(x+speedx,bbox_bottom,obj_slope_right)
+        and !place_meeting(x+speedx,bbox_bottom,obj_slope_left){
             speedx = 0;
             if (!shooting) {facing = -1;}
             walking = true;
@@ -508,7 +553,9 @@ if speedx=0{
         speedy += speed_grav;
         }
         if speedy &gt; speed_fall{speedy = speed_fall;}
-
+if place_meeting(x,y,obj_slope_right) or place_meeting(x,y,obj_slope_left){
+speedy=0;rising=false;falling=false;jumping=false;fall_time=0;grounded=true;
+}
 floor_snap = collision_rectangle( bbox_left, bbox_bottom, bbox_right, bbox_bottom+1, obj_block, false, true );
 if floor_snap &gt; -1 and speedy&gt;=0{
 speedy=0;rising=false;falling=false;jumping=false;fall_time=0;grounded=true;
@@ -519,7 +566,8 @@ if pass_snap &gt; -1 and speedy&gt;=0{
 speedy=0;rising=false;falling=false;jumping=false;fall_time=0;grounded=true;
 y = pass_snap.bbox_top - sprite_get_height(mask_index * image_yscale) + sprite_get_yoffset(mask_index);
 }
-if ((!place_meeting(x,y+6,obj_block)) and (!place_meeting(x,y+6,obj_block_pass_dummy))) {
+if !place_meeting(x,y+6,obj_block) and !place_meeting(x,y+6,obj_block_pass_dummy)
+and !place_meeting(x,y+6,obj_slope_right) and !place_meeting(x,y+6,obj_slope_left){
     grounded = false;
     }
 }
@@ -643,6 +691,7 @@ if sight{
     }
 //draw_set_colour(c_red);
 //draw_circle(gun_x,gun_y,5,true);
+draw_circle(x+speedx,bbox_bottom,2,false);
 </string>
           </argument>
         </arguments>

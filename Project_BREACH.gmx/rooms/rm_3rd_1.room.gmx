@@ -52,7 +52,6 @@
   </views>
   <instances>
     <instance objName="obj_block" x="0" y="480" name="inst_AD9EA57D" locked="0" code="" scaleX="24" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_block" x="-32" y="32" name="inst_72CECAB2" locked="0" code="" scaleX="-1" scaleY="14" colour="4294967295" rotation="0"/>
     <instance objName="obj_block" x="0" y="0" name="inst_E800516B" locked="0" code="" scaleX="23.7419357299805" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_block" x="736" y="32" name="inst_AAE00385" locked="0" code="" scaleX="1" scaleY="15" colour="4294967295" rotation="0"/>
     <instance objName="obj_player" x="96" y="416" name="inst_DF573FEC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
@@ -64,7 +63,6 @@
   <tiles>
     <tile bgName="tile_demo_right" x="736" y="32" w="31" h="448" xo="0" yo="0" id="10000085" name="inst_9342ED70" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="tile_demo_floor" x="-64" y="480" w="832" h="32" xo="0" yo="0" id="10000097" name="inst_55FE6045" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="tile_demo_left" x="-64" y="32" w="32" h="448" xo="0" yo="0" id="10000098" name="inst_7B116DDA" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="tile_demo_light" x="96" y="32" w="60" h="14" xo="0" yo="0" id="10000100" name="inst_7228B511" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="tile_demo_light" x="320" y="32" w="60" h="14" xo="0" yo="0" id="10000101" name="inst_17540EEA" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="tile_demo_light" x="544" y="32" w="60" h="14" xo="0" yo="0" id="10000102" name="inst_41C28A75" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
