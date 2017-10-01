@@ -131,6 +131,8 @@
           <background>background\tile_box5</background>
         </backgrounds>
         <background>background\tile_wallpipe</background>
+        <background>background\tile_slope</background>
+        <background>background\tile_block</background>
       </backgrounds>
       <backgrounds name="level3">
         <background>background\tile_lvl3_vent</background>
