@@ -131,7 +131,10 @@ sprite_Ujump    = spr_morgan_coat_jump_up;
 sprite_Djump    = spr_morgan_coat_jump_down;
 
 sprite_front    = spr_morgan_coat_front;
-sprite_back     = spr_morgan_coat_back
+sprite_back     = spr_morgan_coat_back;
+
+sprite_run_legs = spr_morgan_coat_run_legs;
+sprite_run_arm  = spr_morgan_coat_run_arm;
 }
 </string>
           </argument>
@@ -378,21 +381,24 @@ if acting=false{
             <kind>1</kind>
             <string>///Sprite Changer
 
-gun_x = x +((sprite_get_bbox_left(sprite_index) - sprite_get_xoffset(sprite_index)) * facing );
-gun_y = y + sprite_get_bbox_top (sprite_index) - sprite_get_yoffset(sprite_index);
-
 //idle
 if !acting and !walking and !rising and !falling and !shooting
 and grounded{
     image_speed = .18;
     if aiming = 0{
         sprite_index = sprite_idle;
+        gun_x = x + (31 * facing);
+        gun_y = y + 5; 
         }
     if aiming = 1{
         sprite_index = sprite_Uidle;
+        gun_x = x + (1 * facing);
+        gun_y = y - 10; 
         }
     if aiming = -1{
         sprite_index = sprite_Didle;
+        gun_x = x + (5 * facing);
+        gun_y = y + 33; 
         }
     }
 //shooting
@@ -400,13 +406,19 @@ if !acting and !walking and !rising and !falling and shooting
 and grounded{
     image_speed = .18;
     if aiming = 0{
-        sprite_index = sprite_shoot; 
+        sprite_index = sprite_shoot;
+        gun_x = x + (31 * facing);
+        gun_y = y + 5; 
         }
     if aiming = 1{
         sprite_index = sprite_Uidle;
+        gun_x = x + (1 * facing);
+        gun_y = y - 10; 
         }
     if aiming = -1{
         sprite_index = sprite_Didle;
+        gun_x = x + (5 * facing);
+        gun_y = y + 33; 
         }
     }
 //running
@@ -417,9 +429,13 @@ if !acting and walking  and !rising and !falling and grounded{
         }
     if aiming = 1{
         sprite_index = sprite_Urun;
+        gun_x = x + (5 * facing);
+        gun_y = y - 10; 
         }
     if aiming = -1{
         sprite_index = sprite_Drun;
+        gun_x = x + (10 * facing);
+        gun_y = y + 33;
         }
     }
 //jumping up
@@ -429,12 +445,18 @@ if !acting and rising and !falling
     image_speed = 0;
     if aiming = 0{
         sprite_index = sprite_jump;
+        gun_x = x + (31 * facing);
+        gun_y = y + 5; 
         }
     if aiming = 1{
         sprite_index = sprite_Ujump;
+        gun_x = x + (1 * facing);
+        gun_y = y - 10; 
         }
     if aiming = -1{
         sprite_index = sprite_Djump;
+        gun_x = x + (5 * facing);
+        gun_y = y + 33; 
         }
     }
 //jumping down
@@ -444,12 +466,18 @@ if !acting and falling and !rising
     image_speed = 0;
     if aiming = 0{
         sprite_index = sprite_jump;
+        gun_x = x + (31 * facing);
+        gun_y = y + 5; 
         }
     if aiming = 1{
         sprite_index = sprite_Ujump;
+        gun_x = x + (1 * facing);
+        gun_y = y - 10; 
         }
     if aiming = -1{
         sprite_index = sprite_Djump;
+        gun_x = x + (5 * facing);
+        gun_y = y + 33; 
         }
     }
 </string>
@@ -664,10 +692,17 @@ scr_player_damage();
             <string>///Draw sprite on screen
 if sight{
     draw_sprite_ext(sprite_index,image_index,x,y,facing,image_yscale,image_angle,image_blend,image_alpha);
+    if sprite_index = sprite_run{
+        draw_sprite_ext(sprite_run_legs,image_index,x,y,facing,image_yscale,image_angle,image_blend,image_alpha);
+        draw_sprite_ext(sprite_run_arm,image_index,x,y,facing,image_yscale,image_angle,image_blend,image_alpha);
+        }
+    if P1_WEAPON = 1{
+        if sprite_index = sprite_run{draw_sprite_ext(spr_morgan_gun_shock,image_index,gun_x,gun_y,facing,image_yscale,image_angle,image_blend,image_alpha);}
+        }
+            
     }
-//draw_set_colour(c_red);
-//draw_circle(gun_x,gun_y,5,true);
-draw_circle(x+speedx,bbox_bottom,2,false);
+draw_set_colour(c_red);
+draw_circle(gun_x,gun_y,5,true);
 </string>
           </argument>
         </arguments>

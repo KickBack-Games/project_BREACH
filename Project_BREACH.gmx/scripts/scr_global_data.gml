@@ -2,8 +2,10 @@
 globalvar PLAYER_MAXHEALTH; PLAYER_MAXHEALTH = 100;
 globalvar PLAYER_HEALTH; PLAYER_HEALTH = 100;
 
-//player costume
+//player
 globalvar P1_COSTUME; P1_COSTUME = 0;
+globalvar P1_WEAPON;  P1_WEAPON = 1;
+//1-shock | 2-stick | 3-burst | 4-blast
 
 //loading room
 globalvar LOADING; LOADING = false;
