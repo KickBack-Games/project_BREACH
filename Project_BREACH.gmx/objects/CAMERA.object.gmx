@@ -2,7 +2,7 @@
 <object>
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
-  <visible>0</visible>
+  <visible>-1</visible>
   <depth>0</depth>
   <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
@@ -142,6 +142,57 @@ if tracking{
             <kind>1</kind>
             <string>///Restart variables
 event_perform(ev_create,0);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Main HUD
+//Health
+draw_set_color(c_black);
+draw_rectangle(100,50,100 + sprite_get_width(spr_hud_health)-1, 50 + sprite_get_height(spr_hud_health),false);
+draw_set_color(c_white);
+draw_rectangle(100,45,100 + sprite_get_width(spr_hud_health)-1,49,false);
+draw_rectangle(100,66,100 + sprite_get_width(spr_hud_health)-1,70,false);
+draw_set_halign(fa_right);
+draw_set_valign(fa_center);
+draw_set_font(fnt_test);
+draw_text(100,58,PLAYER_HEALTH);
+draw_sprite_part(spr_hud_health,0,0,0,(PLAYER_HEALTH/PLAYER_MAXHEALTH)*200,16,100,50);
+//Weapons
+if prize_shock{
+    if P1_WEAPON  = 1{draw_sprite(spr_hud_slot_shock,1,420,50);}
+    if P1_WEAPON != 1{draw_sprite(spr_hud_slot_shock,0,420,50);}
+    }
+if prize_stick{
+    if P1_WEAPON  = 2{draw_sprite(spr_hud_slot_stick,1,480,50);}
+    if P1_WEAPON != 2{draw_sprite(spr_hud_slot_stick,0,480,50);}
+    }
+if prize_burst{
+    if P1_WEAPON  = 3{draw_sprite(spr_hud_slot_burst,1,540,50);}
+    if P1_WEAPON != 3{draw_sprite(spr_hud_slot_burst,0,540,50);}
+    }
+if prize_blast{
+    if P1_WEAPON  = 4{draw_sprite(spr_hud_slot_blast,1,600,50);}
+    if P1_WEAPON != 4{draw_sprite(spr_hud_slot_blast,0,600,50);}
+    }
 </string>
           </argument>
         </arguments>

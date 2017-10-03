@@ -47,6 +47,7 @@
           <sprite>sprites\spr_morgan_gun_shock</sprite>
           <sprite>sprites\spr_morgan_gun_burst</sprite>
           <sprite>sprites\spr_morgan_gun_blast</sprite>
+          <sprite>sprites\spr_morgan_gun_stick</sprite>
         </sprites>
         <sprites name="fx">
           <sprite>sprites\spr_hero_shot_0_bullet</sprite>
@@ -92,6 +93,14 @@
         <sprite>sprites\spr_cone</sprite>
         <sprite>sprites\sprite23</sprite>
         <sprite>sprites\spr_fire</sprite>
+      </sprites>
+      <sprites name="HUD">
+        <sprite>sprites\spr_hud_health</sprite>
+        <sprite>sprites\spr_hud_slot</sprite>
+        <sprite>sprites\spr_hud_slot_stick</sprite>
+        <sprite>sprites\spr_hud_slot_blast</sprite>
+        <sprite>sprites\spr_hud_slot_shock</sprite>
+        <sprite>sprites\spr_hud_slot_burst</sprite>
       </sprites>
     </sprites>
     <sprites name="levels">
@@ -176,6 +185,7 @@
     </scripts>
     <scripts name="player functions">
       <script>scripts\scr_player_damage.gml</script>
+      <script>scripts\scr_player_sprites.gml</script>
     </scripts>
     <scripts name="lighting">
       <script>scripts\scr_max_range.gml</script>
@@ -187,6 +197,10 @@
       <script>scripts\scr_warp.gml</script>
     </scripts>
   </scripts>
+  <shaders name="shaders"/>
+  <fonts name="fonts">
+    <font>fonts\fnt_test</font>
+  </fonts>
   <objects name="objects">
     <objects name="System">
       <objects name="Lighting">

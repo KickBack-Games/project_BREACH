@@ -88,6 +88,8 @@ hor=0;
 ver=0;
 up=0;
 c_rotation = 0;
+//arm position
+arm_position = ds_grid_create(1,12);
 //door position change
 if warp_x &gt;0 and warp_y &gt;0{
     x=warp_x;
@@ -223,7 +225,53 @@ shooting=false;
         </arguments>
       </action>
     </event>
+    <event eventtype="3" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Sprite Changer
+scr_player_sprites();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="3" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Sprite Changer
+scr_player_sprites();
+</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -379,127 +427,6 @@ if acting=false{
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Sprite Changer
-
-//idle
-if !acting and !walking and !rising and !falling and !shooting
-and grounded{
-    image_speed = .18;
-    if aiming = 0{
-        sprite_index = sprite_idle;
-        gun_x = x + (31 * facing);
-        gun_y = y + 5; 
-        }
-    if aiming = 1{
-        sprite_index = sprite_Uidle;
-        gun_x = x + (1 * facing);
-        gun_y = y - 10; 
-        }
-    if aiming = -1{
-        sprite_index = sprite_Didle;
-        gun_x = x + (5 * facing);
-        gun_y = y + 33; 
-        }
-    }
-//shooting
-if !acting and !walking and !rising and !falling and shooting
-and grounded{
-    image_speed = .18;
-    if aiming = 0{
-        sprite_index = sprite_shoot;
-        gun_x = x + (31 * facing);
-        gun_y = y + 5; 
-        }
-    if aiming = 1{
-        sprite_index = sprite_Uidle;
-        gun_x = x + (1 * facing);
-        gun_y = y - 10; 
-        }
-    if aiming = -1{
-        sprite_index = sprite_Didle;
-        gun_x = x + (5 * facing);
-        gun_y = y + 33; 
-        }
-    }
-//running
-if !acting and walking  and !rising and !falling and grounded{
-    image_speed = .33;
-    if aiming = 0{
-        sprite_index = sprite_run;
-        }
-    if aiming = 1{
-        sprite_index = sprite_Urun;
-        gun_x = x + (5 * facing);
-        gun_y = y - 10; 
-        }
-    if aiming = -1{
-        sprite_index = sprite_Drun;
-        gun_x = x + (10 * facing);
-        gun_y = y + 33;
-        }
-    }
-//jumping up
-if !acting and rising and !falling
-{
-    image_index = 0;
-    image_speed = 0;
-    if aiming = 0{
-        sprite_index = sprite_jump;
-        gun_x = x + (31 * facing);
-        gun_y = y + 5; 
-        }
-    if aiming = 1{
-        sprite_index = sprite_Ujump;
-        gun_x = x + (1 * facing);
-        gun_y = y - 10; 
-        }
-    if aiming = -1{
-        sprite_index = sprite_Djump;
-        gun_x = x + (5 * facing);
-        gun_y = y + 33; 
-        }
-    }
-//jumping down
-if !acting and falling and !rising
-{
-    image_index = 1;
-    image_speed = 0;
-    if aiming = 0{
-        sprite_index = sprite_jump;
-        gun_x = x + (31 * facing);
-        gun_y = y + 5; 
-        }
-    if aiming = 1{
-        sprite_index = sprite_Ujump;
-        gun_x = x + (1 * facing);
-        gun_y = y - 10; 
-        }
-    if aiming = -1{
-        sprite_index = sprite_Djump;
-        gun_x = x + (5 * facing);
-        gun_y = y + 33; 
-        }
-    }
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>///Speed Modifiers
 if acting=false {
 if !place_meeting(x,y,obj_water) and loucas=0{
@@ -600,24 +527,143 @@ and !place_meeting(x,y+6,obj_slope_right) and !place_meeting(x,y+6,obj_slope_lef
 if !acting and !LOADING{
 //Shoot
 if PRESS_B and canshoot=true{
-    audio_play_sound_on(s_sfx,sound0,false,10);
-    shooting = true;
-    if light_room &gt; .5{instance_create(gun_x,gun_y,obj_light_player_flash);}
-    fx = instance_create(gun_x,gun_y,EFFECT);
-    fx.sprite_index = spr_hero_shot_0_spray;
-    fx.depth = depth-1;
-    fx.image_speed = .5;
-    shot = instance_create(gun_x,gun_y,obj_player_shot_0);
-    shot.image_xscale = facing;
-    if aiming = 0{shot.hspeed = 10 * shot.image_xscale;}
-    if aiming != 0{shot.image_angle = 90;shot.vspeed = 10 * -aiming;shot.image_yscale = -aiming;}
-    alarm[0]=120;
+    if P1_WEAPON = 1{
+        audio_play_sound_on(s_sfx,sound0,false,10);
+        shooting = true;
+        if light_room &gt; .5{instance_create(gun_x,gun_y,obj_light_player_flash);}
+        fx = instance_create(gun_x,gun_y,EFFECT);
+        fx.sprite_index = spr_hero_shot_0_spray;
+        fx.depth = depth-1;
+        fx.image_speed = .5;
+        shot = instance_create(gun_x,gun_y,obj_player_shot_0);
+        shot.image_xscale = facing;
+        if aiming = 0{shot.hspeed = 10 * shot.image_xscale;}
+        if aiming != 0{shot.image_angle = 90;shot.vspeed = 10 * -aiming;shot.image_yscale = -aiming;}
+        alarm[0]=120;
     }
+    if P1_WEAPON = 3{
+        repeat(5){
+            audio_play_sound_on(s_sfx,sound0,false,10);
+            shooting = true;
+            if light_room &gt; .5{instance_create(gun_x,gun_y,obj_light_player_flash);}
+            fx = instance_create(gun_x,gun_y,EFFECT);
+            fx.sprite_index = spr_hero_shot_0_spray;
+            fx.depth = depth-1;
+            fx.image_speed = .5;
+            shot = instance_create(gun_x,gun_y,obj_player_shot_0);
+            shot.image_xscale = facing;
+            if aiming = 0{shot.hspeed = 10 * shot.image_xscale;}
+            if aiming != 0{shot.image_angle = 90;shot.vspeed = 10 * -aiming;shot.image_yscale = -aiming;}
+        }
+        alarm[0]=120;
+    }
+    if P1_WEAPON = 4{
+        audio_play_sound_on(s_sfx,sound0,false,10);
+        shooting = true;
+        if light_room &gt; .5{instance_create(gun_x,gun_y,obj_light_player_flash);}
+        fx = instance_create(gun_x,gun_y,EFFECT);
+        fx.sprite_index = spr_hero_shot_0_spray;
+        fx.depth = depth-1;
+        fx.image_speed = .5;
+        shot = instance_create(gun_x,gun_y,obj_player_shot_0);
+        shot.image_xscale = facing;
+        if aiming = 0{shot.hspeed = 10 * shot.image_xscale;}
+        if aiming != 0{shot.image_angle = 90;shot.vspeed = 10 * -aiming;shot.image_yscale = -aiming;}
+        alarm[0]=120;
+    }
+}
 //Toggle Flashlight
 if PRESS_C{
         if light_player=true{light_player=false;instance_destroy(light);exit;}
         if light_player=false{light_player=true;light=instance_create(x,y,obj_light_player);exit;}
-    }    
+    } 
+//Weapon Switch
+if PRESS_L{
+    P1_WEAPON -= 1;
+    if P1_WEAPON &lt; 1{P1_WEAPON = 4;}
+    if P1_WEAPON = 1 and !prize_shock{P1_WEAPON -= 1;}
+    if P1_WEAPON = 2 and !prize_stick{P1_WEAPON -= 1;}
+    if P1_WEAPON = 3 and !prize_burst{P1_WEAPON -= 1;}
+    if P1_WEAPON = 4 and !prize_blast{P1_WEAPON -= 1;}
+    }
+if PRESS_R{
+    P1_WEAPON += 1;
+    if P1_WEAPON &gt; 4{P1_WEAPON = 1;}
+    if P1_WEAPON = 1 and !prize_shock{P1_WEAPON += 1;}
+    if P1_WEAPON = 2 and !prize_stick{P1_WEAPON += 1;}
+    if P1_WEAPON = 3 and !prize_burst{P1_WEAPON += 1;}
+    if P1_WEAPON = 4 and !prize_blast{P1_WEAPON += 1;}
+    }
+
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Arm Position
+///sprite setup - Default
+if P1_COSTUME=0{
+    if sprite_index = sprite_run{
+        arm_position = ds_grid_create(1,12);
+        ds_grid_add(arm_position,0,1,0);
+        ds_grid_add(arm_position,0,2,1);
+        ds_grid_add(arm_position,0,3,1);
+        ds_grid_add(arm_position,0,4,-1);
+        ds_grid_add(arm_position,0,5,-2);
+        ds_grid_add(arm_position,0,6,-2);
+        ds_grid_add(arm_position,0,7,-1);
+        ds_grid_add(arm_position,0,8,0);
+        ds_grid_add(arm_position,0,9,0);
+        ds_grid_add(arm_position,0,10,-1);
+        ds_grid_add(arm_position,0,11,-2);
+        ds_grid_add(arm_position,0,12,-2);
+    }
+    if sprite_index = sprite_Urun{
+        arm_position = ds_grid_create(1,12);
+        ds_grid_add(arm_position,0,1,0);
+        ds_grid_add(arm_position,0,2,1);
+        ds_grid_add(arm_position,0,3,1);
+        ds_grid_add(arm_position,0,4,0);
+        ds_grid_add(arm_position,0,5,-1);
+        ds_grid_add(arm_position,0,6,-1);
+        ds_grid_add(arm_position,0,7,0);
+        ds_grid_add(arm_position,0,8,1);
+        ds_grid_add(arm_position,0,9,1);
+        ds_grid_add(arm_position,0,10,0);
+        ds_grid_add(arm_position,0,11,-1);
+        ds_grid_add(arm_position,0,12,-1);        
+    }
+    if sprite_index = sprite_Drun{
+        arm_position = ds_grid_create(1,12);
+        ds_grid_add(arm_position,0,1,0);
+        ds_grid_add(arm_position,0,2,1);
+        ds_grid_add(arm_position,0,3,1);
+        ds_grid_add(arm_position,0,4,0);
+        ds_grid_add(arm_position,0,5,-1);
+        ds_grid_add(arm_position,0,6,-1);
+        ds_grid_add(arm_position,0,7,-1);
+        ds_grid_add(arm_position,0,8,0);
+        ds_grid_add(arm_position,0,9,1);
+        ds_grid_add(arm_position,0,10,0);
+        ds_grid_add(arm_position,0,11,0);
+        ds_grid_add(arm_position,0,12,0);        
+    }
 }
 </string>
           </argument>
@@ -690,19 +736,34 @@ scr_player_damage();
           <argument>
             <kind>1</kind>
             <string>///Draw sprite on screen
+guns = ds_grid_create(1,5);
+ds_grid_add(guns,0,1,spr_morgan_gun_shock);
+ds_grid_add(guns,0,2,spr_morgan_gun_stick);
+ds_grid_add(guns,0,3,spr_morgan_gun_burst);
+ds_grid_add(guns,0,4,spr_morgan_gun_blast);
 if sight{
+    if P1_WEAPON != 2{
+        if sprite_index = sprite_Didle{draw_sprite_ext(ds_grid_get(guns,0,P1_WEAPON),image_index,gun_x,gun_y,facing,image_yscale,270*facing,image_blend,image_alpha);}
+        if sprite_index = sprite_Drun{draw_sprite_ext(ds_grid_get(guns,0,P1_WEAPON),image_index,gun_x,gun_y+(ds_grid_get(arm_position,0,image_index)),facing,image_yscale,270*facing,image_blend,image_alpha);}
+        if sprite_index = sprite_Djump{draw_sprite_ext(ds_grid_get(guns,0,P1_WEAPON),image_index,gun_x,gun_y,facing,image_yscale,270*facing,image_blend,image_alpha);}
+        }
     draw_sprite_ext(sprite_index,image_index,x,y,facing,image_yscale,image_angle,image_blend,image_alpha);
     if sprite_index = sprite_run{
         draw_sprite_ext(sprite_run_legs,image_index,x,y,facing,image_yscale,image_angle,image_blend,image_alpha);
         draw_sprite_ext(sprite_run_arm,image_index,x,y,facing,image_yscale,image_angle,image_blend,image_alpha);
-        }
-    if P1_WEAPON = 1{
-        if sprite_index = sprite_run{draw_sprite_ext(spr_morgan_gun_shock,image_index,gun_x,gun_y,facing,image_yscale,image_angle,image_blend,image_alpha);}
+        }  
+    if P1_WEAPON != 2{
+        if sprite_index = sprite_run{draw_sprite_ext(ds_grid_get(guns,0,P1_WEAPON),image_index,gun_x,gun_y+(ds_grid_get(arm_position,0,image_index)),facing,image_yscale,image_angle,image_blend,image_alpha);}
+        if sprite_index = sprite_jump{draw_sprite_ext(ds_grid_get(guns,0,P1_WEAPON),image_index,gun_x,gun_y,facing,image_yscale,image_angle,image_blend,image_alpha);}
+        if sprite_index = sprite_shoot{draw_sprite_ext(ds_grid_get(guns,0,P1_WEAPON),image_index,gun_x,gun_y,facing,image_yscale,image_angle,image_blend,image_alpha);}
+        if sprite_index = sprite_Uidle{draw_sprite_ext(ds_grid_get(guns,0,P1_WEAPON),image_index,gun_x,gun_y,facing,image_yscale,90*facing,image_blend,image_alpha);}
+        if sprite_index = sprite_Urun{draw_sprite_ext(ds_grid_get(guns,0,P1_WEAPON),image_index,gun_x,gun_y+(ds_grid_get(arm_position,0,image_index)),facing,image_yscale,90*facing,image_blend,image_alpha);}
+        if sprite_index = sprite_Ujump{draw_sprite_ext(ds_grid_get(guns,0,P1_WEAPON),image_index,gun_x,gun_y,facing,image_yscale,90*facing,image_blend,image_alpha);}
         }
             
     }
-draw_set_colour(c_red);
-draw_circle(gun_x,gun_y,5,true);
+/*draw_set_colour(c_red);
+draw_circle(gun_x,gun_y,5,true);*/
 </string>
           </argument>
         </arguments>

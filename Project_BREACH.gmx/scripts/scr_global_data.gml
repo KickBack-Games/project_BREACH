@@ -1,3 +1,5 @@
+globalvar display_set_gui_size(1080,720);
+surface_resize(application_surface,1920,1080);
 //health
 globalvar PLAYER_MAXHEALTH; PLAYER_MAXHEALTH = 100;
 globalvar PLAYER_HEALTH; PLAYER_HEALTH = 100;
@@ -26,12 +28,12 @@ globalvar warp_x;   warp_x = 0;
 globalvar warp_y;   warp_y = 0;
 
 //rewards
-globalvar prize_shock; prize_shock = false;
-globalvar prize_stick; prize_stick = false;
-globalvar prize_burst; prize_burst = false;
-globalvar prize_blast; prize_blast = false;
-globalvar prize_glove; prize_glove = false;
-globalvar prize_light; prize_light = false;
+globalvar prize_shock; prize_shock = true;
+globalvar prize_stick; prize_stick = true;
+globalvar prize_burst; prize_burst = true;
+globalvar prize_blast; prize_blast = true;
+globalvar prize_glove; prize_glove = true;
+globalvar prize_light; prize_light = true;
 globalvar prize_health; prize_health = false;
 globalvar prize_power; prize_power = false;
 globalvar prize_boots; prize_boots = 0;
