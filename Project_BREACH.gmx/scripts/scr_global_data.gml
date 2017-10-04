@@ -4,14 +4,21 @@ surface_resize(application_surface,1920,1080);
 globalvar PLAYER_MAXHEALTH; PLAYER_MAXHEALTH = 100;
 globalvar PLAYER_HEALTH; PLAYER_HEALTH = 100;
 
+//weapon power
+globalvar PLAYER_LEVEL; PLAYER_LEVEL = 1;
+globalvar PLAYER_MAXLEVEL; PLAYER_MAXLEVEL = 3;
+globalvar PLAYER_RANK; PLAYER_RANK = 1;
+globalvar PLAYER_POWER; PLAYER_POWER = 0;
 //player
 globalvar P1_COSTUME; P1_COSTUME = 0;
 globalvar P1_WEAPON;  P1_WEAPON = 1;
 //1-shock | 2-stick | 3-burst | 4-blast
 
+//status | 0-normal | 1-EMP
+globalvar PLAYER_STATUS; PLAYER_STATUS = 0;
+
 //loading room
 globalvar LOADING; LOADING = false;
-
 
 //lighting system
 globalvar light_room; light_room = 0;

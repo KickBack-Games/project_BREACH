@@ -76,7 +76,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if !place_meeting(x,y,obj_player_shot_0){instance_destroy();}
+            <string>if !place_meeting(x,y,SHOT){instance_destroy();}
 </string>
           </argument>
         </arguments>

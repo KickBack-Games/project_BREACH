@@ -15,6 +15,10 @@ if keyboard_check_released(keyb){RELEASE_B=true;}else{RELEASE_B=false;}
 if keyboard_check_pressed(keyc){PRESS_C=true;}else{PRESS_C=false;}
 if keyboard_check(keyc){HOLD_C=true;}else{HOLD_C=false;}
 if keyboard_check_released(keyc){RELEASE_C=true;}else{RELEASE_C=false;}
+//press, hold, release - G
+if keyboard_check_pressed(keyg){PRESS_G=true;}else{PRESS_G=false;}
+if keyboard_check(keyg){HOLD_G=true;}else{HOLD_G=false;}
+if keyboard_check_released(keyg){RELEASE_G=true;}else{RELEASE_G=false;}
 //press, hold, release - L
 if keyboard_check_pressed(keyl){PRESS_L=true;}else{PRESS_L=false;}
 if keyboard_check(keyl){HOLD_L=true;}else{HOLD_L=false;}

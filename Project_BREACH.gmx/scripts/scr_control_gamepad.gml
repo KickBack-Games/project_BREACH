@@ -20,6 +20,10 @@ if gamepad_button_check_released(argument0,jkeyb){RELEASE_B=true;}else{RELEASE_B
 if gamepad_button_check_pressed(argument0,jkeyc){PRESS_C=true;}else{PRESS_C=false;}
 if gamepad_button_check(argument0,jkeyc){HOLD_C=true;}else{HOLD_C=false;}
 if gamepad_button_check_released(argument0,jkeyc){RELEASE_C=true;}else{RELEASE_C=false;}
+//press, hold, release - G
+if gamepad_button_check_pressed(argument0,jkeyg){PRESS_G=true;}else{PRESS_G=false;}
+if gamepad_button_check(argument0,jkeyg){HOLD_G=true;}else{HOLD_G=false;}
+if gamepad_button_check_released(argument0,jkeyg){RELEASE_G=true;}else{RELEASE_G=false;}
 //press, hold, release - L
 if gamepad_button_check_pressed(argument0,jkeyl){PRESS_L=true;}else{PRESS_L=false;}
 if gamepad_button_check(argument0,jkeyl){HOLD_L=true;}else{HOLD_L=false;}

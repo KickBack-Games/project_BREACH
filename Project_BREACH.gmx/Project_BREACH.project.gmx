@@ -40,6 +40,7 @@
           <sprite>sprites\spr_morgan_coat_jump_down</sprite>
           <sprite>sprites\spr_morgan_coat_front</sprite>
           <sprite>sprites\spr_morgan_coat_back</sprite>
+          <sprite>sprites\spr_morgan_coat_damage</sprite>
         </sprites>
         <sprites name="arm">
           <sprite>sprites\spr_morgan_coat_run_arm</sprite>
@@ -48,11 +49,15 @@
           <sprite>sprites\spr_morgan_gun_burst</sprite>
           <sprite>sprites\spr_morgan_gun_blast</sprite>
           <sprite>sprites\spr_morgan_gun_stick</sprite>
+          <sprite>sprites\spr_morgan_gun_glove</sprite>
+          <sprite>sprites\spr_morgan_gun_glove_chain</sprite>
         </sprites>
         <sprites name="fx">
           <sprite>sprites\spr_hero_shot_0_bullet</sprite>
           <sprite>sprites\spr_hero_shot_0_spray</sprite>
           <sprite>sprites\spr_hero_shot_0_hit</sprite>
+          <sprite>sprites\spr_hero_shot_burst_bullet</sprite>
+          <sprite>sprites\spr_hero_shot_blast_bullet</sprite>
         </sprites>
       </sprites>
       <sprites name="guard1">
@@ -96,11 +101,14 @@
       </sprites>
       <sprites name="HUD">
         <sprite>sprites\spr_hud_health</sprite>
+        <sprite>sprites\spr_hud_power</sprite>
+        <sprite>sprites\spr_hud_max</sprite>
         <sprite>sprites\spr_hud_slot</sprite>
         <sprite>sprites\spr_hud_slot_stick</sprite>
         <sprite>sprites\spr_hud_slot_blast</sprite>
         <sprite>sprites\spr_hud_slot_shock</sprite>
         <sprite>sprites\spr_hud_slot_burst</sprite>
+        <sprite>sprites\spr_hud_emp</sprite>
       </sprites>
     </sprites>
     <sprites name="levels">
@@ -185,6 +193,7 @@
     </scripts>
     <scripts name="player functions">
       <script>scripts\scr_player_damage.gml</script>
+      <script>scripts\scr_player_knockback.gml</script>
       <script>scripts\scr_player_sprites.gml</script>
     </scripts>
     <scripts name="lighting">
@@ -196,8 +205,10 @@
     <scripts name="transition">
       <script>scripts\scr_warp.gml</script>
     </scripts>
+    <scripts name="display">
+      <script>scripts\draw_text_outline.gml</script>
+    </scripts>
   </scripts>
-  <shaders name="shaders"/>
   <fonts name="fonts">
     <font>fonts\fnt_test</font>
   </fonts>
@@ -258,7 +269,11 @@
     <objects name="player">
       <object>objects\obj_player</object>
       <object>objects\obj_light_player</object>
-      <object>objects\obj_player_shot_0</object>
+      <object>objects\obj_player_shot_shock</object>
+      <object>objects\obj_player_shot_burst</object>
+      <object>objects\obj_player_shot_blast</object>
+      <object>objects\obj_player_shot_glove</object>
+      <object>objects\obj_player_shot_glove_chain</object>
     </objects>
     <objects name="levels">
       <objects name="demo">

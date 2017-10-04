@@ -71,8 +71,13 @@ hit_frame=24;
 canhurt=true;
 //Can vac
 canshoot=true;
+shot_level=1;
 //Aiming | 1 = up, -1 = down
 aiming = 0;
+//Aim | degrees circle counter clockwise from right
+aim = 0;
+//number of rapid fire shots
+rapid = 5;
 //affected by windup
 upwind=false;
 //where projectile shoots from
@@ -88,6 +93,8 @@ hor=0;
 ver=0;
 up=0;
 c_rotation = 0;
+//weapon charge
+charging = false;
 //arm position
 arm_position = ds_grid_create(1,12);
 //door position change
@@ -137,6 +144,8 @@ sprite_back     = spr_morgan_coat_back;
 
 sprite_run_legs = spr_morgan_coat_run_legs;
 sprite_run_arm  = spr_morgan_coat_run_arm;
+
+sprite_damage   = spr_morgan_coat_damage;
 }
 </string>
           </argument>
@@ -201,6 +210,43 @@ loucas=0;
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Rapid Burst
+if rapid &gt; 0{
+    audio_play_sound_on(s_sfx,sound0,false,10);
+    if light_room &gt; .5{instance_create(gun_x,gun_y,obj_light_player_flash);}
+    fx = instance_create(gun_x,gun_y,EFFECT);
+    fx.sprite_index = spr_hero_shot_0_spray;
+    fx.depth = depth-1;
+    fx.image_speed = .5;
+    shot = instance_create(gun_x,gun_y,obj_player_shot_burst);
+    shot.direction = aim;
+    shot.image_angle = aim * facing;
+    rapid -= 1;
+    alarm[1]=5;
+    exit;
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="0">
       <action>
         <libid>1</libid>
@@ -220,6 +266,10 @@ loucas=0;
             <kind>1</kind>
             <string>///Shooting off
 shooting=false;
+rapid = 5;
+if HOLD_B{
+    charging = true;
+    }
 </string>
           </argument>
         </arguments>
@@ -428,7 +478,6 @@ if acting=false{
           <argument>
             <kind>1</kind>
             <string>///Speed Modifiers
-if acting=false {
 if !place_meeting(x,y,obj_water) and loucas=0{
     x += speedx/2;
     if !upwind{y += speedy;}
@@ -501,8 +550,12 @@ if !place_meeting(x,y+6,obj_block) and !place_meeting(x,y+6,obj_block_pass_dummy
 and !place_meeting(x,y+6,obj_slope_right) and !place_meeting(x,y+6,obj_slope_left){
     grounded = false;
     }
-}
-
+if grounded and sprite_index = sprite_damage{
+    acting = false;
+    canhurt=false; //can't be hurt
+    alarm[2]=5;
+    hit_frame = 24;
+    }
 </string>
           </argument>
         </arguments>
@@ -523,11 +576,19 @@ and !place_meeting(x,y+6,obj_slope_right) and !place_meeting(x,y+6,obj_slope_lef
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Gunplay 
+            <string>///Gunplay
 if !acting and !LOADING{
+//charging
+if charging{
+    PLAYER_POWER += 1;
+    }
+if PLAYER_POWER &gt;= 99 and (PLAYER_LEVEL &lt; PLAYER_MAXLEVEL){
+    PLAYER_LEVEL += 1;
+    PLAYER_POWER = 0;
+    }
 //Shoot
-if PRESS_B and canshoot=true{
-    if P1_WEAPON = 1{
+if (PRESS_B and canshoot=true) or (RELEASE_B and canshoot=true and PLAYER_POWER&gt;0){
+    if P1_WEAPON = 1 and PLAYER_STATUS != 1{
         audio_play_sound_on(s_sfx,sound0,false,10);
         shooting = true;
         if light_room &gt; .5{instance_create(gun_x,gun_y,obj_light_player_flash);}
@@ -535,29 +596,16 @@ if PRESS_B and canshoot=true{
         fx.sprite_index = spr_hero_shot_0_spray;
         fx.depth = depth-1;
         fx.image_speed = .5;
-        shot = instance_create(gun_x,gun_y,obj_player_shot_0);
-        shot.image_xscale = facing;
-        if aiming = 0{shot.hspeed = 10 * shot.image_xscale;}
-        if aiming != 0{shot.image_angle = 90;shot.vspeed = 10 * -aiming;shot.image_yscale = -aiming;}
-        alarm[0]=120;
+        shot = instance_create(gun_x,gun_y,obj_player_shot_shock);
+        shot.direction = aim;
+        shot.image_angle = aim * facing;
     }
-    if P1_WEAPON = 3{
-        repeat(5){
-            audio_play_sound_on(s_sfx,sound0,false,10);
-            shooting = true;
-            if light_room &gt; .5{instance_create(gun_x,gun_y,obj_light_player_flash);}
-            fx = instance_create(gun_x,gun_y,EFFECT);
-            fx.sprite_index = spr_hero_shot_0_spray;
-            fx.depth = depth-1;
-            fx.image_speed = .5;
-            shot = instance_create(gun_x,gun_y,obj_player_shot_0);
-            shot.image_xscale = facing;
-            if aiming = 0{shot.hspeed = 10 * shot.image_xscale;}
-            if aiming != 0{shot.image_angle = 90;shot.vspeed = 10 * -aiming;shot.image_yscale = -aiming;}
-        }
-        alarm[0]=120;
+    if P1_WEAPON = 3 and rapid &gt;= 5 and PLAYER_STATUS != 1{
+        rapid = 5 + PLAYER_LEVEL;
+        shooting = true;
+        alarm[1]=1;
     }
-    if P1_WEAPON = 4{
+    if P1_WEAPON = 4 and PLAYER_STATUS != 1{
         audio_play_sound_on(s_sfx,sound0,false,10);
         shooting = true;
         if light_room &gt; .5{instance_create(gun_x,gun_y,obj_light_player_flash);}
@@ -565,12 +613,46 @@ if PRESS_B and canshoot=true{
         fx.sprite_index = spr_hero_shot_0_spray;
         fx.depth = depth-1;
         fx.image_speed = .5;
-        shot = instance_create(gun_x,gun_y,obj_player_shot_0);
-        shot.image_xscale = facing;
-        if aiming = 0{shot.hspeed = 10 * shot.image_xscale;}
-        if aiming != 0{shot.image_angle = 90;shot.vspeed = 10 * -aiming;shot.image_yscale = -aiming;}
-        alarm[0]=120;
+        shot = instance_create(gun_x,gun_y,obj_player_shot_blast);
+        shot.direction = aim;
+        shot.image_angle = aim * facing;
+        
+        shot = instance_create(gun_x,gun_y,obj_player_shot_blast);
+        shot.direction = aim + 10;
+        shot.image_angle = (aim * facing) + 10;
+        
+        shot = instance_create(gun_x,gun_y,obj_player_shot_blast);
+        shot.direction = aim + 350;
+        shot.image_angle = (aim * facing) + 350;
+        
+        if PLAYER_LEVEL &gt;=2{
+            shot = instance_create(gun_x,gun_y,obj_player_shot_blast);
+            shot.direction = aim - 20;
+            shot.image_angle = (aim * facing) - 20;
+            }
+
+        if PLAYER_LEVEL &gt;=3{
+            shot = instance_create(gun_x,gun_y,obj_player_shot_blast);
+            shot.direction = aim - 340;
+            shot.image_angle = (aim * facing) - 340;
+            }
+            
+        if PLAYER_LEVEL &gt;=4{
+            shot = instance_create(gun_x,gun_y,obj_player_shot_blast);
+            shot.direction = aim - 30;
+            shot.image_angle = (aim * facing) - 30;
+            }
+            
+        if PLAYER_LEVEL &gt;=5{
+            shot = instance_create(gun_x,gun_y,obj_player_shot_blast);
+            shot.direction = aim - 330;
+            shot.image_angle = (aim * facing) - 330;
+            }
     }
+    alarm[0]=60;
+    charging=false;
+    PLAYER_LEVEL = PLAYER_RANK;
+    PLAYER_POWER = 0;
 }
 //Toggle Flashlight
 if PRESS_C{
@@ -669,6 +751,62 @@ if P1_COSTUME=0{
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Grapple Glove
+if !acting and !LOADING{
+    if instance_exists(obj_player_shot_glove) and speedy &gt;0{
+        if grounded{
+            sprite_index = sprite_Uidle;
+            gun_x = x + (1 * facing);
+            gun_y = y - 10; 
+            aim = 90;
+            }
+        if !grounded{
+            sprite_index = sprite_Ujump;
+            gun_x = x + (1 * facing);
+            gun_y = y - 10;
+            aim = 90; 
+        }
+        instance_create(gun_x,gun_y,obj_player_shot_glove_chain);
+    }
+    //Shoot
+    if (PRESS_G and canshoot=true and prize_glove){
+    acting = true;
+    speedx = 0;
+    if grounded{
+        sprite_index = sprite_Uidle;
+        gun_x = x + (1 * facing);
+        gun_y = y - 10; 
+        aim = 90;
+        }
+    if !grounded{
+        sprite_index = sprite_Ujump;
+        gun_x = x + (1 * facing);
+        gun_y = y - 10;
+        aim = 90; 
+    }
+        instance_create(gun_x,gun_y,obj_player_shot_glove);
+        }
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="4" ename="HAZARD">
       <action>
@@ -688,7 +826,7 @@ if P1_COSTUME=0{
           <argument>
             <kind>1</kind>
             <string>///Call damage function
-scr_player_damage();
+scr_player_knockback();
 </string>
           </argument>
         </arguments>
@@ -769,7 +907,7 @@ draw_circle(gun_x,gun_y,5,true);*/
         </arguments>
       </action>
     </event>
-    <event eventtype="9" enumb="32">
+    <event eventtype="9" enumb="17">
       <action>
         <libid>1</libid>
         <id>603</id>
