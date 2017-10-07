@@ -4,9 +4,9 @@ and grounded{
     image_speed = .18;
     if aiming = 0{
         sprite_index = sprite_idle;
-        gun_x = x + (31 * facing);
+        gun_x = x + (27 * facing);
         gun_y = y + 5;
-        if facing =1 {aim =0;} if facing = -1{aim = 180;} 
+        if facing =1 {aim =0;} if facing = -1{aim = 180;}  
         }
     if aiming = 1{
         sprite_index = sprite_Uidle;

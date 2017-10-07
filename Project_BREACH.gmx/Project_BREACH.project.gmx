@@ -27,6 +27,7 @@
       <sprites name="morgan">
         <sprites name="coat">
           <sprite>sprites\spr_morgan_coat_idle</sprite>
+          <sprite>sprites\spr_morgan_coat_ready</sprite>
           <sprite>sprites\spr_morgan_coat_mask</sprite>
           <sprite>sprites\spr_morgan_coat_idle_up</sprite>
           <sprite>sprites\spr_morgan_coat_idle_down</sprite>
@@ -44,7 +45,7 @@
         </sprites>
         <sprites name="arm">
           <sprite>sprites\spr_morgan_coat_run_arm</sprite>
-          <sprite>sprites\spr_morgan_coat_run_arm_recoil</sprite>
+          <sprite>sprites\spr_morgan_coat_arm_recoil_shock</sprite>
           <sprite>sprites\spr_morgan_gun_shock</sprite>
           <sprite>sprites\spr_morgan_gun_burst</sprite>
           <sprite>sprites\spr_morgan_gun_blast</sprite>
@@ -195,6 +196,7 @@
       <script>scripts\scr_player_damage.gml</script>
       <script>scripts\scr_player_knockback.gml</script>
       <script>scripts\scr_player_sprites.gml</script>
+      <script>scripts\scr_player_arm.gml</script>
     </scripts>
     <scripts name="lighting">
       <script>scripts\scr_max_range.gml</script>
@@ -268,12 +270,17 @@
     </objects>
     <objects name="player">
       <object>objects\obj_player</object>
-      <object>objects\obj_light_player</object>
-      <object>objects\obj_player_shot_shock</object>
-      <object>objects\obj_player_shot_burst</object>
-      <object>objects\obj_player_shot_blast</object>
-      <object>objects\obj_player_shot_glove</object>
-      <object>objects\obj_player_shot_glove_chain</object>
+      <objects name="projectiles">
+        <object>objects\obj_player_shot_shock</object>
+        <object>objects\obj_player_shot_burst</object>
+        <object>objects\obj_player_shot_blast</object>
+        <object>objects\obj_player_shot_glove</object>
+        <object>objects\obj_light_player</object>
+      </objects>
+      <objects name="fx">
+        <object>objects\obj_player_shot_glove_chain</object>
+        <object>objects\obj_player_arm_recoil</object>
+      </objects>
     </objects>
     <objects name="levels">
       <objects name="demo">
