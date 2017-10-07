@@ -3,7 +3,7 @@
   <spriteName>spr_morgan_gun_glove</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>1</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -27,7 +27,29 @@
             <kind>1</kind>
             <string>alarm[0]=30;
 vspeed -= 10;
-chain_height = sprite_get_height(spr_morgan_gun_glove_chain);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>owner.grapple = -1;
 </string>
           </argument>
         </arguments>
@@ -51,14 +73,13 @@ chain_height = sprite_get_height(spr_morgan_gun_glove_chain);
           <argument>
             <kind>1</kind>
             <string>instance_destroy();
-instance_destroy(obj_player_shot_glove_chain);
 obj_player.acting = false;
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="1">
+    <event eventtype="4" ename="obj_block">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -75,15 +96,18 @@ obj_player.acting = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if !collision_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom,obj_player_shot_glove_chain,true,true) and vspeed &lt; 0{
-    instance_create(x,y,obj_player_shot_glove_chain);
+            <string>if HOLD_G and vspeed !=0{
+    owner.autohang=true;
     }
+vspeed = 0;
+alarm[0]=-1;
+owner.hanging=true;
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="4" ename="obj_player_shot_glove_chain">
+    <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -100,9 +124,8 @@ obj_player.acting = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if vspeed &gt; 0{
-    instance_destroy(other);
-    }
+            <string>draw_sprite_part_ext(spr_morgan_gun_glove_chain,0,0,0,16,obj_player.gun_y-y,x,obj_player.gun_y,1,-1,c_white,1);
+draw_self();
 </string>
           </argument>
         </arguments>

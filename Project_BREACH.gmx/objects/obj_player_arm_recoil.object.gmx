@@ -25,7 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>owner.alarm[0]=5;
+            <string>if P1_WEAPON != 3 or owner.rapid=0{
+    owner.alarm[0]=5;
+    }
 owner.arms = -1;
 </string>
           </argument>

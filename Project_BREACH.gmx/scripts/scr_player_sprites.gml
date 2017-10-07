@@ -1,6 +1,6 @@
 //idle
 if !acting and !walking and !rising and !falling and !shooting
-and grounded{
+and grounded and !hanging{
     image_speed = .18;
     if aiming = 0{
         sprite_index = sprite_idle;
@@ -23,7 +23,7 @@ and grounded{
     }
 //shooting
 if !acting and !walking and !rising and !falling and shooting
-and grounded{
+and grounded and !hanging{
     image_speed = .18;
     if aiming = 0{
         sprite_index = sprite_shoot;
@@ -45,7 +45,7 @@ and grounded{
         }
     }
 //running
-if !acting and walking  and !rising and !falling and grounded{
+if !acting and walking  and !rising and !falling and grounded and !hanging{
     image_speed = .33;
     if aiming = 0{
         sprite_index = sprite_run;
@@ -67,7 +67,7 @@ if !acting and walking  and !rising and !falling and grounded{
         }
     }
 //jumping up
-if !acting and rising and !falling
+if !acting and rising and !falling and !hanging
 {
     image_index = 0;
     image_speed = 0;
@@ -91,7 +91,7 @@ if !acting and rising and !falling
         }
     }
 //jumping down
-if !acting and falling and !rising
+if !acting and falling and !rising and !hanging
 {
     image_index = 1;
     image_speed = 0;
@@ -114,3 +114,9 @@ if !acting and falling and !rising
         aim = 270; 
         }
     }
+if instance_exists(obj_player_shot_glove){
+        //sprite_index = sprite_jump;
+        gun_x = x + (27 * facing);
+        gun_y = y + 5;
+        if facing =1 {aim =0;} if facing = -1{aim = 180;} 
+}

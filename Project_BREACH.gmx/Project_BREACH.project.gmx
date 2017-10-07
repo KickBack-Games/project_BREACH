@@ -278,7 +278,6 @@
         <object>objects\obj_light_player</object>
       </objects>
       <objects name="fx">
-        <object>objects\obj_player_shot_glove_chain</object>
         <object>objects\obj_player_arm_recoil</object>
       </objects>
     </objects>
