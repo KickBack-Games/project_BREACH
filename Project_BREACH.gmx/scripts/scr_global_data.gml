@@ -6,9 +6,11 @@ globalvar PLAYER_HEALTH; PLAYER_HEALTH = 100;
 
 //weapon power
 globalvar PLAYER_LEVEL; PLAYER_LEVEL = 1;
-globalvar PLAYER_MAXLEVEL; PLAYER_MAXLEVEL = 3;
+globalvar PLAYER_MAXLEVEL; PLAYER_MAXLEVEL = 2;
 globalvar PLAYER_RANK; PLAYER_RANK = 1;
 globalvar PLAYER_POWER; PLAYER_POWER = 0;
+globalvar PLAYER_STICK; PLAYER_STICK = 1;
+globalvar PLAYER_JUMP; PLAYER_JUMP = 1;
 //player
 globalvar P1_COSTUME; P1_COSTUME = 0;
 globalvar P1_WEAPON;  P1_WEAPON = 1;

@@ -104,6 +104,14 @@ arms = -1;
 grapple = -1;
 hanging = false;
 autohang = false;
+//stick combo step
+stick = 0;
+//stick combo advance
+sticknext = false;
+//stick hitbox
+stickmask = -1;
+//time to idle anim
+idle_time = 600;
 //door position change
 if warp_x &gt;0 and warp_y &gt;0{
     x=warp_x;
@@ -153,6 +161,13 @@ sprite_run_legs = spr_morgan_coat_run_legs;
 sprite_run_arm  = spr_morgan_coat_run_arm;
 
 sprite_damage   = spr_morgan_coat_damage;
+
+sprite_stick1   = spr_morgan_coat_stick_1;
+sprite_stick2   = spr_morgan_coat_stick_2;
+sprite_stick3   = spr_morgan_coat_stick_3;
+sprite_sticka   = spr_morgan_coat_stick_air;
+
+sprite_wait     = spr_morgan_coat_idle;
 
 guns = ds_grid_create(2,5);
 ds_grid_add(guns,0,1,spr_morgan_gun_shock);
@@ -329,6 +344,7 @@ shooting=false;
 canshoot=true;
 rapid = 5;
 chargemax=false;
+stick=0;
 </string>
           </argument>
         </arguments>
@@ -478,7 +494,6 @@ scr_player_arm();
           <argument>
             <kind>1</kind>
             <string>///Movement
-if keyboard_check(vk_escape){x=xstart;}
 if acting=false and !hanging{
 ///////////////Normal/////////////////////////////////
 //if press right and not front of block
@@ -531,7 +546,7 @@ if acting=false and !hanging{
         
 //Jumping        
         if( (PRESS_A) and grounded and speedy=0) or ((PRESS_A) and place_meeting(x,y+2,obj_block_pass_dummy)) {
-            speedy = speed_jump;
+            speedy = speed_jump * PLAYER_JUMP;
             jumping=true;
         }
 //Spring Jump
@@ -559,7 +574,14 @@ if acting=false and !hanging{
         if !(PRESS_UP) and !(PRESS_DOWN){
             aiming = 0;
             }
-  if speedy&gt;0{falling=true;rising=false;}  if speedy&lt;0{falling=false;rising=true;} if speedy=0{falling=false;rising=false;}      
+  if speedy&gt;0{falling=true;rising=false;}  if speedy&lt;0{falling=false;rising=true;} if speedy=0{falling=false;rising=false;}     
+//Idle timetown
+if sprite_index = sprite_idle{
+    idle_time -= 1;
+    }
+if sprite_index != sprite_idle and sprite_index != sprite_wait{
+    idle_time = 600;
+    } 
 }
 </string>
           </argument>
@@ -683,6 +705,14 @@ if hanging = false{
           <argument>
             <kind>1</kind>
             <string>///Gunplay
+if PRESS_B and P1_WEAPON = 2{
+    if shooting=true{
+        if sprite_index = sprite_stick1 or sprite_index = sprite_stick2 or sprite_index = sprite_stick3{
+            sticknext=true;
+            exit;
+        }
+    }
+}
 if !acting and !LOADING{
 //charging
 if charging{
@@ -714,7 +744,7 @@ if (PRESS_B and canshoot=true) or (RELEASE_B and canshoot=true and PLAYER_POWER&
         if sprite_index = sprite_Ujump{arms.x=x-(1*facing);arms.y=y+15;arms.image_xscale=facing;arms.image_yscale=image_yscale;arms.image_angle=90*facing;arms.depth=1;}
         if sprite_index = sprite_Djump{arms.x=x-(4*facing);arms.y=y+9;arms.image_xscale=facing;arms.image_yscale=-image_yscale;arms.image_angle=270*facing;arms.depth=1;}
         }
-    if (!chargemax or PRESS_UP or PRESS_DOWN) and P1_WEAPON != 3{
+    if (!chargemax or PRESS_UP or PRESS_DOWN) and P1_WEAPON != 3 and P1_WEAPON != 2{
         alarm[0]=10;
         }
     //shock gun
@@ -792,8 +822,30 @@ if (PRESS_B and canshoot=true) or (RELEASE_B and canshoot=true and PLAYER_POWER&
             shot.image_angle = (aim * facing) - 340;
             }
     }
+    //stick combo
+     if P1_WEAPON = 2 and !hanging{
+        if shooting=true{
+            if sprite_index = sprite_stick1 or sprite_index = sprite_stick2 or sprite_index = sprite_stick3{
+                sticknext=true;
+                exit;
+            }
+        }
+        acting=true;
+        image_speed=.5;
+        stickmask = instance_create(x,y,obj_player_shot_stick);
+        stickmask.owner=id;
+        image_index = 0;
+        shooting=true;
+        if grounded and stick=0{
+            speedx = 0;
+            sprite_index = sprite_stick1;
+            exit;
+        }
+        if !grounded{
+        sprite_index = sprite_sticka;stick=0;exit;}
+        }
     charging=false;
-    PLAYER_LEVEL = PLAYER_RANK;
+    PLAYER_LEVEL = 1;
     PLAYER_POWER = 0;
     canshoot=false;
     alarm[3]=30;
@@ -877,8 +929,21 @@ if !acting and !LOADING{
             <kind>1</kind>
             <string>///Hanging Mode
 if hanging{
-    acting=false;
-    sprite_index = sprite_jump;
+    if PRESS_B and P1_WEAPON = 2 and stick=0{
+        acting=true;
+        image_speed=.5;
+        stickmask = instance_create(x,y,obj_player_shot_stick);
+        stickmask.owner=id;
+        image_index = 0;
+        shooting=true; 
+        sprite_index = sprite_sticka;
+        stick=1;
+    }
+    if stick=0{
+        sprite_index = sprite_jump;
+        acting=false;
+        image_speed=0;
+    }
     if PRESS_LEFT{
         facing = -1;
         }
@@ -952,6 +1017,49 @@ scr_player_knockback();
             <kind>1</kind>
             <string>///Call damage function
 scr_player_damage();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="7">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Stick Combo
+if sprite_index = sprite_stick1 or sprite_index = sprite_stick2{
+    if sticknext{
+        image_index = 0;
+        sticknext = false;
+        stickmask = instance_create(x,y,obj_player_shot_stick);
+        stickmask.owner=id;
+        if sprite_index = sprite_stick1{sprite_index = sprite_stick2;stick=2;exit;}
+        if sprite_index = sprite_stick2{sprite_index = sprite_stick3;stick=3;exit;}
+        }
+    if !sticknext{
+        acting=false;
+        alarm[0]=1;
+        exit;
+        }
+}
+if sprite_index = sprite_stick3 or sprite_index = sprite_sticka{
+        acting=false;
+        alarm[0]=1;
+        exit;
+}
 </string>
           </argument>
         </arguments>

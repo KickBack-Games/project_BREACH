@@ -26,7 +26,6 @@
       </sprites>
       <sprites name="morgan">
         <sprites name="coat">
-          <sprite>sprites\spr_morgan_coat_idle</sprite>
           <sprite>sprites\spr_morgan_coat_ready</sprite>
           <sprite>sprites\spr_morgan_coat_mask</sprite>
           <sprite>sprites\spr_morgan_coat_idle_up</sprite>
@@ -42,6 +41,11 @@
           <sprite>sprites\spr_morgan_coat_front</sprite>
           <sprite>sprites\spr_morgan_coat_back</sprite>
           <sprite>sprites\spr_morgan_coat_damage</sprite>
+          <sprite>sprites\spr_morgan_coat_stick_1</sprite>
+          <sprite>sprites\spr_morgan_coat_stick_2</sprite>
+          <sprite>sprites\spr_morgan_coat_stick_3</sprite>
+          <sprite>sprites\spr_morgan_coat_stick_air</sprite>
+          <sprite>sprites\spr_morgan_coat_idle</sprite>
         </sprites>
         <sprites name="arm">
           <sprite>sprites\spr_morgan_coat_run_arm</sprite>
@@ -126,6 +130,11 @@
       <sprites name="hud">
         <sprite>sprites\spr_alert</sprite>
         <sprite>sprites\spr_caution</sprite>
+      </sprites>
+      <sprites name="items">
+        <sprite>sprites\spr_item_str</sprite>
+        <sprite>sprites\spr_item_def</sprite>
+        <sprite>sprites\spr_item_spd</sprite>
       </sprites>
     </sprites>
   </sprites>
@@ -276,6 +285,7 @@
         <object>objects\obj_player_shot_blast</object>
         <object>objects\obj_player_shot_glove</object>
         <object>objects\obj_light_player</object>
+        <object>objects\obj_player_shot_stick</object>
       </objects>
       <objects name="fx">
         <object>objects\obj_player_arm_recoil</object>
@@ -294,6 +304,11 @@
         <object>objects\obj_enem_guard1</object>
         <object>objects\obj_light_enemy</object>
       </objects>
+    </objects>
+    <objects name="items">
+      <object>objects\obj_item_def</object>
+      <object>objects\obj_item_str</object>
+      <object>objects\obj_item_spd</object>
     </objects>
   </objects>
   <rooms name="rooms">

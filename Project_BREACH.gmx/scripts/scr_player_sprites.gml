@@ -3,7 +3,8 @@ if !acting and !walking and !rising and !falling and !shooting
 and grounded and !hanging{
     image_speed = .18;
     if aiming = 0{
-        sprite_index = sprite_idle;
+        if idle_time >   0{sprite_index = sprite_idle;}
+        if idle_time <=  0{sprite_index = sprite_wait;}
         gun_x = x + (27 * facing);
         gun_y = y + 5;
         if facing =1 {aim =0;} if facing = -1{aim = 180;}  

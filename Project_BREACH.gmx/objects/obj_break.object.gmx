@@ -146,10 +146,40 @@ if place_meeting(x,y,obj_block) or place_meeting(x,y,obj_block_pass) {
 col = collision_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom,SHOT,false,true);
 //Minus health on collide
 if col != noone{
-    image_index += 1;
+    image_index += col.dmg;
     event_user(0);
     instance_destroy(col,true);
     }
+//destroy on hp 0
+if image_index = image_number -1{
+    instance_destroy();
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_player_shot_stick">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Collision Handle
+//Minus health on collide
+image_index += other.dmg;
+event_user(0);
 //destroy on hp 0
 if image_index = image_number -1{
     instance_destroy();
