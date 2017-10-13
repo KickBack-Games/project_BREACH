@@ -47,6 +47,12 @@ view_wport[0]=1920;
 
 view_wview[0]=832;
 view_hview[0]=512;
+
+if ds_grid_value_exists(map_layout,0,0,0,ds_grid_height(map_layout),room){
+    var val = ds_grid_value_y(map_layout,0,0,0,ds_grid_height(map_layout),room);
+        ds_grid_set(map_layout,4,val,1);
+        ds_grid_set(map_layout,5,val,1);
+}
 </string>
           </argument>
         </arguments>
@@ -214,6 +220,76 @@ if prize_blast{
     if P1_WEAPON != 4{draw_sprite(spr_hud_slot_blast,0,600,50);}
     if PLAYER_STATUS = 1{draw_sprite(spr_hud_emp,0,600,50);}
     }
+//Map
+draw_sprite(spr_map_grid,0,900,25);
+var val = ds_grid_value_y(map_layout,0,0,0,ds_grid_height(map_layout),room);
+
+//3x2
+//does room exist?
+if ds_grid_value_exists(map_layout,0,0,0,ds_grid_height(map_layout),room){
+//store y of room values    
+//draw square if visible/visited    
+    var val2 = ds_grid_get(map_layout,4,val);
+    if val2=true{draw_sprite(spr_map_room,0+ds_grid_get(map_layout,5,val),932,41);}
+//top border if..    
+    var val2 = ds_grid_get(map_layout,9,val);
+    if val2=true{draw_sprite(spr_map_room_top,0,932,41);}
+//bottom border if..    
+    var val2 = ds_grid_get(map_layout,10,val);
+    if val2=true{draw_sprite(spr_map_room_bottom,0,932,41);}
+//left border if..    
+    var val2 = ds_grid_get(map_layout,7,val);
+    if val2=true{draw_sprite(spr_map_room_left,0,932,41);}
+//right border if..    
+    var val2 = ds_grid_get(map_layout,8,val);
+    if val2=true{draw_sprite(spr_map_room_right,0,932,41);}
+}
+    
+//4x2
+//does room exist?
+room_map = ds_grid_get(map_pos,ds_grid_get(map_layout,11,val)+1,ds_grid_get(map_layout,12,val));
+if ds_grid_value_exists(map_layout,0,0,0,ds_grid_height(map_layout),room_map){
+//store y of room values
+    var val0 = ds_grid_value_y(map_layout,0,0,0,ds_grid_height(map_layout),room_map);
+//draw square if visible/visited    
+    var val2 = ds_grid_get(map_layout,4,val0);
+    if val2=true{draw_sprite(spr_map_room,0+ds_grid_get(map_layout,5,val0),948,41);}
+//top border if..    
+    var val2 = ds_grid_get(map_layout,9,val0);
+    if val2=true{draw_sprite(spr_map_room_top,0,948,41);}
+//bottom border if..    
+    var val2 = ds_grid_get(map_layout,10,val0);
+    if val2=true{draw_sprite(spr_map_room_bottom,0,948,41);}
+//left border if..    
+    var val2 = ds_grid_get(map_layout,7,val0);
+    if val2=true{draw_sprite(spr_map_room_left,0,948,41);}
+//right border if..    
+    var val2 = ds_grid_get(map_layout,8,val0);
+    if val2=true{draw_sprite(spr_map_room_right,0,948,41);}       
+}
+//2x2
+//does room exist?
+room_map = ds_grid_get(map_pos,ds_grid_get(map_layout,11,val)-1,ds_grid_get(map_layout,12,val));
+show_debug_message(room_map);
+if ds_grid_value_exists(map_layout,0,0,0,ds_grid_height(map_layout),room_map){
+//store y of room values
+    var val0 = ds_grid_value_y(map_layout,0,0,0,ds_grid_height(map_layout),room_map);
+//draw square if visible/visited    
+    var val2 = ds_grid_get(map_layout,4,val0);
+    if val2=true{draw_sprite(spr_map_room,0+ds_grid_get(map_layout,5,val0),916,41);}
+//top border if..    
+    var val2 = ds_grid_get(map_layout,9,val0);
+    if val2=true{draw_sprite(spr_map_room_top,0,916,41);}
+//bottom border if..    
+    var val2 = ds_grid_get(map_layout,10,val0);
+    if val2=true{draw_sprite(spr_map_room_bottom,0,916,41);}
+//left border if..    
+    var val2 = ds_grid_get(map_layout,7,val0);
+    if val2=true{draw_sprite(spr_map_room_left,0,916,41);}
+//right border if..    
+    var val2 = ds_grid_get(map_layout,8,val0);
+    if val2=true{draw_sprite(spr_map_room_right,0,916,41);}       
+}
 </string>
           </argument>
         </arguments>

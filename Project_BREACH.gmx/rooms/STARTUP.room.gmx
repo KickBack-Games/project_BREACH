@@ -12,6 +12,7 @@
   <showcolour>-1</showcolour>
   <code>scr_global_data();
 scr_global_controls();
+scr_map_layout();
 instance_create(0,0,GLOBAL_KEYS);
 room_goto_next();</code>
   <enableViews>0</enableViews>

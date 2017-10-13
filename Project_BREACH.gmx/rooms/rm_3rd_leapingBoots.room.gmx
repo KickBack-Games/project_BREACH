@@ -57,11 +57,12 @@
     <instance objName="obj_block" x="736" y="32" name="inst_AAE00385" locked="0" code="" scaleX="1" scaleY="15" colour="4294967295" rotation="0"/>
     <instance objName="obj_player" x="672" y="416" name="inst_DF573FEC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_door" x="64" y="64" name="inst_D5E5ACDC" locked="0" code="rm = rm_3rd_hall1;&#xA;xx = 330;&#xA;yy = 416;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_block" x="-32" y="160" name="inst_01C69876" locked="0" code="" scaleX="10" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_block" x="-64" y="160" name="inst_01C69876" locked="0" code="" scaleX="10" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_block_pass" x="288" y="288" name="inst_8152D7AD" locked="0" code="" scaleX="6" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_block_pass" x="128" y="384" name="inst_D5F1C951" locked="0" code="" scaleX="5" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_block_pass" x="480" y="384" name="inst_2E2C37FB" locked="0" code="" scaleX="5" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_demo_light" x="384" y="480" name="inst_6413F6D9" locked="0" code="" scaleX="1" scaleY="1" colour="855638015" rotation="0"/>
+    <instance objName="obj_item_spd" x="384" y="448" name="inst_BD8FBE90" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="tile_demo_right" x="736" y="32" w="31" h="448" xo="0" yo="0" id="10000085" name="inst_9342ED70" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

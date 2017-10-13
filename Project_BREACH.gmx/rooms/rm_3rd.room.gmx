@@ -73,11 +73,8 @@
     <instance objName="obj_slope_left" x="608" y="448" name="inst_9BA91B61" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_block_pass" x="96" y="256" name="inst_F7E4EF78" locked="0" code="" scaleX="7" scaleY="2" colour="4294967295" rotation="0"/>
     <instance objName="obj_demo_fire" x="128" y="224" name="inst_0E0E53EF" locked="0" code="" scaleX="0.340000003576279" scaleY="0.340000003576279" colour="4294967295" rotation="0"/>
-    <instance objName="obj_item_def" x="224" y="224" name="inst_28E58D66" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_box" x="672" y="448" name="inst_AF350A9D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_box_metal" x="64" y="448" name="inst_C27552AF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_item_str" x="96" y="384" name="inst_D813400B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_item_spd" x="480" y="320" name="inst_6409536A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="tile_demo_right" x="800" y="32" w="31" h="448" xo="0" yo="0" id="10000015" name="inst_C98FB3B5" depth="1" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

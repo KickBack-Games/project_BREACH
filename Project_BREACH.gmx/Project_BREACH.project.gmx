@@ -115,6 +115,14 @@
         <sprite>sprites\spr_hud_slot_burst</sprite>
         <sprite>sprites\spr_hud_emp</sprite>
       </sprites>
+      <sprites name="map">
+        <sprite>sprites\spr_map_room</sprite>
+        <sprite>sprites\spr_map_room_bottom</sprite>
+        <sprite>sprites\spr_map_room_left</sprite>
+        <sprite>sprites\spr_map_room_top</sprite>
+        <sprite>sprites\spr_map_room_right</sprite>
+        <sprite>sprites\spr_map_grid</sprite>
+      </sprites>
     </sprites>
     <sprites name="levels">
       <sprites name="demo">
@@ -219,6 +227,9 @@
     <scripts name="display">
       <script>scripts\draw_text_outline.gml</script>
     </scripts>
+    <scripts name="map">
+      <script>scripts\scr_map_layout.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_test</font>
@@ -258,6 +269,7 @@
       </objects>
       <objects name="Camera">
         <object>objects\CAMERA</object>
+        <object>objects\MAP</object>
       </objects>
       <objects name="Parents">
         <object>objects\BLANK</object>
