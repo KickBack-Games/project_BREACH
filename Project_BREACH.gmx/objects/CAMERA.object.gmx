@@ -47,12 +47,13 @@ view_wport[0]=1920;
 
 view_wview[0]=832;
 view_hview[0]=512;
-
-if ds_grid_value_exists(map_layout,0,0,0,ds_grid_height(map_layout),room){
-    var val = ds_grid_value_y(map_layout,0,0,0,ds_grid_height(map_layout),room);
-        ds_grid_set(map_layout,4,val,1);
-        ds_grid_set(map_layout,5,val,1);
+/*
+if ds_grid_value_exists(map_layout,0,0,0,ds_grid_height(map_layout),map_room){
+    var valu = ds_grid_value_y(map_layout,0,0,0,ds_grid_height(map_layout),valu);
+        ds_grid_set(map_layout,4,valu,1);
+        ds_grid_set(map_layout,5,valu,1);
 }
+*/
 </string>
           </argument>
         </arguments>
@@ -220,13 +221,14 @@ if prize_blast{
     if P1_WEAPON != 4{draw_sprite(spr_hud_slot_blast,0,600,50);}
     if PLAYER_STATUS = 1{draw_sprite(spr_hud_emp,0,600,50);}
     }
+    /*
 //Map
 draw_sprite(spr_map_grid,0,900,25);
-var val = ds_grid_value_y(map_layout,0,0,0,ds_grid_height(map_layout),room);
+var val = ds_grid_value_y(map_layout,0,0,0,ds_grid_height(map_layout),map_room);
 
 //3x2
 //does room exist?
-if ds_grid_value_exists(map_layout,0,0,0,ds_grid_height(map_layout),room){
+if ds_grid_value_exists(map_layout,0,0,0,ds_grid_height(map_layout),map_room){
 //store y of room values    
 //draw square if visible/visited    
     var val2 = ds_grid_get(map_layout,4,val);
@@ -290,6 +292,7 @@ if ds_grid_value_exists(map_layout,0,0,0,ds_grid_height(map_layout),room_map){
     var val2 = ds_grid_get(map_layout,8,val0);
     if val2=true{draw_sprite(spr_map_room_right,0,916,41);}       
 }
+*/
 </string>
           </argument>
         </arguments>

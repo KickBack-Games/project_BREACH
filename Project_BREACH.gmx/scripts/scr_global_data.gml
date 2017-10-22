@@ -36,6 +36,9 @@ globalvar warp_rm;  warp_rm = room;
 globalvar warp_x;   warp_x = 0;
 globalvar warp_y;   warp_y = 0;
 
+//map rooms
+globalvar map_room; map_room = " ";
+
 //rewards
 globalvar prize_shock; prize_shock = true;
 globalvar prize_stick; prize_stick = true;

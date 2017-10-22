@@ -229,6 +229,7 @@
     </scripts>
     <scripts name="map">
       <script>scripts\scr_map_layout.gml</script>
+      <script>scripts\scr_map_pos.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">
