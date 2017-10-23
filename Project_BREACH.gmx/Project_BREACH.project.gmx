@@ -132,6 +132,7 @@
         <sprite>sprites\spr_tile_demo_light</sprite>
         <sprite>sprites\spr_door_unlock</sprite>
         <sprite>sprites\spr_door_lock</sprite>
+        <sprite>sprites\sor_hole_travel</sprite>
       </sprites>
     </sprites>
     <sprites name="menu">
@@ -267,6 +268,7 @@
         <object>objects\obj_move_flip</object>
         <object>objects\obj_water</object>
         <object>objects\obj_door</object>
+        <object>objects\obj_hole_travel</object>
       </objects>
       <objects name="Camera">
         <object>objects\CAMERA</object>
@@ -327,9 +329,12 @@
   <rooms name="rooms">
     <rooms name="alpha">
       <room>rooms\STARTUP</room>
+      <room>rooms\rm_3rd_hall2</room>
       <room>rooms\rm_3rd</room>
       <room>rooms\rm_3rd_1</room>
       <room>rooms\rm_3rd_hall1</room>
+      <room>rooms\rm_3rd_hall2A</room>
+      <room>rooms\rm_3rd_hall2B</room>
       <room>rooms\rm_3rd_leapingBoots</room>
       <room>rooms\rm_demo_lights_1</room>
       <room>rooms\rm_demo_lights_2</room>
