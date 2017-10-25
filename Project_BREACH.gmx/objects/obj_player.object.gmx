@@ -117,8 +117,7 @@ if warp_x &gt;0 and warp_y &gt;0{
     x=warp_x;
     y=warp_y;
 }
-    warp_x = 0;
-    warp_y = 0;
+
 </string>
           </argument>
         </arguments>

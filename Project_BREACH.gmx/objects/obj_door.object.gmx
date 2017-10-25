@@ -92,17 +92,25 @@ type = 0;
             <string>if open = true{
     if collision_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom,PLAYER,false,true)
     and PRESS_UP and image_speed = 0{
-        if PLAYER.speedy=0{
-            PLAYER.acting=true;
-            image_speed = .25;
-            PLAYER.sprite_index = PLAYER.sprite_back;
+        if image_number &gt; 1{
+            if PLAYER.speedy=0{
+                PLAYER.acting=true;
+                image_speed = .25;
+                PLAYER.sprite_index = PLAYER.sprite_back;
+                PLAYER.speedx=0;
+            }
         }
+        if image_number =1{
+            scr_warp(rm,xx,yy);
+            }
         }
-    if image_index = image_number -1{
-        PLAYER.image_alpha -= 0.01;
-        }
-    if image_index = image_number -1 and PLAYER.image_alpha &lt;= 0{
-        image_speed = -.25;
+    if type &gt; -1{
+        if image_index = image_number -1{
+            PLAYER.image_alpha -= 0.01;
+            }
+        if image_index = image_number -1 and PLAYER.image_alpha &lt;= 0{
+            image_speed = -.25;
+            }
         }
     }
 </string>
@@ -125,8 +133,10 @@ type = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if open {sprite_index = spr_door_unlock;light.image_blend = c_lime;}
-if !open{sprite_index = spr_door_lock;light.image_blend = c_red}
+            <string>if type &gt; -1{
+    if open {sprite_index = spr_door_unlock;light.image_blend = c_lime;}
+    if !open{sprite_index = spr_door_lock;light.image_blend = c_red}
+    }
 
 if type =1 and instance_number(ENEMY) = 0{open = true;}
 </string>

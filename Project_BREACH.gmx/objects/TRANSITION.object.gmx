@@ -124,7 +124,7 @@ if IsPaused=true{
 
 if (a == 1)
 {
-    if room !=warp_rm{room_goto(warp_rm);}else{room_restart();}
+    if room !=warp_rm{room_goto(warp_rm);}
     fade = -1;
 }
 
@@ -132,7 +132,9 @@ if (a == 0) &amp;&amp; (fade == -1)
 {
     instance_destroy();
     IsPaused=false;
-    if instance_exists(PLAYER){PLAYER.acting=false;}
+    if instance_exists(PLAYER){PLAYER.acting=false;PLAYER.image_alpha = 1;
+    PLAYER.x = warp_x;
+    PLAYER.y =warp_y;}
 }
 draw_set_color(c_black);
 draw_set_alpha(a);
