@@ -38,6 +38,8 @@ speed_fall=10;
 hor=0;
 ver=0;
 pass = true;
+drop = 0;
+//1 = health
 </string>
           </argument>
         </arguments>
@@ -78,6 +80,7 @@ for (i=0;i&lt;ww;i+=chunk) { //we loop 4 pixel at a time all the way across
  }
  }
 audio_play_sound_on(s_sfx,sound1,false,10);
+scr_spoils(drop);
 </string>
           </argument>
         </arguments>

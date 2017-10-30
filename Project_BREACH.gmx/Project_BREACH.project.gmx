@@ -115,6 +115,7 @@
         <sprite>sprites\spr_hud_slot_shock</sprite>
         <sprite>sprites\spr_hud_slot_burst</sprite>
         <sprite>sprites\spr_hud_emp</sprite>
+        <sprite>sprites\spr_button_dpad</sprite>
       </sprites>
       <sprites name="map">
         <sprite>sprites\spr_map_room</sprite>
@@ -147,6 +148,7 @@
         <sprite>sprites\spr_item_str</sprite>
         <sprite>sprites\spr_item_def</sprite>
         <sprite>sprites\spr_item_spd</sprite>
+        <sprite>sprites\spr_item_health</sprite>
       </sprites>
     </sprites>
   </sprites>
@@ -235,9 +237,13 @@
       <script>scripts\scr_map_layout.gml</script>
       <script>scripts\scr_map_pos.gml</script>
     </scripts>
+    <scripts name="spoils">
+      <script>scripts\scr_spoils.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_test</font>
+    <font>fonts\fnt_text</font>
   </fonts>
   <objects name="objects">
     <objects name="System">
@@ -295,6 +301,9 @@
         <object>objects\obj_parallax_handler</object>
         <object>objects\obj_parallax_element</object>
       </objects>
+      <objects name="speech">
+        <object>objects\SPEECH</object>
+      </objects>
     </objects>
     <objects name="player">
       <object>objects\obj_player</object>
@@ -328,6 +337,10 @@
       <object>objects\obj_item_def</object>
       <object>objects\obj_item_str</object>
       <object>objects\obj_item_spd</object>
+      <object>objects\obj_item_health</object>
+    </objects>
+    <objects name="npc">
+      <object>objects\obj_npc_test</object>
     </objects>
   </objects>
   <rooms name="rooms">

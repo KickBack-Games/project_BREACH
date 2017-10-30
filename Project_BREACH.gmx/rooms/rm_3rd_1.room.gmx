@@ -59,6 +59,7 @@
     <instance objName="obj_light_spot" x="128" y="32" name="inst_3A940A88" locked="0" code="" scaleX="3" scaleY="2.06557369232178" colour="4294967295" rotation="-90"/>
     <instance objName="obj_light_spot" x="352" y="32" name="inst_5BD8F919" locked="0" code="" scaleX="3" scaleY="2.06557369232178" colour="4294967295" rotation="-90"/>
     <instance objName="obj_light_spot" x="576" y="32" name="inst_0DF81CB5" locked="0" code="" scaleX="3" scaleY="2.06557369232178" colour="4294967295" rotation="-90"/>
+    <instance objName="obj_npc_test" x="352" y="422" name="inst_99B78822" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="tile_demo_right" x="736" y="32" w="31" h="448" xo="0" yo="0" id="10000085" name="inst_9342ED70" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

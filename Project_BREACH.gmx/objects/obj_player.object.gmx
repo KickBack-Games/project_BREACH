@@ -447,7 +447,8 @@ grounded=true;}
 x = clamp(x,0,room_width);
 y = clamp(y,0,room_height);
 }
-
+//Health
+PLAYER_HEALTH = clamp(PLAYER_HEALTH,0,PLAYER_MAXHEALTH);
 </string>
           </argument>
         </arguments>
