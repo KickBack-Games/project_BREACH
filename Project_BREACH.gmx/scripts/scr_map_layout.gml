@@ -209,26 +209,26 @@ ds_grid_set(map_pos,3,1,"1-3-E");
 //////////////////////////////////////
 //HallwayF (4,1)
 //file
-ds_grid_set(map_layout,0,6,"1-3-F");
+ds_grid_set(map_layout,0,7,"1-3-F");
 //string
-ds_grid_set(map_layout,1,6,"Hallway");
+ds_grid_set(map_layout,1,7,"Hallway");
 //visible
-ds_grid_set(map_layout,4,6,true);
+ds_grid_set(map_layout,4,7,true);
 //visited
-ds_grid_set(map_layout,5,6,0);
+ds_grid_set(map_layout,5,7,0);
 //contents (0 = none, 1 = recording, 2 = map, 3 = rank up, 4 = boss)
-ds_grid_set(map_layout,6,6,0);
+ds_grid_set(map_layout,6,7,0);
 //left wall
-ds_grid_set(map_layout,7,6,false);
+ds_grid_set(map_layout,7,7,false);
 //right wall
-ds_grid_set(map_layout,8,6,true);
+ds_grid_set(map_layout,8,7,true);
 //ceiling
-ds_grid_set(map_layout,9,6,false);
+ds_grid_set(map_layout,9,7,false);
 //floor
-ds_grid_set(map_layout,10,6,true);
+ds_grid_set(map_layout,10,7,true);
 //x
-ds_grid_set(map_layout,11,6,4);
+ds_grid_set(map_layout,11,7,4);
 //y
-ds_grid_set(map_layout,12,6,1);
+ds_grid_set(map_layout,12,7,1);
 //x,y pos
 ds_grid_set(map_pos,4,1,"1-3-F");

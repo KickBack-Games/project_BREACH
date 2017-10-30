@@ -620,7 +620,7 @@ if !acting and !LOADING{
 if ai_b and canshoot=true{
     shooting = true;
     audio_play_sound_on(s_sfx,sound0,false,10);
-    shot = instance_create(gun_x,gun_y,obj_player_shot_0);
+    shot = instance_create(gun_x,gun_y,obj_player_shot_shock);
     shot.image_xscale = facing;
     if aiming = 0{shot.hspeed = 10 * shot.image_xscale;}
     if aiming != 0{shot.image_angle = 90;shot.vspeed = 10 * -aiming;shot.image_yscale = -aiming;}
