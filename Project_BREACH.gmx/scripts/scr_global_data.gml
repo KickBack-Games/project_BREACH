@@ -49,3 +49,6 @@ globalvar prize_light; prize_light = true;
 globalvar prize_health; prize_health = false;
 globalvar prize_power; prize_power = false;
 globalvar prize_boots; prize_boots = 0;
+
+//Cinematic border
+globalvar Border;Border= 0;

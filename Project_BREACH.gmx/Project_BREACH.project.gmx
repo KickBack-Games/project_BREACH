@@ -126,6 +126,12 @@
         <sprite>sprites\spr_map_room_right</sprite>
         <sprite>sprites\spr_map_grid</sprite>
       </sprites>
+      <sprites name="speech">
+        <sprite>sprites\spr_txt_border</sprite>
+        <sprites name="faces">
+          <sprite>sprites\spr_txt_face</sprite>
+        </sprites>
+      </sprites>
     </sprites>
     <sprites name="levels">
       <sprites name="demo">
@@ -283,6 +289,7 @@
       <objects name="Camera">
         <object>objects\CAMERA</object>
         <object>objects\MAP</object>
+        <object>objects\BORDER</object>
       </objects>
       <objects name="Parents">
         <object>objects\BLANK</object>

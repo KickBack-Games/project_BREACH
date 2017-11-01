@@ -25,10 +25,39 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>test = "Hello World 1-1 #potato$";
+            <string>text = "Hello World 1-1 #potato$";
+face = 0;
 go = false;
+alarm[0]=5;
 draw = "";
 i = 1;
+border_index = 0;
+alarm[1]=1;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>border_index ++
+if border_index = sprite_get_number(spr_txt_border)-1{go=true}
+if border_index &lt; sprite_get_number(spr_txt_border)-1{alarm[1]=1;}
 </string>
           </argument>
         </arguments>
@@ -51,10 +80,10 @@ i = 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw += string_char_at(test,i);
+            <string>draw += string_char_at(text,i);
 i += 1;    
-if i &lt; string_length(test){alarm[0]=5;}
-if i = string_length(test){alarm[0]=-1;}
+if i &lt; string_length(text){alarm[0]=5;}
+if i = string_length(text){alarm[0]=-1;}
 </string>
           </argument>
         </arguments>
@@ -77,35 +106,15 @@ if i = string_length(test){alarm[0]=-1;}
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_font(fnt_text);
+            <string>draw_sprite(spr_txt_border,border_index,540,550);
+draw_set_font(fnt_text);
 draw_set_colour(c_white);
 draw_set_halign(fa_left);
 draw_set_valign(fa_middle);
-draw_text(500,500,draw);
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="32">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>go = true;
-alarm[0]=5;
+if go{
+    draw_text(400,550,draw);
+    draw_sprite(spr_txt_face,face,210,465);
+    }
 </string>
           </argument>
         </arguments>
