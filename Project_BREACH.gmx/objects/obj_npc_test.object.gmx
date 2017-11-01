@@ -28,6 +28,30 @@
             <string>icon = false;
 text = "This is test dialouge. Nothing to see here.#
         What? You're not the only survivor, you know.";
+alarm[0]=60;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>alarm[0]=60;
 </string>
           </argument>
         </arguments>
@@ -79,13 +103,8 @@ else{
           <argument>
             <kind>1</kind>
             <string>if icon{
-i=0;j=0;repeat(20){
-        draw_sprite_ext(spr_button_dpad,i,PLAYER.x,PLAYER.y-32,1,1,90,c_white,1);
-        j ++;
-        if ((j mod 5) == 0){
-        i ++;
-        }
-        }
+        draw_sprite_ext(spr_button_dpad,alarm[0],PLAYER.x,PLAYER.y-32,1,1,90,c_white,1);
+
     }
 draw_self();
 </string>
