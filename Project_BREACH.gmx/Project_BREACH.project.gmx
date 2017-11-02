@@ -15,6 +15,9 @@
         <sound>sound\sound2</sound>
       </sounds>
     </sounds>
+    <sounds name="va">
+      <sound>sound\va_rec_demo</sound>
+    </sounds>
   </sounds>
   <sprites name="sprites">
     <sprites name="actors">
@@ -130,6 +133,7 @@
         <sprite>sprites\spr_txt_border</sprite>
         <sprites name="faces">
           <sprite>sprites\spr_txt_face</sprite>
+          <sprite>sprites\spr_voice_face</sprite>
         </sprites>
       </sprites>
     </sprites>
@@ -155,6 +159,7 @@
         <sprite>sprites\spr_item_def</sprite>
         <sprite>sprites\spr_item_spd</sprite>
         <sprite>sprites\spr_item_health</sprite>
+        <sprite>sprites\spr_item_tape</sprite>
       </sprites>
     </sprites>
   </sprites>
@@ -310,6 +315,7 @@
       </objects>
       <objects name="speech">
         <object>objects\SPEECH</object>
+        <object>objects\VOICE</object>
       </objects>
     </objects>
     <objects name="player">
@@ -345,6 +351,7 @@
       <object>objects\obj_item_str</object>
       <object>objects\obj_item_spd</object>
       <object>objects\obj_item_health</object>
+      <object>objects\obj_item_tape</object>
     </objects>
     <objects name="npc">
       <object>objects\obj_npc_test</object>
