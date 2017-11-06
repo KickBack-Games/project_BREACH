@@ -1,5 +1,6 @@
 globalvar display_set_gui_size(1080,720);
 surface_resize(application_surface,1920,1080);
+display_reset(8, true);
 //health
 globalvar PLAYER_MAXHEALTH; PLAYER_MAXHEALTH = 100;
 globalvar PLAYER_HEALTH; PLAYER_HEALTH = 100;
