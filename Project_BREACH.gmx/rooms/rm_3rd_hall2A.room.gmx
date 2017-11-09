@@ -59,7 +59,7 @@
     <instance objName="obj_door" x="288" y="640" name="inst_9C0790FE" locked="0" code="rm = rm_3rd_hall2;&#xA;xx = 1295;&#xA;yy = 384;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_door" x="64" y="640" name="inst_5EEB1DE8" locked="0" code="rm = rm_3rd_hall2B;&#xA;xx = 687;&#xA;yy = 672;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_door" x="1504" y="640" name="inst_B532CFBC" locked="0" code="open = false;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_hole_travel" x="480" y="640" name="inst_865CA3B4" locked="0" code="rm = rm_3rd_hall2A;&#xA;xx = 943;&#xA;yy = 672;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_hole_travel" x="480" y="640" name="inst_865CA3B4" locked="0" code="rm = rm_3rd_hall2A;&#xA;xx = 943;&#xA;yy = 672;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_hole_travel" x="928" y="640" name="inst_A515BF3C" locked="0" code="rm = rm_3rd_hall2A;&#xA;xx = 527;&#xA;yy = 672;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_light_spot" x="320" y="64" name="inst_CDC86922" locked="0" code="" scaleX="5" scaleY="5" colour="4294967295" rotation="270"/>
     <instance objName="obj_light_spot" x="992" y="64" name="inst_14317322" locked="0" code="" scaleX="5" scaleY="5" colour="4294967295" rotation="270"/>

@@ -173,7 +173,7 @@ event_perform(ev_create,0);
           <argument>
             <kind>1</kind>
             <string>///Main HUD
-if Border = 0{
+/*if Border = 0{
     //Health
     draw_set_color(c_black);
     draw_rectangle(100,50,100 + sprite_get_width(spr_hud_health)-1, 50 + sprite_get_height(spr_hud_health),false);
@@ -562,7 +562,7 @@ if Border = 0{
     }
     
     draw_sprite(spr_map_player,image_index,932,41);
-}
+}*/
 </string>
           </argument>
         </arguments>

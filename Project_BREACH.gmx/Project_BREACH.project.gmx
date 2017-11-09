@@ -360,13 +360,14 @@
   <rooms name="rooms">
     <rooms name="alpha">
       <room>rooms\STARTUP</room>
+      <room>rooms\rm_3rd_leapingBoots</room>
       <room>rooms\rm_3rd</room>
       <room>rooms\rm_3rd_1</room>
       <room>rooms\rm_3rd_hall1</room>
+      <room>rooms\rm_3rd_hall2</room>
       <room>rooms\rm_3rd_hall2A</room>
       <room>rooms\rm_3rd_hall2B</room>
-      <room>rooms\rm_3rd_leapingBoots</room>
-      <room>rooms\rm_3rd_hall2</room>
+      <room>rooms\rm_stairwell</room>
       <room>rooms\rm_demo_lights_1</room>
       <room>rooms\rm_demo_lights_2</room>
       <room>rooms\rm_demo_lights_3</room>
