@@ -19,7 +19,7 @@
         <exetype>2</exetype>
         <functionname></functionname>
         <codestring></codestring>
-        <whoName>self</whoName>
+        <whoName>other</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
         <arguments>
@@ -38,7 +38,7 @@ speed_walk = 3;
 //run speed
 speed_run = 0;
 //jump speed
-speed_jump = -13;
+speed_jump = -12;
 //max fall speed
 speed_fall = 8;
 //acceleration
@@ -48,7 +48,7 @@ speed_shoot = speed_walk;
 //deceleration
 speed_accel = speed_walk;
 //falling rate
-speed_grav = 0.55;
+speed_grav = 0.53;
 //no input state
 acting=false;
 //walking state
@@ -91,7 +91,7 @@ aim = 0;
 //0 = shot | 1 = rapid | 2 = stick | 3 = grenade
 weapon = 0
 //0 = assault | 1 = riot | 2 = scout
-type = 1;
+type = 2;
 
 if type =1{
     shield = instance_create(x,y,obj_enem_guard_shield);
@@ -168,6 +168,7 @@ ai_right = false;
 ai_up = false;
 ai_down = false;
 ai_a = false;
+ai_a_press=false;
 ai_b = false;
 //Sight range
 sight_caution = 220;
@@ -211,6 +212,30 @@ fire_count = 0;
             <kind>1</kind>
             <string>///Loucas
 loucas=0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Riot Flip
+facing *= -1;
 </string>
           </argument>
         </arguments>
@@ -270,7 +295,12 @@ if canhurt=true{
             <string>///state switch
 if state = shock{state = search;exit;}
 if state = find{state = idle;exit;}
-if state = alert{state = pursue;ai_b = true;exit;}
+if state = alert{
+    state = pursue;
+    ai_b = true;
+    if PLAYER.x &lt; x {facing = 1;}
+    if PLAYER.x &gt; x {facing = -1;}
+    exit;}
 </string>
           </argument>
         </arguments>
@@ -387,7 +417,7 @@ if acting=false{
         }        
         
 //Jumping        
-        if( (ai_a) and grounded and speedy=0) or ((ai_a) and place_meeting(x,y+2,obj_block_pass)) {
+        if( (ai_a) and grounded and speedy=0) and !collision_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom,obj_block_pass,false,true) {
             speedy = speed_jump;
             jumping=true;
         }
@@ -409,12 +439,16 @@ if acting=false{
 //Aiming
         if (ai_up) and !(ai_down){
             aiming = 1;
+            aim = 90;
             }
         if !(ai_up) and (ai_down){
             aiming = -1;
+            aim = 270;
             }
         if !(ai_up) and !(ai_down){
             aiming = 0;
+            if facing = 1{aim = 0;}
+            if facing = -1{aim = 180;}
             }
   if speedy&gt;0{falling=true;rising=false;}  if speedy&lt;0{falling=false;rising=true;} if speedy=0{falling=false;rising=false;}      
 }
@@ -593,19 +627,25 @@ if speedx=0{
         if speedy &gt; speed_fall{speedy = speed_fall;}
 
 floor_snap = collision_rectangle( bbox_left, bbox_bottom, bbox_right, bbox_bottom+1, obj_block, false, true );
-if floor_snap &gt; -1 and speedy&gt;=0{
-speedy=0;rising=false;falling=false;jumping=false;fall_time=0;grounded=true;
+if floor_snap != noone and speedy&gt;=0{
+speedy=0;rising=false;falling=false;jumping=false;fall_time=0;ai_a=false;grounded=true;jump_y = 0
 y = floor_snap.bbox_top - sprite_get_height(mask_index * image_yscale) + sprite_get_yoffset(mask_index);
 } 
 pass_snap = collision_rectangle( bbox_left, bbox_bottom, bbox_right, bbox_bottom+1, obj_block_pass, false, true );
-if pass_snap &gt; -1 and speedy&gt;=0{
-speedy=0;rising=false;falling=false;jumping=false;fall_time=0;grounded=true;
+if pass_snap != noone and speedy&gt;=0{
+speedy=0;rising=false;falling=false;jumping=false;fall_time=0;ai_a=false;grounded=true;jump_y = 0
 y = pass_snap.bbox_top - sprite_get_height(mask_index * image_yscale) + sprite_get_yoffset(mask_index);
 }
-
-if ((!place_meeting(x,y+6,obj_block)) and (!place_meeting(x,y+6,obj_block_pass))) {
+if floor_snap = noone and pass_snap = noone{grounded = false;}
+/*
+if ((!place_meeting(x,bbox_bottom+speedy,obj_block)) and (!place_meeting(x,bbox_bottom+speedy,obj_block_pass))) {
     grounded = false;
     }
+if ((place_meeting(x,bbox_bottom+speedy,obj_block)) or (place_meeting(x,bbox_bottom+speedy,obj_block_pass))) {
+    if speedy &gt; 0{ai_a = false;}
+    if speedy = 0{grounded = true;}
+    }
+*/
 }
 
 </string>
@@ -632,24 +672,22 @@ if ((!place_meeting(x,y+6,obj_block)) and (!place_meeting(x,y+6,obj_block_pass))
 if !acting and !LOADING{
 if PLAYER.x &gt; x - 64 and PLAYER.x &lt; x+64{
     if PLAYER.y &lt; y-50{
-        aiming = 1;
-        aim = 90;
+        ai_up = true;
+        ai_down=false;
     }
     if PLAYER.y &gt; y+50{
-        aiming = -1;
-        aim = 270;
+        ai_up = false;
+        ai_down=true;
     }
     if PLAYER.y &gt; y-50 and PLAYER.y &lt; y+50{
-        aiming = 0;
-        if facing = 1{aim = 0;}
-        if facing = -1{aim = 180;}
+        ai_up = false;
+        ai_down=false;
     }
-    if PLAYER.x &lt; x - 64 or PLAYER.x &gt; x+64{
-        aiming = 0;
-        if facing = 1{aim = 0;}
-        if facing = -1{aim = 180;}
-    }  
 }
+    if PLAYER.x &lt; x - 64 or PLAYER.x &gt; x+64{
+        ai_up = false;
+        ai_down=false;
+    }  
 //Shoot
 if ai_b and canshoot=true{
     shooting = true;
@@ -899,7 +937,9 @@ if type = 0{
           <argument>
             <kind>1</kind>
             <string>///Riot - Pattern - Idle
+if type != 1 and state != idle{alarm[3] = -1;}
 if type =1{
+    if alarm[3] = -1 and state = idle{alarm[3] = irandom_range(120,180);}
     if shield != -1{
     shield.image_xscale = facing;}
     if state = pursue{
@@ -919,6 +959,115 @@ if type =1{
         if PLAYER.x &lt; x - 64 or PLAYER.x &gt; x+64{
             shield.image_angle = 0;
         }
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Scout - Pattern - Idle
+if type != 2 and state != idle{alarm[3] = -1;}
+if type =2 and state = idle{
+    if alarm[3] = -1{alarm[3] = irandom_range(120,180);}
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Scout - Pattern - Flee
+//Movement
+if type = 2{
+    if !acting and state = pursue{
+    target_x = PLAYER.x;
+    target_y = PLAYER.y;   
+            //left/right flee
+                if (facing = -1) and !place_meeting(x+speedx,y,obj_block){
+                    ai_right=false;
+                    ai_left=true;
+                    }
+                if (facing = 1) and !place_meeting(x+speedx,y,obj_block){
+                    ai_left=false;
+                    ai_right=true;
+                }
+            //jumping
+            if place_meeting(x+32,bbox_bottom,obj_block){
+                block = collision_point(x+32,bbox_bottom,obj_block,false,true);
+                if block != noone and grounded{
+                    if block.bbox_top &gt;= y - 64{
+                    ai_a = true;
+                        jump_y = bbox_bottom - (bbox_bottom - block.bbox_top);
+                        }
+                    else{facing = -1;}
+                    }
+            }
+            if place_meeting(x-32,bbox_bottom,obj_block){
+                block = collision_point(x-32,bbox_bottom,obj_block,false,true);
+                if block != noone and grounded{
+                    if block.bbox_top &gt;= y - 64{
+                    ai_a = true;
+                        jump_y = bbox_bottom - (bbox_bottom - block.bbox_top);
+                        }
+                    else{facing = 1;}
+                    }
+    
+            }
+            //Jump to Passthrough
+            pass = collision_line(x,bbox_bottom,x,bbox_bottom - 96,obj_block_pass,false,true)
+            if pass != noone and grounded{
+                    ai_a = true;
+                    jump_y = bbox_bottom - (bbox_bottom - pass.bbox_top);
+                }
+            if ai_a and bbox_bottom &lt; jump_y - 32{
+                if jump_y = 0{ai_a = false;}
+            }
+            //Jump over gap
+            jumpblock = collision_line(x+128*facing,bbox_bottom-96,x+128*facing,y+64,obj_block,false,true);
+            jumppass = collision_line(x+128*facing,bbox_bottom-96,x+128*facing,y+64,obj_block_pass,false,true);
+            if jumpblock != noone or jumppass != noone{
+                if !place_meeting(x+8*facing,bbox_bottom+1,obj_block) and !place_meeting(x+8*facing,bbox_bottom+1,obj_block_pass) and grounded
+                and !collision_line(x,y,x,y-96,obj_block,false,true) and speedy=0{
+                    ai_a = true;
+                    }
+                }
+            //Falldown
+            pitcheck = collision_line(x,y,x,room_height,KILL,false,true);
+            blockcheck = collision_line(x,y,x,room_height,obj_block,false,true);
+            passcheck = collision_line(x,y,x,room_height,obj_block_pass,false,true);
+            if ai_right and (!place_meeting(x+8*facing,bbox_bottom,obj_block) and !place_meeting(x+8*facing,bbox_bottom,obj_block_pass)){
+                 
+            }
     }
 }
 </string>
@@ -957,6 +1106,7 @@ draw_set_colour(c_lime);
 draw_line(x,y,PLAYER.x,PLAYER.y);
 draw_circle(target_x,target_y,5,false);
 draw_circle(x,jump_y,5,false);+*/
+draw_circle(x,bbox_bottom+speedy,2,false);
 if state = shock{
     draw_sprite(spr_caution,0,x,y-32);
     }

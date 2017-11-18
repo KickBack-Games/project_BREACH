@@ -305,6 +305,7 @@
         <object>objects\PARTICLE</object>
         <object>objects\SHOT</object>
         <object>objects\HAZARD</object>
+        <object>objects\KILL</object>
       </objects>
       <objects name="Transition">
         <object>objects\TRANSITION</object>
@@ -360,8 +361,10 @@
     </objects>
   </objects>
   <rooms name="rooms">
+    <room>rooms\STARTUP</room>
     <rooms name="alpha">
-      <room>rooms\STARTUP</room>
+      <room>rooms\rm_demo_combat_3</room>
+      <room>rooms\rm_demo_combat_1</room>
       <room>rooms\rm_3rd_leapingBoots</room>
       <room>rooms\rm_3rd</room>
       <room>rooms\rm_3rd_1</room>
@@ -374,7 +377,6 @@
       <room>rooms\rm_demo_lights_2</room>
       <room>rooms\rm_demo_lights_3</room>
       <room>rooms\rm_demo_lights_4</room>
-      <room>rooms\rm_demo_combat_1</room>
     </rooms>
   </rooms>
   <help>
