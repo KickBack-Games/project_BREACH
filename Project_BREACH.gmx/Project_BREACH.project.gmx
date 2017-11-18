@@ -81,6 +81,7 @@
         <sprite>sprites\spr_guard1_jump</sprite>
         <sprite>sprites\spr_guard1_jump_up</sprite>
         <sprite>sprites\spr_guard1_jump_down</sprite>
+        <sprite>sprites\spr_guard1_shield</sprite>
       </sprites>
     </sprites>
     <sprites name="debug">
@@ -341,9 +342,10 @@
       </objects>
     </objects>
     <objects name="enemy">
-      <objects name="guard1">
-        <object>objects\obj_enem_guard1</object>
+      <objects name="guard">
+        <object>objects\obj_enem_guard_ass_shot</object>
         <object>objects\obj_light_enemy</object>
+        <object>objects\obj_enem_guard_shield</object>
       </objects>
     </objects>
     <objects name="items">
