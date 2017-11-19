@@ -112,6 +112,8 @@ sticknext = false;
 stickmask = -1;
 //time to idle anim
 idle_time = 600;
+//time to recover emp
+emp_time = 600;
 //door position change
 if warp_x &gt;0 and warp_y &gt;0{
     x=warp_x;
@@ -200,8 +202,9 @@ ds_grid_add(guns,1,4,spr_morgan_coat_arm_recoil_shock);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Loucas
+            <string>///Status Recover
 loucas=0;
+PLAYER_STATUS = 0;
 </string>
           </argument>
         </arguments>

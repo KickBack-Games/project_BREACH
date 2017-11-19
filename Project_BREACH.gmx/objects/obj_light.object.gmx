@@ -128,9 +128,10 @@ surface_reset_target();
 
 //Limit range of light
 light_room = clamp(light_room,0,1);
+light_sight = clamp(light_sight,0,1);
 //The alpha value of the 'darkness'
 Blackness_Value = light_room; 
-
+light_sight = 1 - light_room;
 //DEBUG LIGHT CONTROLS
 if mouse_wheel_up()
 {

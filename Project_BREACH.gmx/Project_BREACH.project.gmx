@@ -59,18 +59,13 @@
           <sprite>sprites\spr_morgan_gun_stick</sprite>
           <sprite>sprites\spr_morgan_gun_glove</sprite>
           <sprite>sprites\spr_morgan_gun_glove_chain</sprite>
-        </sprites>
-        <sprites name="fx">
-          <sprite>sprites\spr_hero_shot_0_bullet</sprite>
-          <sprite>sprites\spr_hero_shot_0_spray</sprite>
-          <sprite>sprites\spr_hero_shot_0_hit</sprite>
-          <sprite>sprites\spr_hero_shot_burst_bullet</sprite>
-          <sprite>sprites\spr_hero_shot_blast_bullet</sprite>
+          <sprite>sprites\spr_morgan_gun_grenade</sprite>
         </sprites>
       </sprites>
       <sprites name="guard1">
         <sprite>sprites\spr_guard1_shot_0</sprite>
         <sprite>sprites\spr_guard1_idle</sprite>
+        <sprite>sprites\spr_guard1_stick</sprite>
         <sprite>sprites\spr_guard1_mask</sprite>
         <sprite>sprites\spr_guard1_idle_up</sprite>
         <sprite>sprites\spr_guard1_idle_down</sprite>
@@ -84,20 +79,16 @@
         <sprite>sprites\spr_guard1_shield</sprite>
       </sprites>
     </sprites>
-    <sprites name="debug">
-      <sprite>sprites\spr_block</sprite>
-      <sprite>sprites\spr_block_slope_right</sprite>
-      <sprite>sprites\spr_block_slope_left</sprite>
-      <sprite>sprites\spr_block_half</sprite>
-      <sprite>sprites\spr_block2</sprite>
-      <sprite>sprites\spr_bounce</sprite>
-      <sprite>sprites\spr_break</sprite>
-      <sprite>sprites\spr_grav</sprite>
-      <sprite>sprites\spr_hole</sprite>
-      <sprite>sprites\spr_ice</sprite>
-      <sprite>sprites\spr_move</sprite>
-      <sprite>sprites\spr_water</sprite>
-      <sprite>sprites\spr_turret</sprite>
+    <sprites name="fx">
+      <sprite>sprites\spr_hero_shot_0_bullet</sprite>
+      <sprite>sprites\spr_hero_shot_0_spray</sprite>
+      <sprite>sprites\spr_hero_shot_0_hit</sprite>
+      <sprite>sprites\spr_hero_shot_burst_bullet</sprite>
+      <sprite>sprites\spr_hero_shot_blast_bullet</sprite>
+      <sprite>sprites\spr_fx_explode</sprite>
+      <sprite>sprites\spr_fx_emp</sprite>
+      <sprite>sprites\spr_fx_shock</sprite>
+      <sprite>sprites\spr_fx_smoke</sprite>
     </sprites>
     <sprites name="system">
       <sprites name="lighting">
@@ -162,6 +153,21 @@
         <sprite>sprites\spr_item_health</sprite>
         <sprite>sprites\spr_item_tape</sprite>
       </sprites>
+    </sprites>
+    <sprites name="debug">
+      <sprite>sprites\spr_block</sprite>
+      <sprite>sprites\spr_block_slope_right</sprite>
+      <sprite>sprites\spr_block_slope_left</sprite>
+      <sprite>sprites\spr_block_half</sprite>
+      <sprite>sprites\spr_block2</sprite>
+      <sprite>sprites\spr_bounce</sprite>
+      <sprite>sprites\spr_break</sprite>
+      <sprite>sprites\spr_grav</sprite>
+      <sprite>sprites\spr_hole</sprite>
+      <sprite>sprites\spr_ice</sprite>
+      <sprite>sprites\spr_move</sprite>
+      <sprite>sprites\spr_water</sprite>
+      <sprite>sprites\spr_turret</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -322,24 +328,9 @@
     </objects>
     <objects name="player">
       <object>objects\obj_player</object>
-      <objects name="projectiles">
-        <object>objects\obj_player_shot_shock</object>
-        <object>objects\obj_player_shot_burst</object>
-        <object>objects\obj_player_shot_blast</object>
-        <object>objects\obj_player_shot_glove</object>
-        <object>objects\obj_light_player</object>
-        <object>objects\obj_player_shot_stick</object>
-      </objects>
       <objects name="fx">
         <object>objects\obj_player_arm_recoil</object>
-      </objects>
-    </objects>
-    <objects name="levels">
-      <objects name="demo">
-        <object>objects\obj_demo_lamp</object>
-        <object>objects\obj_box</object>
-        <object>objects\obj_demo_fire</object>
-        <object>objects\obj_box_metal</object>
+        <object>objects\obj_player_shock</object>
       </objects>
     </objects>
     <objects name="enemy">
@@ -347,6 +338,26 @@
         <object>objects\obj_enem_guard_ass_shot</object>
         <object>objects\obj_light_enemy</object>
         <object>objects\obj_enem_guard_shield</object>
+      </objects>
+    </objects>
+    <objects name="projectiles">
+      <object>objects\obj_player_shot_shock</object>
+      <object>objects\obj_player_shot_burst</object>
+      <object>objects\obj_player_shot_blast</object>
+      <object>objects\obj_player_shot_glove</object>
+      <object>objects\obj_light_player</object>
+      <object>objects\obj_player_shot_stick</object>
+      <object>objects\obj_player_bomb</object>
+      <object>objects\obj_player_bomb_fire</object>
+      <object>objects\obj_player_bomb_emp</object>
+      <object>objects\obj_player_bomb_smoke</object>
+    </objects>
+    <objects name="levels">
+      <objects name="demo">
+        <object>objects\obj_demo_lamp</object>
+        <object>objects\obj_box</object>
+        <object>objects\obj_demo_fire</object>
+        <object>objects\obj_box_metal</object>
       </objects>
     </objects>
     <objects name="items">

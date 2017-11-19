@@ -67,6 +67,8 @@ grounded=false;
 hit_frame=150;
 //can be hurt
 canhurt=true;
+//hopping over gap
+hop=false;
 //Can vac
 canshoot=true;
 //Aiming | 1 = up, -1 = down
@@ -88,8 +90,9 @@ up=0;
 c_rotation = 0;
 //1 = up | -1 = down
 aim = 0;
-//0 = shot | 1 = rapid | 2 = stick | 3 = grenade
-weapon = 0
+//0 = shot | 1 = rapid | 2 = spread | 3 = stick | 4 = grenade
+weapon = 4;
+rapid = 4
 //0 = assault | 1 = riot | 2 = scout
 type = 2;
 
@@ -131,6 +134,8 @@ sprite_Drun     = spr_guard1_run_down;
 sprite_Urun     = spr_guard1_run_up;
 sprite_Ujump    = spr_guard1_jump_up;
 sprite_Djump    = spr_guard1_jump_down;
+
+sprite_stick    = spr_guard1_stick;
 </string>
           </argument>
         </arguments>
@@ -188,6 +193,8 @@ jump_y = 0;
 start_y = 0;
 //gunshot delay
 fire_count = 0;
+//swinging stick
+stick = false;
 </string>
           </argument>
         </arguments>
@@ -212,6 +219,38 @@ fire_count = 0;
             <kind>1</kind>
             <string>///Loucas
 loucas=0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Rapid Burst
+if rapid &gt; 0{
+    audio_play_sound_on(s_sfx,sound0,false,10);
+    shot = instance_create(gun_x,gun_y,obj_player_shot_burst);
+    shot.direction = aim;
+    shot.image_angle = aim * facing;
+    shot.owner=id;
+    if rapid = 0{alarm[0]=irandom_range(60,120);exit;}
+    if rapid&gt;0{rapid -= 1;alarm[4]=5;exit;}
+}
 </string>
           </argument>
         </arguments>
@@ -328,6 +367,7 @@ shooting=false;
 canhurt=true;
 canshoot=true;
 ai_b = true;
+rapid=4;
 </string>
           </argument>
         </arguments>
@@ -476,78 +516,79 @@ if acting=false{
 
 gun_x = x +((sprite_get_bbox_left(sprite_index) - sprite_get_xoffset(sprite_index)) * facing );
 gun_y = y + sprite_get_bbox_top (sprite_index) - sprite_get_yoffset(sprite_index);
-
+if !stick{
 //idle
-if !acting and !walking and !rising and !falling and !shooting
-and grounded{
-    image_speed = .18;
-    if aiming = 0{
-        sprite_index = sprite_idle;
+    if !acting and !walking and !rising and !falling and !shooting
+    and grounded{
+        image_speed = .18;
+        if aiming = 0{
+            sprite_index = sprite_idle;
+            }
+        if aiming = 1{
+            sprite_index = sprite_Uidle;
+            }
+        if aiming = -1{
+            sprite_index = sprite_Didle;
+            }
         }
-    if aiming = 1{
-        sprite_index = sprite_Uidle;
-        }
-    if aiming = -1{
-        sprite_index = sprite_Didle;
-        }
-    }
 //shooting
-if !acting and !walking and !rising and !falling and shooting
-and grounded{
-    image_speed = .18;
-    if aiming = 0{
-        sprite_index = sprite_shoot; 
+    if !acting and !walking and !rising and !falling and shooting
+    and grounded{
+        image_speed = .18;
+        if aiming = 0{
+            sprite_index = sprite_shoot; 
+            }
+        if aiming = 1{
+            sprite_index = sprite_Uidle;
+            }
+        if aiming = -1{
+            sprite_index = sprite_Didle;
+            }
         }
-    if aiming = 1{
-        sprite_index = sprite_Uidle;
-        }
-    if aiming = -1{
-        sprite_index = sprite_Didle;
-        }
-    }
 //running
-if !acting and walking  and !rising and !falling and grounded{
-    image_speed = .18;
-    if aiming = 0{
-        sprite_index = sprite_run;
+    if !acting and walking  and !rising and !falling and grounded{
+        image_speed = .28;
+        if aiming = 0{
+            sprite_index = sprite_run;
+            }
+        if aiming = 1{
+            sprite_index = sprite_Urun;
+            }
+        if aiming = -1{
+            sprite_index = sprite_Drun;
+            }
         }
-    if aiming = 1{
-        sprite_index = sprite_Urun;
-        }
-    if aiming = -1{
-        sprite_index = sprite_Drun;
-        }
-    }
 //jumping up
-if !acting and rising and !falling
-{
-    image_index = 0;
-    image_speed = 0;
-    if aiming = 0{
-        sprite_index = sprite_jump;
+    if !acting and rising and !falling
+    {
+        image_index = 0;
+        image_speed = 0;
+        if aiming = 0{
+            sprite_index = sprite_jump;
+            }
+        if aiming = 1{
+            sprite_index = sprite_Ujump;
+            }
+        if aiming = -1{
+            sprite_index = sprite_Djump;
+            }
         }
-    if aiming = 1{
-        sprite_index = sprite_Ujump;
-        }
-    if aiming = -1{
-        sprite_index = sprite_Djump;
-        }
-    }
 //jumping down
-if !acting and falling and !rising
-{
-    image_index = 1;
-    image_speed = 0;
-    if aiming = 0{
-        sprite_index = sprite_jump;
+    if !acting and falling and !rising
+    {
+        image_index = 1;
+        image_speed = 0;
+        if aiming = 0{
+            sprite_index = sprite_jump;
+            }
+        if aiming = 1{
+            sprite_index = sprite_Ujump;
+            }
+        if aiming = -1{
+            sprite_index = sprite_Djump;
+            }
         }
-    if aiming = 1{
-        sprite_index = sprite_Ujump;
-        }
-    if aiming = -1{
-        sprite_index = sprite_Djump;
-        }
-    }
+}
 </string>
           </argument>
         </arguments>
@@ -690,16 +731,58 @@ if PLAYER.x &gt; x - 64 and PLAYER.x &lt; x+64{
     }  
 //Shoot
 if ai_b and canshoot=true{
-    shooting = true;
-    audio_play_sound_on(s_sfx,sound0,false,10);
-    shot = instance_create(gun_x,gun_y,obj_player_shot_shock);
-    shot.image_xscale = facing;
-    shot.direction = aim;
-    shot.image_angle = aim;
-    shot.owner=id;
-    canshoot=false;
-    alarm[0]=irandom_range(60,120);;
-    ai_b = false;
+        shooting = true;
+        canshoot=false;
+        alarm[0]=irandom_range(60,120);
+        ai_b = false;  
+//basic
+        if weapon = 0{
+            audio_play_sound_on(s_sfx,sound0,false,10);
+            shot = instance_create(gun_x,gun_y,obj_player_shot_shock);
+            shot.image_xscale = facing;
+            shot.direction = aim;
+            shot.image_angle = aim;
+            shot.owner=id;     
+        }
+//rapid fire
+        if (weapon = 1 and rapid &gt;= 4 ) {
+            rapid = 4;
+            shooting = true;
+            alarm[4]=1;
+        }
+//spread shot
+        if (weapon = 2){
+        shot = instance_create(gun_x,gun_y,obj_player_shot_blast);
+        shot.direction = aim;
+        shot.image_angle = aim * facing;
+        shot.owner = id;
+        
+        shot = instance_create(gun_x,gun_y,obj_player_shot_blast);
+        shot.direction = aim + 5;
+        shot.image_angle = (aim * facing) + 5;
+        shot.owner = id;
+        
+        shot = instance_create(gun_x,gun_y,obj_player_shot_blast);
+        shot.direction = aim + 355;
+        shot.image_angle = (aim * facing) + 355;
+        shot.owner = id;
+        }
+//stick
+        if weapon = 3{
+            stick=true;
+            image_index = 0;
+            image_speed = .5;
+            sprite_index = sprite_stick;
+            dmg = 10;
+            ai_b=false;
+            canshoot=false;
+        }
+//basic
+        if weapon = 4{
+            audio_play_sound_on(s_sfx,sound0,false,10);
+            shot = instance_create(gun_x,gun_y,obj_player_bomb);
+            shot.owner=id;     
+        }
     }
 }
 </string>
@@ -723,7 +806,11 @@ if ai_b and canshoot=true{
           <argument>
             <kind>1</kind>
             <string>///Path of sight
-if rectangle_in_triangle(PLAYER.bbox_left,PLAYER.bbox_top,PLAYER.bbox_right,PLAYER.bbox_bottom,x,y,x+ (sight_caution * facing),y-64,x+ (sight_caution * facing),y+64)
+//Sight range
+sight_caution = 220*(light_sight);
+sight_alert = 110*(light_sight);
+
+if rectangle_in_triangle(PLAYER.bbox_left,PLAYER.bbox_top,PLAYER.bbox_right,PLAYER.bbox_bottom,x,y,x+ (sight_caution*facing),y-64,x+ (sight_caution*facing),y+64)
 and state = idle{
     if !collision_line(x,y,PLAYER.x,PLAYER.y,obj_block,true,true){
         state = shock;
@@ -734,7 +821,7 @@ and state = idle{
         target_y = PLAYER.y;
         }
     }
-if rectangle_in_triangle(PLAYER.bbox_left,PLAYER.bbox_top,PLAYER.bbox_right,PLAYER.bbox_bottom,x,y,x+ (sight_alert * facing),y-32,x+ (sight_alert * facing),y+32)
+if rectangle_in_triangle(PLAYER.bbox_left,PLAYER.bbox_top,PLAYER.bbox_right,PLAYER.bbox_bottom,x,y,x+ (sight_alert*facing),y-32,x+ (sight_alert*facing),y+32)
 and (state != alert and state != pursue){
     if !collision_line(x,y,PLAYER.x,PLAYER.y,obj_block,true,true){
         state = alert;
@@ -1059,17 +1146,54 @@ if type = 2{
                 if !place_meeting(x+8*facing,bbox_bottom+1,obj_block) and !place_meeting(x+8*facing,bbox_bottom+1,obj_block_pass) and grounded
                 and !collision_line(x,y,x,y-96,obj_block,false,true) and speedy=0{
                     ai_a = true;
+                    hop = true;
+                    }
+                if hop and (collision_line(x,y,x,y+128,jumpblock,false,true) or collision_line(x,y,x,y+128,jumppass,false,true)){
+                    ai_a=false;
+                    hop=false;
                     }
                 }
             //Falldown
-            pitcheck = collision_line(x,y,x,room_height,KILL,false,true);
-            blockcheck = collision_line(x,y,x,room_height,obj_block,false,true);
-            passcheck = collision_line(x,y,x,room_height,obj_block_pass,false,true);
-            if ai_right and (!place_meeting(x+8*facing,bbox_bottom,obj_block) and !place_meeting(x+8*facing,bbox_bottom,obj_block_pass)){
-                 
+            fallblock = collision_line(x+speedx*facing,bbox_bottom,x+speedx*facing,room_height,obj_block,false,true);
+            fallpass = collision_line(x+speedx*facing,bbox_bottom,x+speedx*facing,room_height,obj_block_pass,false,true);
+            if (jumpblock = noone and jumppass = noone){
+                 if (fallblock = noone and fallpass = noone) and grounded{
+                     ai_right = !ai_right;
+                     ai_left = !ai_left;
+                     facing *= -1;
+                     speedx *= -1;
+                }               
             }
+
     }
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="7">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if sprite_index = sprite_stick{
+    alarm[0]=irandom_range(60,120);
+    stick = false;
+    dmg=3;
+    }
 </string>
           </argument>
         </arguments>
@@ -1098,15 +1222,15 @@ if sight{
     }
 /*
 draw_set_color(c_yellow);
-draw_triangle(x,y,x+ (sight_caution * facing),y-64,x+ (sight_caution * facing),y+64,false);
+draw_triangle(x,y,x+ (sight_caution),y-64,x+ (sight_caution),y+64,false);
 draw_set_colour(c_red);
-draw_triangle(x,y,x+ (sight_alert * facing),y-32,x+ (sight_alert * facing),y+32,false);
+draw_triangle(x,y,x+ (sight_alert),y-32,x+ (sight_alert),y+32,false);
 draw_circle(gun_x,gun_y,5,false);
 draw_set_colour(c_lime);
 draw_line(x,y,PLAYER.x,PLAYER.y);
 draw_circle(target_x,target_y,5,false);
-draw_circle(x,jump_y,5,false);+*/
-draw_circle(x,bbox_bottom+speedy,2,false);
+draw_circle(x,jump_y,5,false);
+*/
 if state = shock{
     draw_sprite(spr_caution,0,x,y-32);
     }

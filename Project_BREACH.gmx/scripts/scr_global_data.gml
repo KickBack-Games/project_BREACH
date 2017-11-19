@@ -26,6 +26,7 @@ globalvar LOADING; LOADING = false;
 //lighting system
 globalvar light_room; light_room = 0;
 globalvar light_player; light_player = false;
+globalvar light_sight; light_sight =1;
 
 //sound
 globalvar s_bgm; s_bgm = audio_emitter_create();
