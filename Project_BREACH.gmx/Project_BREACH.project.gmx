@@ -199,6 +199,9 @@
         </backgrounds>
         <background>background\tile_wallpipe</background>
         <background>background\tile_slope</background>
+        <background>background\tile_slope_down</background>
+        <background>background\tile_slope_downright</background>
+        <background>background\tile_slope_right</background>
         <background>background\tile_block</background>
       </backgrounds>
       <backgrounds name="level3">
