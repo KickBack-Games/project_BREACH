@@ -376,6 +376,7 @@
     <rooms name="alpha">
       <room>rooms\rm_demo_combat_3</room>
       <room>rooms\rm_demo_combat_1</room>
+      <room>rooms\rm_1st</room>
       <room>rooms\rm_3rd_leapingBoots</room>
       <room>rooms\rm_3rd</room>
       <room>rooms\rm_3rd_1</room>
@@ -383,6 +384,8 @@
       <room>rooms\rm_3rd_hall2</room>
       <room>rooms\rm_3rd_hall2A</room>
       <room>rooms\rm_3rd_hall2B</room>
+      <room>rooms\rm_3rd_elevator</room>
+      <room>rooms\rm_3rd_hall3</room>
       <room>rooms\rm_stairwell</room>
       <room>rooms\rm_demo_lights_1</room>
       <room>rooms\rm_demo_lights_2</room>

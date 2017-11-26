@@ -72,6 +72,7 @@
     <instance objName="obj_slope_right" x="256" y="2720" name="inst_2DDD7470" locked="0" code="" scaleX="11.3548383712769" scaleY="7.22580623626709" colour="4294967295" rotation="0"/>
     <instance objName="obj_slope_right" x="512" y="2976" name="inst_1909AF95" locked="0" code="" scaleX="-11.3500003814697" scaleY="7.22580623626709" colour="4294967295" rotation="0"/>
     <instance objName="obj_door" x="64" y="2336" name="inst_11D35709" locked="0" code="rm = rm_3rd_hall2;&#xA;xx = 2368;&#xA;yy = 416;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_door" x="672" y="2336" name="inst_12C6D1F8" locked="0" code="rm = rm_3rd_hall2;&#xA;xx = 96;&#xA;yy = 416;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="tile_demo_floor" x="0" y="3552" w="832" h="32" xo="0" yo="0" id="10000328" name="inst_E3AC1001" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
